@@ -1,0 +1,25 @@
+/* generated using openapi-typescript-codegen -- do no edit */
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+
+/**
+ * - AUCTION_TRIGGER_UNSPECIFIED: Default value for AuctionTrigger, no auction triggered
+ * - AUCTION_TRIGGER_BATCH: Batch auction
+ * - AUCTION_TRIGGER_OPENING: Opening auction
+ * - AUCTION_TRIGGER_PRICE: Price monitoring trigger
+ * - AUCTION_TRIGGER_LIQUIDITY: Deprecated
+ * - AUCTION_TRIGGER_LIQUIDITY_TARGET_NOT_MET: Liquidity auction due to not enough committed liquidity
+ * - AUCTION_TRIGGER_UNABLE_TO_DEPLOY_LP_ORDERS: Deprecated
+ * - AUCTION_TRIGGER_GOVERNANCE_SUSPENSION: Market is suspended and put into auction via governance
+ */
+export enum vegaAuctionTrigger {
+    AUCTION_TRIGGER_UNSPECIFIED = 'AUCTION_TRIGGER_UNSPECIFIED',
+    AUCTION_TRIGGER_BATCH = 'AUCTION_TRIGGER_BATCH',
+    AUCTION_TRIGGER_OPENING = 'AUCTION_TRIGGER_OPENING',
+    AUCTION_TRIGGER_PRICE = 'AUCTION_TRIGGER_PRICE',
+    AUCTION_TRIGGER_LIQUIDITY = 'AUCTION_TRIGGER_LIQUIDITY',
+    AUCTION_TRIGGER_LIQUIDITY_TARGET_NOT_MET = 'AUCTION_TRIGGER_LIQUIDITY_TARGET_NOT_MET',
+    AUCTION_TRIGGER_UNABLE_TO_DEPLOY_LP_ORDERS = 'AUCTION_TRIGGER_UNABLE_TO_DEPLOY_LP_ORDERS',
+    AUCTION_TRIGGER_GOVERNANCE_SUSPENSION = 'AUCTION_TRIGGER_GOVERNANCE_SUSPENSION',
+}

@@ -1,0 +1,11 @@
+/* generated using openapi-typescript-codegen -- do no edit */
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+
+export enum v2TransferDirection {
+    TRANSFER_DIRECTION_UNSPECIFIED = 'TRANSFER_DIRECTION_UNSPECIFIED',
+    TRANSFER_DIRECTION_TRANSFER_FROM = 'TRANSFER_DIRECTION_TRANSFER_FROM',
+    TRANSFER_DIRECTION_TRANSFER_TO = 'TRANSFER_DIRECTION_TRANSFER_TO',
+    TRANSFER_DIRECTION_TRANSFER_TO_OR_FROM = 'TRANSFER_DIRECTION_TRANSFER_TO_OR_FROM',
+}
