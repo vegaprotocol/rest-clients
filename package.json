@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vegaprotocol/js-protos.git"
+    "url": "git+https://github.com/vegaprotocol/rest-clients.git"
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
