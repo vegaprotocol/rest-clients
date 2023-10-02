@@ -5,11 +5,6 @@
   "description": "Clients for interacting with VegaProtocol REST APIs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "exports": {
-    ".": "./dist/index.js",
-    "./*": "./dist/*.js",
-    "./*.js": "./dist/*.js"
-  },
   "bugs": {
     "url": "https://github.com/vegaprotocol/rest-clients/issues"
   },
