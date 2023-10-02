@@ -10,6 +10,13 @@
     "./*": "./dist/*.js",
     "./*.js": "./dist/*.js"
   },
+  "bugs": {
+    "url": "https://github.com/vegaprotocol/rest-clients/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vegaprotocol/js-protos.git"
+  },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
