@@ -21,10 +21,6 @@
     "generate:all": "yarn generate:trading-data && yarn generate:core-state && yarn generate:core && yarn generate:block-explorer"
   },
   "license": "MIT",
-  "dependencies": {
-    "axios": "^1.5.1",
-    "form-data": "^4.0.0"
-  },
   "devDependencies": {
     "openapi-typescript-codegen": "^0.25.0",
     "typescript": "^5.2.2"
