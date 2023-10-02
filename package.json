@@ -1,6 +1,6 @@
 {
   "author": "Dexter Edwards <dexter@vega.xyz>",
-  "name": "@vegaprotocol/rest-client",
+  "name": "@vegaprotocol/rest-clients",
   "version": "0.0.1",
   "description": "Clients for interacting with VegaProtocol REST APIs",
   "main": "dist/index.js",
