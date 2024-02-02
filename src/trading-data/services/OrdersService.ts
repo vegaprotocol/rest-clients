@@ -203,7 +203,7 @@ export class OrdersService {
      * or not at all, and does not remain on the book if it doesn't trade
      * - TIME_IN_FORCE_GFA: Good for auction, this order is only accepted during an auction period
      * - TIME_IN_FORCE_GFN: Good for normal, this order is only accepted during normal trading (that can be continuous trading or frequent batched auctions)
-     * @param filterExcludeLiquidity Indicator if liquidity provision orders should be included or not in the list.
+     * @param filterExcludeLiquidity Indicator if liquidity provisions should be included or not in the list.
      * @param filterPartyIds Restrict orders to those placed by the given party IDs.
      * @param filterMarketIds Restrict orders to those placed on the given market IDs.
      * @param filterReference Restrict orders to those with the given reference.

@@ -13,6 +13,9 @@ export type v2TeamEdge = {
      * Cursor that can be used to fetch further pages.
      */
     cursor?: string;
+    /**
+     * Team data.
+     */
     node?: apiv2Team;
 };
 

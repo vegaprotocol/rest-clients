@@ -3,12 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { vegaReferralProgram } from './vegaReferralProgram';
+import type { vegaReferralProgramChanges } from './vegaReferralProgramChanges';
 
 export type vegaUpdateReferralProgram = {
     /**
      * Configuration for change to update a referral program.
      */
-    changes?: vegaReferralProgram;
+    changes?: vegaReferralProgramChanges;
 };
 

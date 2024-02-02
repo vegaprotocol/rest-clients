@@ -8,14 +8,12 @@ import type { vegaStakingTier } from './vegaStakingTier';
 
 export type vegaReferralProgram = {
     /**
-     * Defined benefit tiers in increasing order. First element will give Tier 1,
-     * second element will give Tier 2, and so on. Determines the level of
-     * benefit a party can expect based on performance criteria.
+     * Defined benefit tiers ordered by increasing discounts.
      */
     benefitTiers?: Array<vegaBenefitTier>;
     /**
-     * Timestamp as Unix time in seconds, after which when the current epoch ends, the
-     * programs status will become STATE_CLOSED and benefits will be disabled.
+     * Timestamp in Unix nanoseconds, after which when the current epoch ends,
+     * the program will end and benefits will be disabled.
      */
     endOfProgramTimestamp?: string;
     /**
@@ -23,8 +21,7 @@ export type vegaReferralProgram = {
      */
     id?: string;
     /**
-     * Defined staking tiers in increasing order. First element will give Tier 1,
-     * second element will give Tier 2, and so on. Determines the level of
+     * Defined benefit tiers ordered by increasing reward multiplier. Determines the level of
      * benefit a party can expect based on their staking.
      */
     stakingTiers?: Array<vegaStakingTier>;
@@ -34,7 +31,7 @@ export type vegaReferralProgram = {
      */
     version?: string;
     /**
-     * Number of epochs over which to evaluate a referral set's running volume.
+     * Number of epochs over which the referral set's running volume is evaluated.
      */
     windowLength?: string;
 };

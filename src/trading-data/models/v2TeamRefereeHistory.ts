@@ -5,7 +5,7 @@
 
 export type v2TeamRefereeHistory = {
     /**
-     * Time in Unix nanoseconds when the party joined a team.
+     * Timestamp in Unix nanoseconds when the party joined the team.
      */
     joinedAt?: string;
     /**

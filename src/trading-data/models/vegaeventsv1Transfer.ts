@@ -15,6 +15,7 @@ export type vegaeventsv1Transfer = {
     asset?: string;
     from?: string;
     fromAccountType?: vegaAccountType;
+    gameId?: string;
     id?: string;
     oneOff?: vegaeventsv1OneOffTransfer;
     oneOffGovernance?: v1OneOffGovernanceTransfer;

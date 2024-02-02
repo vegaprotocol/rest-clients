@@ -12,6 +12,10 @@ export type v1PartyVestingStats = {
      */
     partyId?: string;
     /**
+     * The balance of the party, in quantum.
+     */
+    quantumBalance?: string;
+    /**
      * The bonus multiplier applied on the reward.
      */
     rewardBonusMultiplier?: string;

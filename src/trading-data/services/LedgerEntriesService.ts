@@ -56,17 +56,23 @@ export class LedgerEntriesService {
 
     /**
      * List ledger entries
-     * Get a list of ledger entries within the given date range.
+     * Get a list of ledger entries within the given date range. The date range is restricted to a maximum of 5 days.
      * This query requests and sums the number of ledger entries from a given subset of accounts, specified via the 'filter' argument.
      * It returns a time series - implemented as a list of AggregateLedgerEntry structs - with a row for every time
      * the summed ledger entries of the set of specified accounts changes.
      * Each account filter must contain no more than one party ID.
+     * At least one party ID must be specified in the from or to account filter.
      *
      * Entries can be filtered by:
      * - the sending account (market ID, asset ID, account type)
      * - receiving account (market ID, asset ID, account type)
      * - sending AND receiving account
      * - transfer type either in addition to the above filters or as a standalone option
+     * Note: The date range is restricted to any 5 days.
+     * If no start or end date is provided, only ledger entries from the last 5 days will be returned.
+     * If a start and end date are provided, but the end date is more than 5 days after the start date, only data up to 5 days after the start date will be returned.
+     * If a start date is provided but no end date, the end date will be set to 5 days after the start date.
+     * If no start date is provided, but the end date is, the start date will be set to 5 days before the end date.
      * @param filterCloseOnAccountFilters Determines whether an entry must have accounts matching both the account_from_filter
      * and the account_to_filter. If set to 'true', entries must have matches in both filters.
      * If set to `false`, entries matching only the account_from_filter or the account_to_filter will also be included.
@@ -118,6 +124,7 @@ export class LedgerEntriesService {
      * - ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY: Per asset market reward account given for return volatility
      * - ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING: Per asset market reward account given to validators by their ranking
      * - ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD: Per asset account for pending fee referral reward payouts
+     * - ACCOUNT_TYPE_ORDER_MARGIN: Per asset market account for party in isolated margin mode
      * @param filterToAccountFilterAssetId Restrict accounts to those holding balances in this asset ID.
      * @param filterToAccountFilterPartyIds Restrict accounts to those owned by the parties in this list. Pass an empty list for no filter.
      * @param filterToAccountFilterMarketIds Restrict accounts to those connected to the markets in this list. Pass an empty list for no filter.
@@ -166,6 +173,7 @@ export class LedgerEntriesService {
      * - ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY: Per asset market reward account given for return volatility
      * - ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING: Per asset market reward account given to validators by their ranking
      * - ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD: Per asset account for pending fee referral reward payouts
+     * - ACCOUNT_TYPE_ORDER_MARGIN: Per asset market account for party in isolated margin mode
      * @param filterTransferTypes List of transfer types that is used for filtering sender and receiver accounts.
      *
      * - TRANSFER_TYPE_UNSPECIFIED: Default value, always invalid
@@ -207,6 +215,11 @@ export class LedgerEntriesService {
      * - TRANSFER_TYPE_REWARDS_VESTED: Funds moved from the vesting account to the vested account once the vesting period is reached.
      * - TRANSFER_TYPE_FEE_REFERRER_REWARD_PAY: Fee referrer reward paid from general account.
      * - TRANSFER_TYPE_FEE_REFERRER_REWARD_DISTRIBUTE: Fee referrer reward received into general account of the referrer.
+     * - TRANSFER_TYPE_ORDER_MARGIN_LOW: Funds transferred from general account to meet order margin requirement in isolated margin mode.
+     * - TRANSFER_TYPE_ORDER_MARGIN_HIGH: Excess order margin amount returned to general account.
+     * - TRANSFER_TYPE_ISOLATED_MARGIN_LOW: Transfer from order margin account to margin account due to increase of position.
+     * - TRANSFER_TYPE_ISOLATED_MARGIN_HIGH: Transfer from excess order margin account to general account.
+     * @param filterTransferId List ledger entries that are associated with a specific transfer ID. If provided, all other filters are ignored.
      * @param paginationFirst Number of records to be returned that sort greater than row identified by cursor supplied in 'after'.
      * @param paginationAfter If paging forwards, the cursor string for the last row of the previous page.
      * @param paginationLast Number of records to be returned that sort less than row identified by cursor supplied in 'before'.
@@ -223,12 +236,13 @@ export class LedgerEntriesService {
         filterFromAccountFilterAssetId?: string,
         filterFromAccountFilterPartyIds?: Array<string>,
         filterFromAccountFilterMarketIds?: Array<string>,
-        filterFromAccountFilterAccountTypes?: Array<'ACCOUNT_TYPE_UNSPECIFIED' | 'ACCOUNT_TYPE_INSURANCE' | 'ACCOUNT_TYPE_SETTLEMENT' | 'ACCOUNT_TYPE_MARGIN' | 'ACCOUNT_TYPE_GENERAL' | 'ACCOUNT_TYPE_FEES_INFRASTRUCTURE' | 'ACCOUNT_TYPE_FEES_LIQUIDITY' | 'ACCOUNT_TYPE_FEES_MAKER' | 'ACCOUNT_TYPE_BOND' | 'ACCOUNT_TYPE_EXTERNAL' | 'ACCOUNT_TYPE_GLOBAL_INSURANCE' | 'ACCOUNT_TYPE_GLOBAL_REWARD' | 'ACCOUNT_TYPE_PENDING_TRANSFERS' | 'ACCOUNT_TYPE_REWARD_MAKER_PAID_FEES' | 'ACCOUNT_TYPE_REWARD_MAKER_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_LP_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_MARKET_PROPOSERS' | 'ACCOUNT_TYPE_HOLDING' | 'ACCOUNT_TYPE_LP_LIQUIDITY_FEES' | 'ACCOUNT_TYPE_LIQUIDITY_FEES_BONUS_DISTRIBUTION' | 'ACCOUNT_TYPE_NETWORK_TREASURY' | 'ACCOUNT_TYPE_VESTING_REWARDS' | 'ACCOUNT_TYPE_VESTED_REWARDS' | 'ACCOUNT_TYPE_REWARD_AVERAGE_POSITION' | 'ACCOUNT_TYPE_REWARD_RELATIVE_RETURN' | 'ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY' | 'ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING' | 'ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD'>,
+        filterFromAccountFilterAccountTypes?: Array<'ACCOUNT_TYPE_UNSPECIFIED' | 'ACCOUNT_TYPE_INSURANCE' | 'ACCOUNT_TYPE_SETTLEMENT' | 'ACCOUNT_TYPE_MARGIN' | 'ACCOUNT_TYPE_GENERAL' | 'ACCOUNT_TYPE_FEES_INFRASTRUCTURE' | 'ACCOUNT_TYPE_FEES_LIQUIDITY' | 'ACCOUNT_TYPE_FEES_MAKER' | 'ACCOUNT_TYPE_BOND' | 'ACCOUNT_TYPE_EXTERNAL' | 'ACCOUNT_TYPE_GLOBAL_INSURANCE' | 'ACCOUNT_TYPE_GLOBAL_REWARD' | 'ACCOUNT_TYPE_PENDING_TRANSFERS' | 'ACCOUNT_TYPE_REWARD_MAKER_PAID_FEES' | 'ACCOUNT_TYPE_REWARD_MAKER_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_LP_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_MARKET_PROPOSERS' | 'ACCOUNT_TYPE_HOLDING' | 'ACCOUNT_TYPE_LP_LIQUIDITY_FEES' | 'ACCOUNT_TYPE_LIQUIDITY_FEES_BONUS_DISTRIBUTION' | 'ACCOUNT_TYPE_NETWORK_TREASURY' | 'ACCOUNT_TYPE_VESTING_REWARDS' | 'ACCOUNT_TYPE_VESTED_REWARDS' | 'ACCOUNT_TYPE_REWARD_AVERAGE_POSITION' | 'ACCOUNT_TYPE_REWARD_RELATIVE_RETURN' | 'ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY' | 'ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING' | 'ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD' | 'ACCOUNT_TYPE_ORDER_MARGIN'>,
         filterToAccountFilterAssetId?: string,
         filterToAccountFilterPartyIds?: Array<string>,
         filterToAccountFilterMarketIds?: Array<string>,
-        filterToAccountFilterAccountTypes?: Array<'ACCOUNT_TYPE_UNSPECIFIED' | 'ACCOUNT_TYPE_INSURANCE' | 'ACCOUNT_TYPE_SETTLEMENT' | 'ACCOUNT_TYPE_MARGIN' | 'ACCOUNT_TYPE_GENERAL' | 'ACCOUNT_TYPE_FEES_INFRASTRUCTURE' | 'ACCOUNT_TYPE_FEES_LIQUIDITY' | 'ACCOUNT_TYPE_FEES_MAKER' | 'ACCOUNT_TYPE_BOND' | 'ACCOUNT_TYPE_EXTERNAL' | 'ACCOUNT_TYPE_GLOBAL_INSURANCE' | 'ACCOUNT_TYPE_GLOBAL_REWARD' | 'ACCOUNT_TYPE_PENDING_TRANSFERS' | 'ACCOUNT_TYPE_REWARD_MAKER_PAID_FEES' | 'ACCOUNT_TYPE_REWARD_MAKER_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_LP_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_MARKET_PROPOSERS' | 'ACCOUNT_TYPE_HOLDING' | 'ACCOUNT_TYPE_LP_LIQUIDITY_FEES' | 'ACCOUNT_TYPE_LIQUIDITY_FEES_BONUS_DISTRIBUTION' | 'ACCOUNT_TYPE_NETWORK_TREASURY' | 'ACCOUNT_TYPE_VESTING_REWARDS' | 'ACCOUNT_TYPE_VESTED_REWARDS' | 'ACCOUNT_TYPE_REWARD_AVERAGE_POSITION' | 'ACCOUNT_TYPE_REWARD_RELATIVE_RETURN' | 'ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY' | 'ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING' | 'ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD'>,
-        filterTransferTypes?: Array<'TRANSFER_TYPE_UNSPECIFIED' | 'TRANSFER_TYPE_LOSS' | 'TRANSFER_TYPE_WIN' | 'TRANSFER_TYPE_MTM_LOSS' | 'TRANSFER_TYPE_MTM_WIN' | 'TRANSFER_TYPE_MARGIN_LOW' | 'TRANSFER_TYPE_MARGIN_HIGH' | 'TRANSFER_TYPE_MARGIN_CONFISCATED' | 'TRANSFER_TYPE_MAKER_FEE_PAY' | 'TRANSFER_TYPE_MAKER_FEE_RECEIVE' | 'TRANSFER_TYPE_INFRASTRUCTURE_FEE_PAY' | 'TRANSFER_TYPE_INFRASTRUCTURE_FEE_DISTRIBUTE' | 'TRANSFER_TYPE_LIQUIDITY_FEE_PAY' | 'TRANSFER_TYPE_LIQUIDITY_FEE_DISTRIBUTE' | 'TRANSFER_TYPE_BOND_LOW' | 'TRANSFER_TYPE_BOND_HIGH' | 'TRANSFER_TYPE_WITHDRAW' | 'TRANSFER_TYPE_DEPOSIT' | 'TRANSFER_TYPE_BOND_SLASHING' | 'TRANSFER_TYPE_REWARD_PAYOUT' | 'TRANSFER_TYPE_TRANSFER_FUNDS_SEND' | 'TRANSFER_TYPE_TRANSFER_FUNDS_DISTRIBUTE' | 'TRANSFER_TYPE_CLEAR_ACCOUNT' | 'TRANSFER_TYPE_CHECKPOINT_BALANCE_RESTORE' | 'TRANSFER_TYPE_SPOT' | 'TRANSFER_TYPE_HOLDING_LOCK' | 'TRANSFER_TYPE_HOLDING_RELEASE' | 'TRANSFER_TYPE_SUCCESSOR_INSURANCE_FRACTION' | 'TRANSFER_TYPE_LIQUIDITY_FEE_ALLOCATE' | 'TRANSFER_TYPE_LIQUIDITY_FEE_NET_DISTRIBUTE' | 'TRANSFER_TYPE_SLA_PENALTY_BOND_APPLY' | 'TRANSFER_TYPE_SLA_PENALTY_LP_FEE_APPLY' | 'TRANSFER_TYPE_LIQUIDITY_FEE_UNPAID_COLLECT' | 'TRANSFER_TYPE_SLA_PERFORMANCE_BONUS_DISTRIBUTE' | 'TRANSFER_TYPE_PERPETUALS_FUNDING_LOSS' | 'TRANSFER_TYPE_PERPETUALS_FUNDING_WIN' | 'TRANSFER_TYPE_REWARDS_VESTED' | 'TRANSFER_TYPE_FEE_REFERRER_REWARD_PAY' | 'TRANSFER_TYPE_FEE_REFERRER_REWARD_DISTRIBUTE'>,
+        filterToAccountFilterAccountTypes?: Array<'ACCOUNT_TYPE_UNSPECIFIED' | 'ACCOUNT_TYPE_INSURANCE' | 'ACCOUNT_TYPE_SETTLEMENT' | 'ACCOUNT_TYPE_MARGIN' | 'ACCOUNT_TYPE_GENERAL' | 'ACCOUNT_TYPE_FEES_INFRASTRUCTURE' | 'ACCOUNT_TYPE_FEES_LIQUIDITY' | 'ACCOUNT_TYPE_FEES_MAKER' | 'ACCOUNT_TYPE_BOND' | 'ACCOUNT_TYPE_EXTERNAL' | 'ACCOUNT_TYPE_GLOBAL_INSURANCE' | 'ACCOUNT_TYPE_GLOBAL_REWARD' | 'ACCOUNT_TYPE_PENDING_TRANSFERS' | 'ACCOUNT_TYPE_REWARD_MAKER_PAID_FEES' | 'ACCOUNT_TYPE_REWARD_MAKER_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_LP_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_MARKET_PROPOSERS' | 'ACCOUNT_TYPE_HOLDING' | 'ACCOUNT_TYPE_LP_LIQUIDITY_FEES' | 'ACCOUNT_TYPE_LIQUIDITY_FEES_BONUS_DISTRIBUTION' | 'ACCOUNT_TYPE_NETWORK_TREASURY' | 'ACCOUNT_TYPE_VESTING_REWARDS' | 'ACCOUNT_TYPE_VESTED_REWARDS' | 'ACCOUNT_TYPE_REWARD_AVERAGE_POSITION' | 'ACCOUNT_TYPE_REWARD_RELATIVE_RETURN' | 'ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY' | 'ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING' | 'ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD' | 'ACCOUNT_TYPE_ORDER_MARGIN'>,
+        filterTransferTypes?: Array<'TRANSFER_TYPE_UNSPECIFIED' | 'TRANSFER_TYPE_LOSS' | 'TRANSFER_TYPE_WIN' | 'TRANSFER_TYPE_MTM_LOSS' | 'TRANSFER_TYPE_MTM_WIN' | 'TRANSFER_TYPE_MARGIN_LOW' | 'TRANSFER_TYPE_MARGIN_HIGH' | 'TRANSFER_TYPE_MARGIN_CONFISCATED' | 'TRANSFER_TYPE_MAKER_FEE_PAY' | 'TRANSFER_TYPE_MAKER_FEE_RECEIVE' | 'TRANSFER_TYPE_INFRASTRUCTURE_FEE_PAY' | 'TRANSFER_TYPE_INFRASTRUCTURE_FEE_DISTRIBUTE' | 'TRANSFER_TYPE_LIQUIDITY_FEE_PAY' | 'TRANSFER_TYPE_LIQUIDITY_FEE_DISTRIBUTE' | 'TRANSFER_TYPE_BOND_LOW' | 'TRANSFER_TYPE_BOND_HIGH' | 'TRANSFER_TYPE_WITHDRAW' | 'TRANSFER_TYPE_DEPOSIT' | 'TRANSFER_TYPE_BOND_SLASHING' | 'TRANSFER_TYPE_REWARD_PAYOUT' | 'TRANSFER_TYPE_TRANSFER_FUNDS_SEND' | 'TRANSFER_TYPE_TRANSFER_FUNDS_DISTRIBUTE' | 'TRANSFER_TYPE_CLEAR_ACCOUNT' | 'TRANSFER_TYPE_CHECKPOINT_BALANCE_RESTORE' | 'TRANSFER_TYPE_SPOT' | 'TRANSFER_TYPE_HOLDING_LOCK' | 'TRANSFER_TYPE_HOLDING_RELEASE' | 'TRANSFER_TYPE_SUCCESSOR_INSURANCE_FRACTION' | 'TRANSFER_TYPE_LIQUIDITY_FEE_ALLOCATE' | 'TRANSFER_TYPE_LIQUIDITY_FEE_NET_DISTRIBUTE' | 'TRANSFER_TYPE_SLA_PENALTY_BOND_APPLY' | 'TRANSFER_TYPE_SLA_PENALTY_LP_FEE_APPLY' | 'TRANSFER_TYPE_LIQUIDITY_FEE_UNPAID_COLLECT' | 'TRANSFER_TYPE_SLA_PERFORMANCE_BONUS_DISTRIBUTE' | 'TRANSFER_TYPE_PERPETUALS_FUNDING_LOSS' | 'TRANSFER_TYPE_PERPETUALS_FUNDING_WIN' | 'TRANSFER_TYPE_REWARDS_VESTED' | 'TRANSFER_TYPE_FEE_REFERRER_REWARD_PAY' | 'TRANSFER_TYPE_FEE_REFERRER_REWARD_DISTRIBUTE' | 'TRANSFER_TYPE_ORDER_MARGIN_LOW' | 'TRANSFER_TYPE_ORDER_MARGIN_HIGH' | 'TRANSFER_TYPE_ISOLATED_MARGIN_LOW' | 'TRANSFER_TYPE_ISOLATED_MARGIN_HIGH'>,
+        filterTransferId?: string,
         paginationFirst?: number,
         paginationAfter?: string,
         paginationLast?: number,
@@ -251,6 +265,7 @@ export class LedgerEntriesService {
                 'filter.toAccountFilter.marketIds': filterToAccountFilterMarketIds,
                 'filter.toAccountFilter.accountTypes': filterToAccountFilterAccountTypes,
                 'filter.transferTypes': filterTransferTypes,
+                'filter.transferId': filterTransferId,
                 'pagination.first': paginationFirst,
                 'pagination.after': paginationAfter,
                 'pagination.last': paginationLast,

@@ -3,12 +3,21 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaBatchProposalTerms } from './vegaBatchProposalTerms';
 import type { vegaProposalError } from './vegaProposalError';
 import type { vegaProposalRationale } from './vegaProposalRationale';
 import type { vegaProposalState } from './vegaProposalState';
 import type { vegaProposalTerms } from './vegaProposalTerms';
 
 export type vegaProposal = {
+    /**
+     * ID of a batch proposal that this proposal is part of.
+     */
+    batchId?: string;
+    /**
+     * Batch proposal terms.
+     */
+    batchTerms?: vegaBatchProposalTerms;
     /**
      * Detailed error associated to the reason.
      */
@@ -55,6 +64,7 @@ export type vegaProposal = {
     state?: vegaProposalState;
     /**
      * Proposal configuration and the actual change that is meant to be executed when proposal is enacted.
+     * Single proposal term.
      */
     terms?: vegaProposalTerms;
     /**

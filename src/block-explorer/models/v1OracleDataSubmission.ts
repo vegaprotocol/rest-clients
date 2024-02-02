@@ -7,13 +7,11 @@ import type { OracleDataSubmissionOracleSource } from './OracleDataSubmissionOra
 
 export type v1OracleDataSubmission = {
     /**
-     * Data provided by the data source
-     * In the case of Open Oracle - it will be the entire object - it will contain messages, signatures and price data.
+     * Data provided by the data source.
      */
     payload?: string;
     /**
-     * Source from which the data is coming from. Must be base64 encoded.
-     * Oracle data is a type of external data source data.
+     * Source from which the data is coming from.
      */
     source?: OracleDataSubmissionOracleSource;
 };

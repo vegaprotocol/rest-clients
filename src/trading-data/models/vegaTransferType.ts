@@ -43,6 +43,10 @@
  * - TRANSFER_TYPE_REWARDS_VESTED: Funds moved from the vesting account to the vested account once the vesting period is reached.
  * - TRANSFER_TYPE_FEE_REFERRER_REWARD_PAY: Fee referrer reward paid from general account.
  * - TRANSFER_TYPE_FEE_REFERRER_REWARD_DISTRIBUTE: Fee referrer reward received into general account of the referrer.
+ * - TRANSFER_TYPE_ORDER_MARGIN_LOW: Funds transferred from general account to meet order margin requirement in isolated margin mode.
+ * - TRANSFER_TYPE_ORDER_MARGIN_HIGH: Excess order margin amount returned to general account.
+ * - TRANSFER_TYPE_ISOLATED_MARGIN_LOW: Transfer from order margin account to margin account due to increase of position.
+ * - TRANSFER_TYPE_ISOLATED_MARGIN_HIGH: Transfer from excess order margin account to general account.
  */
 export enum vegaTransferType {
     TRANSFER_TYPE_UNSPECIFIED = 'TRANSFER_TYPE_UNSPECIFIED',
@@ -84,4 +88,8 @@ export enum vegaTransferType {
     TRANSFER_TYPE_REWARDS_VESTED = 'TRANSFER_TYPE_REWARDS_VESTED',
     TRANSFER_TYPE_FEE_REFERRER_REWARD_PAY = 'TRANSFER_TYPE_FEE_REFERRER_REWARD_PAY',
     TRANSFER_TYPE_FEE_REFERRER_REWARD_DISTRIBUTE = 'TRANSFER_TYPE_FEE_REFERRER_REWARD_DISTRIBUTE',
+    TRANSFER_TYPE_ORDER_MARGIN_LOW = 'TRANSFER_TYPE_ORDER_MARGIN_LOW',
+    TRANSFER_TYPE_ORDER_MARGIN_HIGH = 'TRANSFER_TYPE_ORDER_MARGIN_HIGH',
+    TRANSFER_TYPE_ISOLATED_MARGIN_LOW = 'TRANSFER_TYPE_ISOLATED_MARGIN_LOW',
+    TRANSFER_TYPE_ISOLATED_MARGIN_HIGH = 'TRANSFER_TYPE_ISOLATED_MARGIN_HIGH',
 }

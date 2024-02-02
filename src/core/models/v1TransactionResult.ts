@@ -9,10 +9,12 @@ import type { TransactionResultSuccessDetails } from './TransactionResultSuccess
 import type { v1AnnounceNode } from './v1AnnounceNode';
 import type { v1ApplyReferralCode } from './v1ApplyReferralCode';
 import type { v1BatchMarketInstructions } from './v1BatchMarketInstructions';
+import type { v1BatchProposalSubmission } from './v1BatchProposalSubmission';
 import type { v1CreateReferralSet } from './v1CreateReferralSet';
 import type { v1DelegateSubmission } from './v1DelegateSubmission';
 import type { v1EthereumKeyRotateSubmission } from './v1EthereumKeyRotateSubmission';
 import type { v1IssueSignatures } from './v1IssueSignatures';
+import type { v1JoinTeam } from './v1JoinTeam';
 import type { v1KeyRotateSubmission } from './v1KeyRotateSubmission';
 import type { v1LiquidityProvisionAmendment } from './v1LiquidityProvisionAmendment';
 import type { v1LiquidityProvisionCancellation } from './v1LiquidityProvisionCancellation';
@@ -26,6 +28,8 @@ import type { v1ProtocolUpgradeProposal } from './v1ProtocolUpgradeProposal';
 import type { v1StopOrdersCancellation } from './v1StopOrdersCancellation';
 import type { v1StopOrdersSubmission } from './v1StopOrdersSubmission';
 import type { v1UndelegateSubmission } from './v1UndelegateSubmission';
+import type { v1UpdateMarginMode } from './v1UpdateMarginMode';
+import type { v1UpdatePartyProfile } from './v1UpdatePartyProfile';
 import type { v1UpdateReferralSet } from './v1UpdateReferralSet';
 import type { v1VoteSubmission } from './v1VoteSubmission';
 import type { v1WithdrawSubmission } from './v1WithdrawSubmission';
@@ -35,6 +39,7 @@ export type v1TransactionResult = {
     announceNode?: v1AnnounceNode;
     applyReferralCode?: v1ApplyReferralCode;
     batchMarketInstructions?: v1BatchMarketInstructions;
+    batchProposal?: v1BatchProposalSubmission;
     cancelTransfer?: commandsv1CancelTransfer;
     createReferralSet?: v1CreateReferralSet;
     delegateSubmission?: v1DelegateSubmission;
@@ -42,6 +47,7 @@ export type v1TransactionResult = {
     failure?: TransactionResultFailureDetails;
     hash?: string;
     issueSignatures?: v1IssueSignatures;
+    joinTeam?: v1JoinTeam;
     keyRotateSubmission?: v1KeyRotateSubmission;
     liquidityProvisionAmendment?: v1LiquidityProvisionAmendment;
     liquidityProvisionCancellation?: v1LiquidityProvisionCancellation;
@@ -62,6 +68,8 @@ export type v1TransactionResult = {
     success?: TransactionResultSuccessDetails;
     transfer?: vegacommandsv1Transfer;
     undelegateSubmission?: v1UndelegateSubmission;
+    updateMarginMode?: v1UpdateMarginMode;
+    updatePartyProfile?: v1UpdatePartyProfile;
     updateReferralSet?: v1UpdateReferralSet;
     voteSubmission?: v1VoteSubmission;
     withdrawSubmission?: v1WithdrawSubmission;

@@ -5,16 +5,25 @@
 
 export type v1CreateReferralSetTeam = {
     /**
-     * Optional link to an image to be used as the team avatar.
+     * List of public keys that are allowed to join the team.
+     * Only applicable to closed teams. Removing a party from the allow list does not remove
+     * the party from the team.
+     */
+    allowList?: Array<string>;
+    /**
+     * External link to an avatar for the team.
      */
     avatarUrl?: string;
+    /**
+     * Whether or not the team is closed to new party members.
+     */
     closed?: boolean;
     /**
-     * Team name to be added to the referral banner.
+     * Name of the team.
      */
     name?: string;
     /**
-     * Optional link to a team forum, discord, etc.
+     * External link to the team's homepage.
      */
     teamUrl?: string;
 };

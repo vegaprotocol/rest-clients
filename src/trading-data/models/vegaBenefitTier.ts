@@ -14,7 +14,13 @@ export type vegaBenefitTier = {
      * to access this tier.
      */
     minimumRunningNotionalTakerVolume?: string;
+    /**
+     * Proportion of the referee's taker fees to be discounted.
+     */
     referralDiscountFactor?: string;
+    /**
+     * Proportion of the referee's taker fees to be rewarded to the referrer.
+     */
     referralRewardFactor?: string;
 };
 

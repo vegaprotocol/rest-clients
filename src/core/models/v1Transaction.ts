@@ -8,7 +8,8 @@ import type { v1Signature } from './v1Signature';
 import type { v1TxVersion } from './v1TxVersion';
 
 /**
- * Represents a transaction to be sent to Vega.
+ * Transaction containing a command that can be sent to instruct the network to execute an action.
+ * A transaction contains a byte string representation of the input data which must then be signed, with the signature added to the transaction.
  */
 export type v1Transaction = {
     /**
@@ -16,13 +17,12 @@ export type v1Transaction = {
      */
     address?: string;
     /**
-     * One of the set of Vega commands.
-     * These bytes are should be built as follows:
-     * chain_id_as_bytes + \0 character as delimiter + proto_marshalled_command.
+     * Protobuf message of type `InputData` marshalled into bytes. If the transaction version is V3 or higher then this bytes
+     * string must be prepended with `chain_id_as_byes + \0`.
      */
     inputData?: string;
     /**
-     * Proof of work contains the random transaction id used by the client and the nonce.
+     * Proof-of-work containing the random transaction ID used by the client and the nonce.
      */
     pow?: v1ProofOfWork;
     /**
@@ -30,12 +30,11 @@ export type v1Transaction = {
      */
     pubKey?: string;
     /**
-     * Signature of the input data.
+     * Signature of the input data field, signed by the sender of this transaction.
      */
     signature?: v1Signature;
     /**
-     * Version of the transaction, to be used in the future in case changes are implemented
-     * to the transaction format.
+     * Version of the transaction.
      */
     version?: v1TxVersion;
 };

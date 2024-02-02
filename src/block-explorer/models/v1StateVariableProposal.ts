@@ -5,9 +5,12 @@
 
 import type { vegaStateValueProposal } from './vegaStateValueProposal';
 
+/**
+ * A validator command sent automatically to reach consensus on floating point values.
+ */
 export type v1StateVariableProposal = {
     /**
-     * State value proposal details.
+     * Details of the state variable being proposed.
      */
     proposal?: vegaStateValueProposal;
 };

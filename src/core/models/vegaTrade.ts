@@ -13,6 +13,11 @@ export type vegaTrade = {
      */
     aggressor?: vegaSide;
     /**
+     * Price for the trade using asset decimals, as opposed to market decimals used
+     * in the price field. This is only used in trade events for position updates.
+     */
+    assetPrice?: string;
+    /**
      * Identifier of the order from the buy side.
      */
     buyOrder?: string;

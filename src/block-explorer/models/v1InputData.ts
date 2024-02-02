@@ -8,11 +8,13 @@ import type { commandsv1Transfer } from './commandsv1Transfer';
 import type { v1AnnounceNode } from './v1AnnounceNode';
 import type { v1ApplyReferralCode } from './v1ApplyReferralCode';
 import type { v1BatchMarketInstructions } from './v1BatchMarketInstructions';
+import type { v1BatchProposalSubmission } from './v1BatchProposalSubmission';
 import type { v1ChainEvent } from './v1ChainEvent';
 import type { v1CreateReferralSet } from './v1CreateReferralSet';
 import type { v1DelegateSubmission } from './v1DelegateSubmission';
 import type { v1EthereumKeyRotateSubmission } from './v1EthereumKeyRotateSubmission';
 import type { v1IssueSignatures } from './v1IssueSignatures';
+import type { v1JoinTeam } from './v1JoinTeam';
 import type { v1KeyRotateSubmission } from './v1KeyRotateSubmission';
 import type { v1LiquidityProvisionAmendment } from './v1LiquidityProvisionAmendment';
 import type { v1LiquidityProvisionCancellation } from './v1LiquidityProvisionCancellation';
@@ -29,11 +31,17 @@ import type { v1StateVariableProposal } from './v1StateVariableProposal';
 import type { v1StopOrdersCancellation } from './v1StopOrdersCancellation';
 import type { v1StopOrdersSubmission } from './v1StopOrdersSubmission';
 import type { v1UndelegateSubmission } from './v1UndelegateSubmission';
+import type { v1UpdateMarginMode } from './v1UpdateMarginMode';
+import type { v1UpdatePartyProfile } from './v1UpdatePartyProfile';
 import type { v1UpdateReferralSet } from './v1UpdateReferralSet';
 import type { v1ValidatorHeartbeat } from './v1ValidatorHeartbeat';
 import type { v1VoteSubmission } from './v1VoteSubmission';
 import type { v1WithdrawSubmission } from './v1WithdrawSubmission';
 
+/**
+ * Input data for a transaction containing a network command for the Vega network to execute.
+ * Once populated the protobuf message should be marshalled into a byte array and included in a transaction message.
+ */
 export type v1InputData = {
     /**
      * Command used by a node operator to announce its node as a pending validator.
@@ -44,32 +52,27 @@ export type v1InputData = {
      */
     applyReferralCode?: v1ApplyReferralCode;
     /**
-     * Command to submit a batch of order instructions to a market.
+     * Command to submit a batch of order instructions.
      */
     batchMarketInstructions?: v1BatchMarketInstructions;
     /**
-     * Block height at which the transaction was made.
-     * This should be the current block height. The transaction will be valid
-     * from the block and up to the `tolerance` block height.
-     * Example: If the network has a tolerance of 150 blocks and `block_height`
-     * is set to `200`, then the transaction will be valid until block `350`.
-     * Note that a `block_height` that is ahead of the real block height will be
-     * rejected. The tolerance can be queried from the chain's network parameters.
-     * `block_height` prevents replay attacks in conjunction with `nonce` (see above).
+     * Command to submit a batch governance proposal.
+     */
+    batchProposalSubmission?: v1BatchProposalSubmission;
+    /**
+     * Block height which has been used to calculate the transaction proof-of-work.
      */
     blockHeight?: string;
     /**
-     * Command to request cancelling a recurring transfer.
+     * Command to cancel a recurring transfer.
      */
     cancelTransfer?: commandsv1CancelTransfer;
     /**
-     * Command used by a validator to submit an event forwarded to the Vega network to provide information
-     * on events happening on other networks, to be used by a foreign chain
-     * to recognise a decision taken by the Vega network.
+     * Validator command sent automatically to notify the Vega chain of an off-chain event.
      */
     chainEvent?: v1ChainEvent;
     /**
-     * Command to create a team.
+     * Command to create a referral set.
      */
     createReferralSet?: v1CreateReferralSet;
     /**
@@ -77,23 +80,27 @@ export type v1InputData = {
      */
     delegateSubmission?: v1DelegateSubmission;
     /**
-     * Command used by a validator to allow given validator to rotate their Ethereum keys.
+     * Validator command sent manually by a node operator to rotate their node's Ethereum keys.
      */
     ethereumKeyRotateSubmission?: v1EthereumKeyRotateSubmission;
     /**
-     * Command used by a validator to submit signatures to a smart contract.
+     * Command to request signatures to amend the multisig-control contract.
      */
     issueSignatures?: v1IssueSignatures;
     /**
-     * Command used by a validator to allow given validator to rotate their Vega keys.
+     * Command to join a team.
+     */
+    joinTeam?: v1JoinTeam;
+    /**
+     * Validator command sent manually by a node operator to rotate their node's Vega keys.
      */
     keyRotateSubmission?: v1KeyRotateSubmission;
     /**
-     * Command to request amending a liquidity commitment.
+     * Command to amend a liquidity commitment.
      */
     liquidityProvisionAmendment?: v1LiquidityProvisionAmendment;
     /**
-     * Command to request cancelling a liquidity commitment.
+     * Command to cancel a liquidity commitment.
      */
     liquidityProvisionCancellation?: v1LiquidityProvisionCancellation;
     /**
@@ -101,29 +108,20 @@ export type v1InputData = {
      */
     liquidityProvisionSubmission?: v1LiquidityProvisionSubmission;
     /**
-     * Command used by a validator to submit a signature, to be used by a foreign chain to recognise a decision taken by the Vega network.
+     * Validator command sent automatically to provide signatures for the Ethereum bridge.
      */
     nodeSignature?: v1NodeSignature;
     /**
-     * Command used by a validator when a node votes for validating that a given resource exists or is valid,
-     * for example, an ERC20 deposit is valid and exists on ethereum.
+     * Validator command sent automatically to vote on that validity of an external resource.
      */
     nodeVote?: v1NodeVote;
     /**
-     * Number to provide uniqueness to prevent accidental replays and,
-     * in combination with `block_height`, deliberate attacks.
-     * A nonce provides uniqueness for otherwise identical transactions,
-     * ensuring that the transaction hash uniquely identifies a specific transaction.
-     * Granted all other fields are equal, the nonce can either be a counter
-     * or generated at random to submit multiple transactions within the same
-     * block (see below), without being identified as replays.
-     * Please note that Protocol Buffers do not have a canonical, unique encoding
-     * and therefore different libraries or binaries may encode the same message
-     * slightly differently, causing a different hash.
+     * Arbitrary number used to provide uniqueness to the signature of two otherwise identical input data, preventing replay attacks.
+     * Must be set to a different value for all new transactions sent by a party. It is advised to generate this number randomly.
      */
     nonce?: string;
     /**
-     * Command to submit new oracle data from third party providers.
+     * Command to submit external oracle data.
      */
     oracleDataSubmission?: v1OracleDataSubmission;
     /**
@@ -135,7 +133,7 @@ export type v1InputData = {
      */
     orderCancellation?: v1OrderCancellation;
     /**
-     * Command for submitting an order.
+     * Command to submit an order.
      */
     orderSubmission?: v1OrderSubmission;
     /**
@@ -143,11 +141,11 @@ export type v1InputData = {
      */
     proposalSubmission?: v1ProposalSubmission;
     /**
-     * Command used by a validator to propose a protocol upgrade.
+     * Validator command sent manually to propose a protocol upgrade.
      */
     protocolUpgradeProposal?: v1ProtocolUpgradeProposal;
     /**
-     * Command used by a validator to submit a floating point value.
+     * Validator command sent automatically to reach consensus on floating point values.
      */
     stateVariableProposal?: v1StateVariableProposal;
     /**
@@ -167,12 +165,19 @@ export type v1InputData = {
      */
     undelegateSubmission?: v1UndelegateSubmission;
     /**
+     * Command to update the margin mode of a party in a market.
+     */
+    updateMarginMode?: v1UpdateMarginMode;
+    /**
+     * Command to update a party's profile.
+     */
+    updatePartyProfile?: v1UpdatePartyProfile;
+    /**
      * Command to update a referral set.
      */
     updateReferralSet?: v1UpdateReferralSet;
     /**
-     * Command used by a validator to signal they are still online and validating blocks
-     * or ready to validate blocks when they are still a pending validator.
+     * Validator command sent automatically to signal regular participation in the network.
      */
     validatorHeartbeat?: v1ValidatorHeartbeat;
     /**

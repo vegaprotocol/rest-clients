@@ -19,9 +19,26 @@ export type v1ReferralSetStatsUpdated = {
      * referral program.
      */
     referralSetRunningNotionalTakerVolume?: string;
+    referrerTakerVolume?: string;
+    /**
+     * Reward factor applied to the trades.
+     */
+    rewardFactor?: string;
+    /**
+     * Rewards factor multiplier for the trades.
+     */
+    rewardsFactorMultiplier?: string;
+    /**
+     * Rewards multiplier applied to the trades.
+     */
+    rewardsMultiplier?: string;
     /**
      * Unique ID of the set.
      */
     setId?: string;
+    /**
+     * Indicates if the referral set was eligible to be part of the referral program.
+     */
+    wasEligible?: boolean;
 };
 

@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaCompositePriceConfiguration } from './vegaCompositePriceConfiguration';
 import type { vegaDataSourceDefinition } from './vegaDataSourceDefinition';
 import type { vegaDataSourceSpecToPerpetualBinding } from './vegaDataSourceSpecToPerpetualBinding';
 
@@ -27,6 +28,22 @@ export type vegaPerpetualProduct = {
      * Data source spec describing the data source for settlement schedule.
      */
     dataSourceSpecForSettlementSchedule?: vegaDataSourceDefinition;
+    /**
+     * Lower bound for the funding-rate such that the funding-rate will never be lower than this value.
+     */
+    fundingRateLowerBound?: string;
+    /**
+     * Factor applied to funding-rates. This scales the impact that spot price deviations have on funding payments.
+     */
+    fundingRateScalingFactor?: string;
+    /**
+     * Upper bound for the funding-rate such that the funding-rate will never be higher than this value.
+     */
+    fundingRateUpperBound?: string;
+    /**
+     * Composite price configuration to drive the calculation of the index price used for funding payments. If undefined the default mark price of the market is used.
+     */
+    indexPriceConfiguration?: vegaCompositePriceConfiguration;
     /**
      * Continuously compounded interest rate used in funding rate calculation, in the range [-1, 1].
      */

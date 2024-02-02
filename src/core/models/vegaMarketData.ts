@@ -5,7 +5,9 @@
 
 import type { MarketTradingMode } from './MarketTradingMode';
 import type { vegaAuctionTrigger } from './vegaAuctionTrigger';
+import type { vegaCompositePriceType } from './vegaCompositePriceType';
 import type { vegaLiquidityProviderFeeShare } from './vegaLiquidityProviderFeeShare';
+import type { vegaLiquidityProviderSLA } from './vegaLiquidityProviderSLA';
 import type { vegaMarketState } from './vegaMarketState';
 import type { vegaPriceMonitoringBounds } from './vegaPriceMonitoringBounds';
 import type { vegaProductData } from './vegaProductData';
@@ -77,10 +79,18 @@ export type vegaMarketData = {
      */
     liquidityProviderFeeShare?: Array<vegaLiquidityProviderFeeShare>;
     /**
+     * SLA performance for each liquidity provider.
+     */
+    liquidityProviderSla?: Array<vegaLiquidityProviderSLA>;
+    /**
      * Mark price, as an unsigned integer, for example `123456` is a correctly
      * formatted price of `1.23456` assuming market configured to 5 decimal places.
      */
     markPrice?: string;
+    /**
+     * The method used for calculating the mark price.
+     */
+    markPriceType?: vegaCompositePriceType;
     market?: string;
     /**
      * Market growth at the last market time window.
@@ -107,6 +117,10 @@ export type vegaMarketData = {
      * Time in Unix nanoseconds when the next mark-to-market calculation will occur.
      */
     nextMarkToMarket?: string;
+    /**
+     * Time in Unix nanoseconds when the market will next submit a trade to reduce its position.
+     */
+    nextNetworkCloseout?: string;
     /**
      * Sum of the size of all positions greater than zero on the market.
      */

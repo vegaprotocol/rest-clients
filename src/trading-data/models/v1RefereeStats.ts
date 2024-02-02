@@ -13,9 +13,5 @@ export type v1RefereeStats = {
      * Unique ID of the party.
      */
     partyId?: string;
-    /**
-     * Reward factor applied to the party.
-     */
-    rewardFactor?: string;
 };
 

@@ -5,7 +5,9 @@
 
 import type { MarketTradingMode } from './MarketTradingMode';
 import type { vegaAuctionDuration } from './vegaAuctionDuration';
+import type { vegaCompositePriceConfiguration } from './vegaCompositePriceConfiguration';
 import type { vegaFees } from './vegaFees';
+import type { vegaLiquidationStrategy } from './vegaLiquidationStrategy';
 import type { vegaLiquidityMonitoringParameters } from './vegaLiquidityMonitoringParameters';
 import type { vegaLiquiditySLAParameters } from './vegaLiquiditySLAParameters';
 import type { vegaMarketState } from './vegaMarketState';
@@ -37,6 +39,10 @@ export type vegaMarket = {
      */
     linearSlippageFactor?: string;
     /**
+     * Liquidation strategy used by this market.
+     */
+    liquidationStrategy?: vegaLiquidationStrategy;
+    /**
      * LiquidityMonitoringParameters for the market.
      */
     liquidityMonitoringParameters?: vegaLiquidityMonitoringParameters;
@@ -46,9 +52,13 @@ export type vegaMarket = {
     liquiditySlaParams?: vegaLiquiditySLAParameters;
     /**
      * Percentage move up and down from the mid price which specifies the range of
-     * price levels over which automated liquidity provision orders will be deployed.
+     * price levels over which automated liquidity provisions will be deployed.
      */
     lpPriceRange?: string;
+    /**
+     * Mark price calculation configuration.
+     */
+    markPriceConfiguration?: vegaCompositePriceConfiguration;
     /**
      * Timestamps for when the market state changes.
      */

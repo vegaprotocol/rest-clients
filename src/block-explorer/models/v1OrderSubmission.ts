@@ -9,26 +9,28 @@ import type { vegaOrderType } from './vegaOrderType';
 import type { vegaPeggedOrder } from './vegaPeggedOrder';
 import type { vegaSide } from './vegaSide';
 
+/**
+ * A command that submits an order to the Vega network for a given market.
+ */
 export type v1OrderSubmission = {
     /**
-     * Timestamp in Unix nanoseconds for when the order will expire,
-     * required field only for `Order.TimeInForce`.TIME_IN_FORCE_GTT`.
+     * Timestamp, in Unix nanoseconds, for when the order will expire. Can only be set when the order's time-in-force is GTT.
      */
     expiresAt?: string;
     /**
-     * Parameters used to specify an iceberg order.
+     * Iceberg order details. If set, the order will exist on the order book in chunks.
      */
     icebergOpts?: v1IcebergOpts;
     /**
-     * Market ID for the order, required field.
+     * Market ID to submit the order to.
      */
     marketId?: string;
     /**
-     * Used to specify the details for a pegged order.
+     * Pegged order details. If set, the order's price will be offset from a particular reference price of the order book at all times.
      */
     peggedOrder?: vegaPeggedOrder;
     /**
-     * Only valid for Limit orders. Cannot be True at the same time as Reduce-Only.
+     * If set, the order will only be executed if it would not trade on entry to the order book. Only valid for limit orders.
      */
     postOnly?: boolean;
     /**
@@ -39,29 +41,28 @@ export type v1OrderSubmission = {
      */
     price?: string;
     /**
-     * Only valid for Non-Persistent orders. Cannot be True at the same time as Post-Only.
-     * If set, order will only be executed if the outcome of the trade moves the trader's position closer to 0.
+     * If set, the order will only be executed if the outcome of the trade moves the trader's position closer to 0.
+     * Only valid for non-persistent orders.
      */
     reduceOnly?: boolean;
     /**
-     * Reference given for the order, this is typically used to retrieve an order submitted through consensus, currently
-     * set internally by the node to return a unique reference ID for the order submission.
+     * Arbitrary optional reference for the order, to be used as a human-readable non-unique identifier for the order.
      */
     reference?: string;
     /**
-     * Side for the order, e.g. SIDE_BUY or SIDE_SELL, required field.
+     * Which side of the order book the order is for, e.g. buy or sell.
      */
     side?: vegaSide;
     /**
-     * Size for the order, for example, in a futures market the size equals the number of units, cannot be negative.
+     * Size for the order, for example, in a futures market the size equals the number of units.
      */
     size?: string;
     /**
-     * Time in force indicates how long an order will remain active before it is executed or expires, required field.
+     * Time in force indicates how long an order will remain active before it is executed or expires..
      */
     timeInForce?: OrderTimeInForce;
     /**
-     * Type for the order, required field - See `Order.Type`.
+     * Type of the order.
      */
     type?: vegaOrderType;
 };

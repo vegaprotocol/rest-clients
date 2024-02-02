@@ -47,6 +47,7 @@
  * - ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY: Per asset market reward account given for return volatility
  * - ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING: Per asset market reward account given to validators by their ranking
  * - ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD: Per asset account for pending fee referral reward payouts
+ * - ACCOUNT_TYPE_ORDER_MARGIN: Per asset market account for party in isolated margin mode
  */
 export enum vegaAccountType {
     ACCOUNT_TYPE_UNSPECIFIED = 'ACCOUNT_TYPE_UNSPECIFIED',
@@ -77,4 +78,5 @@ export enum vegaAccountType {
     ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY = 'ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY',
     ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING = 'ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING',
     ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD = 'ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD',
+    ACCOUNT_TYPE_ORDER_MARGIN = 'ACCOUNT_TYPE_ORDER_MARGIN',
 }

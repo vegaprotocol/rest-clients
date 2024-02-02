@@ -7,9 +7,7 @@ import type { vegaBenefitTier } from './vegaBenefitTier';
 import type { vegaStakingTier } from './vegaStakingTier';
 
 /**
- * Referral program for reporting purposes differs slightly from the referral program
- * message in the referral program created and referral program updated events, as it includes
- * an optional timestamp that is set when the referral program has ended.
+ * Referral program details.
  */
 export type apiv2ReferralProgram = {
     /**
@@ -18,12 +16,12 @@ export type apiv2ReferralProgram = {
      */
     benefitTiers?: Array<vegaBenefitTier>;
     /**
-     * Timestamp as Unix time in seconds, after which when the current epoch ends, the
-     * programs status will become STATE_CLOSED and benefits will be disabled.
+     * Timestamp in Unix nanoseconds, after which when the current epoch ends, the
+     * program will end and benefits will be disabled.
      */
     endOfProgramTimestamp?: string;
     /**
-     * Timestamp as Unix time in nanoseconds at which the program ended.
+     * Timestamp, in Unix nanoseconds, when the program ended.
      */
     endedAt?: string;
     /**
@@ -31,8 +29,7 @@ export type apiv2ReferralProgram = {
      */
     id?: string;
     /**
-     * Defined staking tiers in increasing order. First element will give Tier 1,
-     * second element will give Tier 2, and so on. Determines the level of
+     * Defined benefit tiers ordered by increasing reward multiplier. Determines the level of
      * benefit a party can expect based on their staking.
      */
     stakingTiers?: Array<vegaStakingTier>;
@@ -42,7 +39,7 @@ export type apiv2ReferralProgram = {
      */
     version?: string;
     /**
-     * Number of epochs over which to evaluate a referral set's running volume.
+     * Number of epochs over which the referral set's running volume is evaluated.
      */
     windowLength?: string;
 };

@@ -8,7 +8,17 @@ import type { v1OrderCancellation } from './v1OrderCancellation';
 import type { v1OrderSubmission } from './v1OrderSubmission';
 import type { v1StopOrdersCancellation } from './v1StopOrdersCancellation';
 import type { v1StopOrdersSubmission } from './v1StopOrdersSubmission';
+import type { v1UpdateMarginMode } from './v1UpdateMarginMode';
 
+/**
+ * A command that allows the submission of a batch market instruction which wraps up multiple market instructions into a single transaction.
+ * These instructions are then processed sequentially in the following order:
+ * - OrderCancellation
+ * - OrderAmendment
+ * - OrderSubmission
+ * - StopOrderSubmission
+ * where the maximum allow of instructions in a batch is controlled by the network parameter "spam.protection.max.batchSize".
+ */
 export type v1BatchMarketInstructions = {
     /**
      * List of order amendments to be processed sequentially.
@@ -30,5 +40,6 @@ export type v1BatchMarketInstructions = {
      * List of order submissions to be processed sequentially.
      */
     submissions?: Array<v1OrderSubmission>;
+    updateMarginMode?: Array<v1UpdateMarginMode>;
 };
 

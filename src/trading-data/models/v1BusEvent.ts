@@ -19,6 +19,8 @@ import type { v1ERC20MultiSigSignerRemoved } from './v1ERC20MultiSigSignerRemove
 import type { v1ERC20MultiSigThresholdSetEvent } from './v1ERC20MultiSigThresholdSetEvent';
 import type { v1EthereumKeyRotation } from './v1EthereumKeyRotation';
 import type { v1ExpiredOrders } from './v1ExpiredOrders';
+import type { v1FeesStats } from './v1FeesStats';
+import type { v1FundingPayments } from './v1FundingPayments';
 import type { v1FundingPeriod } from './v1FundingPeriod';
 import type { v1FundingPeriodDataPoint } from './v1FundingPeriodDataPoint';
 import type { v1KeyRotation } from './v1KeyRotation';
@@ -27,7 +29,10 @@ import type { v1LossSocialization } from './v1LossSocialization';
 import type { v1MarketEvent } from './v1MarketEvent';
 import type { v1MarketTick } from './v1MarketTick';
 import type { v1NodeSignature } from './v1NodeSignature';
+import type { v1PaidLiquidityFeesStats } from './v1PaidLiquidityFeesStats';
 import type { v1PartyActivityStreak } from './v1PartyActivityStreak';
+import type { v1PartyMarginModeUpdated } from './v1PartyMarginModeUpdated';
+import type { v1PartyProfileUpdated } from './v1PartyProfileUpdated';
 import type { v1PositionResolution } from './v1PositionResolution';
 import type { v1PositionStateEvent } from './v1PositionStateEvent';
 import type { v1ProtocolUpgradeDataNodeReady } from './v1ProtocolUpgradeDataNodeReady';
@@ -52,14 +57,18 @@ import type { v1TeamCreated } from './v1TeamCreated';
 import type { v1TeamUpdated } from './v1TeamUpdated';
 import type { v1TimeUpdate } from './v1TimeUpdate';
 import type { v1TransactionResult } from './v1TransactionResult';
+import type { v1TransferFees } from './v1TransferFees';
+import type { v1TransferFeesDiscount } from './v1TransferFeesDiscount';
 import type { v1TxErrorEvent } from './v1TxErrorEvent';
 import type { v1ValidatorRankingEvent } from './v1ValidatorRankingEvent';
 import type { v1ValidatorScoreEvent } from './v1ValidatorScoreEvent';
 import type { v1ValidatorUpdate } from './v1ValidatorUpdate';
+import type { v1VestingBalancesSummary } from './v1VestingBalancesSummary';
 import type { v1VestingStatsUpdated } from './v1VestingStatsUpdated';
 import type { v1VolumeDiscountProgramEnded } from './v1VolumeDiscountProgramEnded';
 import type { v1VolumeDiscountProgramStarted } from './v1VolumeDiscountProgramStarted';
 import type { v1VolumeDiscountProgramUpdated } from './v1VolumeDiscountProgramUpdated';
+import type { v1VolumeDiscountStatsUpdated } from './v1VolumeDiscountStatsUpdated';
 import type { vegaAccount } from './vegaAccount';
 import type { vegaAsset } from './vegaAsset';
 import type { vegaDeposit } from './vegaDeposit';
@@ -102,6 +111,14 @@ export type v1BusEvent = {
     ethereumKeyRotation?: v1EthereumKeyRotation;
     expiredOrders?: v1ExpiredOrders;
     /**
+     * Event notifying of an update the fees stats for a market.
+     */
+    feesStats?: v1FeesStats;
+    /**
+     * Event notifying of funding payments at the end of a funding period.
+     */
+    fundingPayments?: v1FundingPayments;
+    /**
      * Start or end of a funding period.
      */
     fundingPeriod?: v1FundingPeriod;
@@ -126,8 +143,20 @@ export type v1BusEvent = {
     oracleData?: vegaOracleData;
     oracleSpec?: vegaOracleSpec;
     order?: vegaOrder;
+    /**
+     * Event notifying of an update to the liqudity fees stats for a market.
+     */
+    paidLiquidityFeesStats?: v1PaidLiquidityFeesStats;
     party?: vegaParty;
     partyActivityStreak?: v1PartyActivityStreak;
+    /**
+     * Event notifying of a party's margin mode update on a market.
+     */
+    partyMarginModeUpdated?: v1PartyMarginModeUpdated;
+    /**
+     * Event notifying of a party's profile update.
+     */
+    partyProfileUpdated?: v1PartyProfileUpdated;
     positionResolution?: v1PositionResolution;
     positionStateEvent?: v1PositionStateEvent;
     proposal?: vegaProposal;
@@ -184,12 +213,24 @@ export type v1BusEvent = {
     trade?: vegaTrade;
     transactionResult?: v1TransactionResult;
     transfer?: vegaeventsv1Transfer;
+    /**
+     * Event notifying of fees related to a transfer being paid.
+     */
+    transferFees?: v1TransferFees;
+    /**
+     * Event notifying of a party's available discounts for transfer fees, per asset.
+     */
+    transferFeesDiscount?: v1TransferFeesDiscount;
     txErrEvent?: v1TxErrorEvent;
     txHash?: string;
     type?: v1BusEventType;
     validatorScore?: v1ValidatorScoreEvent;
     validatorUpdate?: v1ValidatorUpdate;
     version?: number;
+    /**
+     * Event notifying of an update to the vesting and locked balances.
+     */
+    vestingBalancesSummary?: v1VestingBalancesSummary;
     /**
      * Event notifying of an update to the vesting statistics.
      */
@@ -206,6 +247,10 @@ export type v1BusEvent = {
      * Event notifying that a volume discount program has been updated.
      */
     volumeDiscountProgramUpdated?: v1VolumeDiscountProgramUpdated;
+    /**
+     * Event notifying of an update to the volume discount statistics.
+     */
+    volumeDiscountStatsUpdated?: v1VolumeDiscountStatsUpdated;
     vote?: vegaVote;
     withdrawal?: vegaWithdrawal;
 };

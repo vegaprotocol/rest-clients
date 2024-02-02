@@ -5,6 +5,10 @@
 
 export type v1TeamCreated = {
     /**
+     * List of public keys that are allowed to join the team.
+     */
+    allowList?: Array<string>;
+    /**
      * Epoch at which the team was created.
      */
     atEpoch?: string;

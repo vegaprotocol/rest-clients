@@ -3,13 +3,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
+/**
+ * Command to allow a token holder to delegate their tokens to a validator to help secure the network.
+ * A token holder delegating to a validator will earn rewards based on the amount they have delegated, and the performance of the chosen validator.
+ */
 export type v1DelegateSubmission = {
     /**
-     * Amount of stake to delegate. This field is an unsigned integer scaled to the asset's decimal places.
+     * Amount of stake to delegate, as an unsigned integer scaled to the governance asset's decimal places.
      */
     amount?: string;
     /**
-     * Delegate to the specified node ID.
+     * Node ID to delegate stake to.
      */
     nodeId?: string;
 };

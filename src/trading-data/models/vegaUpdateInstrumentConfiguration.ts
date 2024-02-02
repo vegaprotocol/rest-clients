@@ -15,6 +15,7 @@ export type vegaUpdateInstrumentConfiguration = {
      * Future.
      */
     future?: vegaUpdateFutureProduct;
+    name?: string;
     /**
      * Perpetual.
      */

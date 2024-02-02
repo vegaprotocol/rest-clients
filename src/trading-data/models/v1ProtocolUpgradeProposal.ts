@@ -3,6 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
+/**
+ * A validator command sent manually by a node operator to propose a protocol upgrade.
+ */
 export type v1ProtocolUpgradeProposal = {
     /**
      * Block height at which to perform the upgrade.

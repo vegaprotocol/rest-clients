@@ -4,7 +4,7 @@
 /* eslint-disable */
 
 /**
- * Status of a liquidity provision order.
+ * Status of a liquidity provision.
  *
  * - STATUS_UNSPECIFIED: Always invalid
  * - STATUS_ACTIVE: Liquidity provision is active

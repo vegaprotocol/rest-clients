@@ -6,16 +6,15 @@
 import type { v1NodeVoteType } from './v1NodeVoteType';
 
 /**
- * Used when a node votes for validating that a given resource exists or is valid,
- * for example, an ERC20 deposit is valid and exists on ethereum.
+ * A validator command which is sent automatically by a node when it has verified a resource external to the network.
  */
 export type v1NodeVote = {
     /**
-     * Reference identifying the resource making the vote, required field.
+     * Reference identifying the resource that has been verified.
      */
     reference?: string;
     /**
-     * Type of NodeVote, also required.
+     * Type of external event that has been verified.
      */
     type?: v1NodeVoteType;
 };

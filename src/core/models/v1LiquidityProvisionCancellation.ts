@@ -3,9 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
+/**
+ * Command that allows a liquidity provider to inform the network that they will stop providing liquidity for a market.
+ */
 export type v1LiquidityProvisionCancellation = {
     /**
-     * Unique ID for the market with the liquidity provision to be cancelled.
+     * Market that the submitter will stop providing liquidity for.
      */
     marketId?: string;
 };

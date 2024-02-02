@@ -53,7 +53,7 @@ export class CoreServiceService {
 
     /**
      * Get Spam statistics
-     * Get the spam statistics for a given party
+     * Get the spam statistics for a given party.
      * @param partyId Party ID whose statistics are requested
      * @returns v1GetSpamStatisticsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -154,6 +154,15 @@ export class CoreServiceService {
      * - BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_ENDED: Event indicating a volume discount program ended.
      * - BUS_EVENT_TYPE_REFERRAL_SET_STATS_UPDATED: Event indicating the updated statistics for a referral set.
      * - BUS_EVENT_TYPE_VESTING_STATS_UPDATED: Event indicating the updated statistics for the vesting program.
+     * - BUS_EVENT_TYPE_VOLUME_DISCOUNT_STATS_UPDATED: Event indicating the updated statistics for the volume discount.
+     * - BUS_EVENT_TYPE_FEES_STATS_UPDATED: Event indicating the fees statistics per market at end of epoch
+     * - BUS_EVENT_TYPE_FUNDING_PAYMENTS: Event indicating a funding period has ended and resulted in funding payment transfers.
+     * - BUS_EVENT_TYPE_PAID_LIQUIDITY_FEES_STATS_UPDATED: Event used to report the updated paid liquidity fee statistics for the market at the end of the epoch
+     * - BUS_EVENT_TYPE_VESTING_SUMMARY: Event used to report the summary of vesting and locked balances at the end of the epoch
+     * - BUS_EVENT_TYPE_TRANSFER_FEES_PAID: Event used to link ledger entries to the transfer that triggered the fees being collected.
+     * - BUS_EVENT_TYPE_TRANSFER_FEES_DISCOUNT_UPDATED: Event indicating that a party's available transfer fee discount has changed, per asset.
+     * - BUS_EVENT_TYPE_PARTY_MARGIN_MODE_UPDATED: Event indicating that a party updated their margin mode on a market.
+     * - BUS_EVENT_TYPE_PARTY_PROFILE_UPDATED: Event indicating that a party updated their profile.
      * - BUS_EVENT_TYPE_MARKET: Event indicating a market related event, for example when a market opens
      * - BUS_EVENT_TYPE_TX_ERROR: Event used to report failed transactions back to a user, this is excluded from the ALL type
      * @param marketId Market ID to filter events for, optional field. If omitted, no markets will be filtered out.
@@ -170,7 +179,7 @@ export class CoreServiceService {
      * @throws ApiError
      */
     public static coreServiceObserveEventBus(
-        type?: Array<'BUS_EVENT_TYPE_UNSPECIFIED' | 'BUS_EVENT_TYPE_ALL' | 'BUS_EVENT_TYPE_TIME_UPDATE' | 'BUS_EVENT_TYPE_LEDGER_MOVEMENTS' | 'BUS_EVENT_TYPE_POSITION_RESOLUTION' | 'BUS_EVENT_TYPE_ORDER' | 'BUS_EVENT_TYPE_ACCOUNT' | 'BUS_EVENT_TYPE_PARTY' | 'BUS_EVENT_TYPE_TRADE' | 'BUS_EVENT_TYPE_MARGIN_LEVELS' | 'BUS_EVENT_TYPE_PROPOSAL' | 'BUS_EVENT_TYPE_VOTE' | 'BUS_EVENT_TYPE_MARKET_DATA' | 'BUS_EVENT_TYPE_NODE_SIGNATURE' | 'BUS_EVENT_TYPE_LOSS_SOCIALIZATION' | 'BUS_EVENT_TYPE_SETTLE_POSITION' | 'BUS_EVENT_TYPE_SETTLE_DISTRESSED' | 'BUS_EVENT_TYPE_MARKET_CREATED' | 'BUS_EVENT_TYPE_ASSET' | 'BUS_EVENT_TYPE_MARKET_TICK' | 'BUS_EVENT_TYPE_WITHDRAWAL' | 'BUS_EVENT_TYPE_DEPOSIT' | 'BUS_EVENT_TYPE_AUCTION' | 'BUS_EVENT_TYPE_RISK_FACTOR' | 'BUS_EVENT_TYPE_NETWORK_PARAMETER' | 'BUS_EVENT_TYPE_LIQUIDITY_PROVISION' | 'BUS_EVENT_TYPE_MARKET_UPDATED' | 'BUS_EVENT_TYPE_ORACLE_SPEC' | 'BUS_EVENT_TYPE_ORACLE_DATA' | 'BUS_EVENT_TYPE_DELEGATION_BALANCE' | 'BUS_EVENT_TYPE_VALIDATOR_SCORE' | 'BUS_EVENT_TYPE_EPOCH_UPDATE' | 'BUS_EVENT_TYPE_VALIDATOR_UPDATE' | 'BUS_EVENT_TYPE_STAKE_LINKING' | 'BUS_EVENT_TYPE_REWARD_PAYOUT_EVENT' | 'BUS_EVENT_TYPE_CHECKPOINT' | 'BUS_EVENT_TYPE_STREAM_START' | 'BUS_EVENT_TYPE_KEY_ROTATION' | 'BUS_EVENT_TYPE_STATE_VAR' | 'BUS_EVENT_TYPE_NETWORK_LIMITS' | 'BUS_EVENT_TYPE_TRANSFER' | 'BUS_EVENT_TYPE_VALIDATOR_RANKING' | 'BUS_EVENT_TYPE_ERC20_MULTI_SIG_SIGNER_EVENT' | 'BUS_EVENT_TYPE_ERC20_MULTI_SIG_SET_THRESHOLD' | 'BUS_EVENT_TYPE_ERC20_MULTI_SIG_SIGNER_ADDED' | 'BUS_EVENT_TYPE_ERC20_MULTI_SIG_SIGNER_REMOVED' | 'BUS_EVENT_TYPE_POSITION_STATE' | 'BUS_EVENT_TYPE_ETHEREUM_KEY_ROTATION' | 'BUS_EVENT_TYPE_PROTOCOL_UPGRADE_PROPOSAL' | 'BUS_EVENT_TYPE_BEGIN_BLOCK' | 'BUS_EVENT_TYPE_END_BLOCK' | 'BUS_EVENT_TYPE_PROTOCOL_UPGRADE_STARTED' | 'BUS_EVENT_TYPE_SETTLE_MARKET' | 'BUS_EVENT_TYPE_TRANSACTION_RESULT' | 'BUS_EVENT_TYPE_SNAPSHOT_TAKEN' | 'BUS_EVENT_TYPE_PROTOCOL_UPGRADE_DATA_NODE_READY' | 'BUS_EVENT_TYPE_DISTRESSED_ORDERS_CLOSED' | 'BUS_EVENT_TYPE_EXPIRED_ORDERS' | 'BUS_EVENT_TYPE_DISTRESSED_POSITIONS' | 'BUS_EVENT_TYPE_SPOT_LIQUIDITY_PROVISION' | 'BUS_EVENT_TYPE_STOP_ORDER' | 'BUS_EVENT_TYPE_FUNDING_PERIOD' | 'BUS_EVENT_TYPE_FUNDING_PERIOD_DATA_POINT' | 'BUS_EVENT_TYPE_TEAM_CREATED' | 'BUS_EVENT_TYPE_TEAM_UPDATED' | 'BUS_EVENT_TYPE_REFEREE_SWITCHED_TEAM' | 'BUS_EVENT_TYPE_REFEREE_JOINED_TEAM' | 'BUS_EVENT_TYPE_REFERRAL_PROGRAM_STARTED' | 'BUS_EVENT_TYPE_REFERRAL_PROGRAM_UPDATED' | 'BUS_EVENT_TYPE_REFERRAL_PROGRAM_ENDED' | 'BUS_EVENT_TYPE_REFERRAL_SET_CREATED' | 'BUS_EVENT_TYPE_REFEREE_JOINED_REFERRAL_SET' | 'BUS_EVENT_TYPE_PARTY_ACTIVITY_STREAK' | 'BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_STARTED' | 'BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_UPDATED' | 'BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_ENDED' | 'BUS_EVENT_TYPE_REFERRAL_SET_STATS_UPDATED' | 'BUS_EVENT_TYPE_VESTING_STATS_UPDATED' | 'BUS_EVENT_TYPE_MARKET' | 'BUS_EVENT_TYPE_TX_ERROR'>,
+        type?: Array<'BUS_EVENT_TYPE_UNSPECIFIED' | 'BUS_EVENT_TYPE_ALL' | 'BUS_EVENT_TYPE_TIME_UPDATE' | 'BUS_EVENT_TYPE_LEDGER_MOVEMENTS' | 'BUS_EVENT_TYPE_POSITION_RESOLUTION' | 'BUS_EVENT_TYPE_ORDER' | 'BUS_EVENT_TYPE_ACCOUNT' | 'BUS_EVENT_TYPE_PARTY' | 'BUS_EVENT_TYPE_TRADE' | 'BUS_EVENT_TYPE_MARGIN_LEVELS' | 'BUS_EVENT_TYPE_PROPOSAL' | 'BUS_EVENT_TYPE_VOTE' | 'BUS_EVENT_TYPE_MARKET_DATA' | 'BUS_EVENT_TYPE_NODE_SIGNATURE' | 'BUS_EVENT_TYPE_LOSS_SOCIALIZATION' | 'BUS_EVENT_TYPE_SETTLE_POSITION' | 'BUS_EVENT_TYPE_SETTLE_DISTRESSED' | 'BUS_EVENT_TYPE_MARKET_CREATED' | 'BUS_EVENT_TYPE_ASSET' | 'BUS_EVENT_TYPE_MARKET_TICK' | 'BUS_EVENT_TYPE_WITHDRAWAL' | 'BUS_EVENT_TYPE_DEPOSIT' | 'BUS_EVENT_TYPE_AUCTION' | 'BUS_EVENT_TYPE_RISK_FACTOR' | 'BUS_EVENT_TYPE_NETWORK_PARAMETER' | 'BUS_EVENT_TYPE_LIQUIDITY_PROVISION' | 'BUS_EVENT_TYPE_MARKET_UPDATED' | 'BUS_EVENT_TYPE_ORACLE_SPEC' | 'BUS_EVENT_TYPE_ORACLE_DATA' | 'BUS_EVENT_TYPE_DELEGATION_BALANCE' | 'BUS_EVENT_TYPE_VALIDATOR_SCORE' | 'BUS_EVENT_TYPE_EPOCH_UPDATE' | 'BUS_EVENT_TYPE_VALIDATOR_UPDATE' | 'BUS_EVENT_TYPE_STAKE_LINKING' | 'BUS_EVENT_TYPE_REWARD_PAYOUT_EVENT' | 'BUS_EVENT_TYPE_CHECKPOINT' | 'BUS_EVENT_TYPE_STREAM_START' | 'BUS_EVENT_TYPE_KEY_ROTATION' | 'BUS_EVENT_TYPE_STATE_VAR' | 'BUS_EVENT_TYPE_NETWORK_LIMITS' | 'BUS_EVENT_TYPE_TRANSFER' | 'BUS_EVENT_TYPE_VALIDATOR_RANKING' | 'BUS_EVENT_TYPE_ERC20_MULTI_SIG_SIGNER_EVENT' | 'BUS_EVENT_TYPE_ERC20_MULTI_SIG_SET_THRESHOLD' | 'BUS_EVENT_TYPE_ERC20_MULTI_SIG_SIGNER_ADDED' | 'BUS_EVENT_TYPE_ERC20_MULTI_SIG_SIGNER_REMOVED' | 'BUS_EVENT_TYPE_POSITION_STATE' | 'BUS_EVENT_TYPE_ETHEREUM_KEY_ROTATION' | 'BUS_EVENT_TYPE_PROTOCOL_UPGRADE_PROPOSAL' | 'BUS_EVENT_TYPE_BEGIN_BLOCK' | 'BUS_EVENT_TYPE_END_BLOCK' | 'BUS_EVENT_TYPE_PROTOCOL_UPGRADE_STARTED' | 'BUS_EVENT_TYPE_SETTLE_MARKET' | 'BUS_EVENT_TYPE_TRANSACTION_RESULT' | 'BUS_EVENT_TYPE_SNAPSHOT_TAKEN' | 'BUS_EVENT_TYPE_PROTOCOL_UPGRADE_DATA_NODE_READY' | 'BUS_EVENT_TYPE_DISTRESSED_ORDERS_CLOSED' | 'BUS_EVENT_TYPE_EXPIRED_ORDERS' | 'BUS_EVENT_TYPE_DISTRESSED_POSITIONS' | 'BUS_EVENT_TYPE_SPOT_LIQUIDITY_PROVISION' | 'BUS_EVENT_TYPE_STOP_ORDER' | 'BUS_EVENT_TYPE_FUNDING_PERIOD' | 'BUS_EVENT_TYPE_FUNDING_PERIOD_DATA_POINT' | 'BUS_EVENT_TYPE_TEAM_CREATED' | 'BUS_EVENT_TYPE_TEAM_UPDATED' | 'BUS_EVENT_TYPE_REFEREE_SWITCHED_TEAM' | 'BUS_EVENT_TYPE_REFEREE_JOINED_TEAM' | 'BUS_EVENT_TYPE_REFERRAL_PROGRAM_STARTED' | 'BUS_EVENT_TYPE_REFERRAL_PROGRAM_UPDATED' | 'BUS_EVENT_TYPE_REFERRAL_PROGRAM_ENDED' | 'BUS_EVENT_TYPE_REFERRAL_SET_CREATED' | 'BUS_EVENT_TYPE_REFEREE_JOINED_REFERRAL_SET' | 'BUS_EVENT_TYPE_PARTY_ACTIVITY_STREAK' | 'BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_STARTED' | 'BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_UPDATED' | 'BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_ENDED' | 'BUS_EVENT_TYPE_REFERRAL_SET_STATS_UPDATED' | 'BUS_EVENT_TYPE_VESTING_STATS_UPDATED' | 'BUS_EVENT_TYPE_VOLUME_DISCOUNT_STATS_UPDATED' | 'BUS_EVENT_TYPE_FEES_STATS_UPDATED' | 'BUS_EVENT_TYPE_FUNDING_PAYMENTS' | 'BUS_EVENT_TYPE_PAID_LIQUIDITY_FEES_STATS_UPDATED' | 'BUS_EVENT_TYPE_VESTING_SUMMARY' | 'BUS_EVENT_TYPE_TRANSFER_FEES_PAID' | 'BUS_EVENT_TYPE_TRANSFER_FEES_DISCOUNT_UPDATED' | 'BUS_EVENT_TYPE_PARTY_MARGIN_MODE_UPDATED' | 'BUS_EVENT_TYPE_PARTY_PROFILE_UPDATED' | 'BUS_EVENT_TYPE_MARKET' | 'BUS_EVENT_TYPE_TX_ERROR'>,
         marketId?: string,
         partyId?: string,
         batchSize?: string,
@@ -206,7 +215,8 @@ export class CoreServiceService {
 
     /**
      * Submit transaction
-     * Submit a signed transaction
+     * Submit a signed transaction to the network containing a command to be executed such that if the submission is successful then it will be included in the chain's mempool.
+     * The network will then attempt to execute the transaction in the next available block, where the results of its execution can be seen on the EventBus.
      * @param requestBody
      * @returns v1SubmitTransactionResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -225,7 +235,8 @@ export class CoreServiceService {
 
     /**
      * Check transaction
-     * Check a signed transaction
+     * Send a signed transaction containing a command to the network to be checked, but not added to the chain's mempool.
+     * This is useful for checking the validity of a potential transaction before submitting it.
      * @param requestBody
      * @returns v1CheckTransactionResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -244,7 +255,8 @@ export class CoreServiceService {
 
     /**
      * Submit raw transaction
-     * Submit a version agnostic signed transaction
+     * Submit a pre-serialised signed transaction containing a command to the network to be executed, such that if the submission is successful then it will be included in the chain's mempool.
+     * The network will then attempt to execute the transaction in the next available block, where the results of its execution can be seen on the EventBus.
      * @param requestBody
      * @returns v1SubmitRawTransactionResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -263,7 +275,8 @@ export class CoreServiceService {
 
     /**
      * Check raw transaction
-     * Check a raw signed transaction
+     * Send a pre-serialised transaction containing a command to the network to be checked, but then not added to the chain's mempool.
+     * This is useful for checking the validity of a potential transaction before submitting it.
      * @param requestBody
      * @returns v1CheckRawTransactionResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.

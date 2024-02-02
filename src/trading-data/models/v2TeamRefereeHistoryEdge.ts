@@ -13,6 +13,9 @@ export type v2TeamRefereeHistoryEdge = {
      * Cursor that can be used to fetch further pages.
      */
     cursor?: string;
+    /**
+     * Team referee data.
+     */
     node?: v2TeamRefereeHistory;
 };
 

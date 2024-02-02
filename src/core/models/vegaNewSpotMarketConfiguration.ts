@@ -4,6 +4,7 @@
 /* eslint-disable */
 
 import type { vegaInstrumentConfiguration } from './vegaInstrumentConfiguration';
+import type { vegaLiquidityFeeSettings } from './vegaLiquidityFeeSettings';
 import type { vegaLiquiditySLAParameters } from './vegaLiquiditySLAParameters';
 import type { vegaLogNormalRiskModel } from './vegaLogNormalRiskModel';
 import type { vegaPriceMonitoringParameters } from './vegaPriceMonitoringParameters';
@@ -19,6 +20,10 @@ export type vegaNewSpotMarketConfiguration = {
      * New spot market instrument configuration.
      */
     instrument?: vegaInstrumentConfiguration;
+    /**
+     * Specifies how the liquidity fee for the market will be calculated.
+     */
+    liquidityFeeSettings?: vegaLiquidityFeeSettings;
     /**
      * Log normal risk model parameters, valid only if MODEL_LOG_NORMAL is selected.
      */

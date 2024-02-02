@@ -9,11 +9,17 @@ import type { vegaERC20MultiSigEvent } from './vegaERC20MultiSigEvent';
 import type { vegaEthContractCallEvent } from './vegaEthContractCallEvent';
 import type { vegaStakingEvent } from './vegaStakingEvent';
 
+/**
+ * A validator command sent automatically that provides information of events that have happened on foreign chains.
+ */
 export type v1ChainEvent = {
     /**
      * Built-in asset event.
      */
     builtin?: vegaBuiltinAssetEvent;
+    /**
+     * Ethereum contract call event.
+     */
     contractCall?: vegaEthContractCallEvent;
     /**
      * Ethereum ERC20 event.
@@ -32,7 +38,7 @@ export type v1ChainEvent = {
      */
     stakingEvent?: vegaStakingEvent;
     /**
-     * Transaction ID of the transaction in which the events happened, usually a hash.
+     * ID of the transaction on the foreign chain that caused the event.
      */
     txId?: string;
 };

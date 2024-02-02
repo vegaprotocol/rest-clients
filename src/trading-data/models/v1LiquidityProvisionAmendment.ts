@@ -3,20 +3,26 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { vegaLiquidityOrder } from './vegaLiquidityOrder';
-
+/**
+ * Command that allows a liquidity provider to update the details of their existing liquidity commitment.
+ * Any field that is left unset or as a default value indicates that this field on the original submission will be left unchanged.
+ */
 export type v1LiquidityProvisionAmendment = {
-    buys?: Array<vegaLiquidityOrder>;
     /**
-     * From here at least one of the following is required to consider the command valid.
+     * New commitment amount.
      */
     commitmentAmount?: string;
+    /**
+     * New nominated liquidity fee factor.
+     */
     fee?: string;
     /**
-     * Unique ID for the market with the liquidity provision to be amended.
+     * Market that the submitter wants to amend the liquidity commitment for.
      */
     marketId?: string;
+    /**
+     * New arbitrary reference to be added to every order created out of this liquidity provision submission.
+     */
     reference?: string;
-    sells?: Array<vegaLiquidityOrder>;
 };
 

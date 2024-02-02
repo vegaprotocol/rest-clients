@@ -3,13 +3,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
+/**
+ * A validator command sent manually that allows a node operator to indicate to the network that their node's Vega key will be rotated.
+ */
 export type v1KeyRotateSubmission = {
     /**
-     * Hash of currently used public key.
+     * Hash of the node's current Vega public key.
      */
     currentPubKeyHash?: string;
     /**
-     * New public key to rotate to.
+     * Vega public key that would be rotated to.
      */
     newPubKey?: string;
     /**
@@ -17,7 +20,7 @@ export type v1KeyRotateSubmission = {
      */
     newPubKeyIndex?: number;
     /**
-     * Target block at which the key rotation will take effect on.
+     * Block height at which the key rotation will take effect.
      */
     targetBlock?: string;
 };

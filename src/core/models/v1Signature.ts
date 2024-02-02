@@ -4,8 +4,7 @@
 /* eslint-disable */
 
 /**
- * Signature to authenticate a transaction and to be verified by the Vega
- * network.
+ * Signature definition that allows the network to authenticate external data.
  */
 export type v1Signature = {
     /**
@@ -17,7 +16,7 @@ export type v1Signature = {
      */
     value?: string;
     /**
-     * Version of the signature used to create the signature.
+     * Version of the algorithm used to create the signature.
      */
     version?: number;
 };

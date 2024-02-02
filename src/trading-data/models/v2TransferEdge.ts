@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { vegaeventsv1Transfer } from './vegaeventsv1Transfer';
+import type { v2TransferNode } from './v2TransferNode';
 
 /**
  * Transfers data with the corresponding cursor.
@@ -16,6 +16,6 @@ export type v2TransferEdge = {
     /**
      * Data relating to a transfer that has been made.
      */
-    node?: vegaeventsv1Transfer;
+    node?: v2TransferNode;
 };
 

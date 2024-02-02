@@ -24,7 +24,7 @@ export class CoreStateServiceService {
 
     /**
      * Accounts list
-     * Get a list of accounts
+     * Get a list of accounts. This endpoint may not be exposed by mainnet nodes.
      * @param party
      * @param market
      * @returns v1ListAccountsResponse A successful response.
@@ -47,7 +47,7 @@ export class CoreStateServiceService {
 
     /**
      * Assets list
-     * Get a list of assets
+     * Get a list of assets. This endpoint may not be exposed by mainnet nodes.
      * @param asset
      * @returns v1ListAssetsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -67,7 +67,7 @@ export class CoreStateServiceService {
 
     /**
      * Delegations list
-     * Get a list of delegations
+     * Get a list of delegations. This endpoint may not be exposed by mainnet nodes.
      * @param party
      * @param node
      * @param epochSeq
@@ -93,7 +93,7 @@ export class CoreStateServiceService {
 
     /**
      * Markets list
-     * Get a list of markets
+     * Get a list of markets. This endpoint may not be exposed by mainnet nodes.
      * @param market
      * @returns v1ListMarketsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -113,7 +113,7 @@ export class CoreStateServiceService {
 
     /**
      * Markets data list
-     * Get a list of markets data
+     * Get a list of markets' data. This endpoint may not be exposed by mainnet nodes.
      * @param market
      * @returns v1ListMarketsDataResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -133,7 +133,7 @@ export class CoreStateServiceService {
 
     /**
      * Network limits list
-     * Get a list of network limits
+     * Get a list of network limits. This endpoint may not be exposed by mainnet nodes.
      * @returns v1ListNetworkLimitsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -147,7 +147,7 @@ export class CoreStateServiceService {
 
     /**
      * Network parameters list
-     * Get a list of network parameters
+     * Get a list of network parameters. This endpoint may not be exposed by mainnet nodes.
      * @param networkParameterKey
      * @returns v1ListNetworkParametersResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -167,7 +167,7 @@ export class CoreStateServiceService {
 
     /**
      * Parties list
-     * Get a list of parties
+     * Get a list of parties. This endpoint may not be exposed by mainnet nodes.
      * @returns v1ListPartiesResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -181,7 +181,7 @@ export class CoreStateServiceService {
 
     /**
      * Parties stake list
-     * Get a list of parties stake
+     * Get a list of parties' stake. This endpoint may not be exposed by mainnet nodes.
      * @param party
      * @returns v1ListPartiesStakeResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -201,7 +201,7 @@ export class CoreStateServiceService {
 
     /**
      * Proposals list
-     * Get a list of proposals
+     * Get a list of proposals. This endpoint may not be exposed by mainnet nodes.
      * @param proposal
      * @param proposer
      * @returns v1ListProposalsResponse A successful response.
@@ -224,7 +224,7 @@ export class CoreStateServiceService {
 
     /**
      * Validators list
-     * Get a list of validators
+     * Get a list of validators. This endpoint may not be exposed by mainnet nodes.
      * @returns v1ListValidatorsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -238,7 +238,7 @@ export class CoreStateServiceService {
 
     /**
      * Votes list
-     * Get a list of votes
+     * Get a list of votes. This endpoint may not be exposed by mainnet nodes.
      * @param proposal
      * @param party
      * @returns v1ListVotesResponse A successful response.

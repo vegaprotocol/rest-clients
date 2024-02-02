@@ -12,16 +12,16 @@ export type v2OrderInfo = {
     /**
      * Boolean that indicates if it is a market order.
      */
-    isMarketOrder?: boolean;
+    isMarketOrder: boolean;
     /**
      * Price for the order. The price is an unsigned integer. For example `123456` is a correctly
      * formatted price of `1.23456` assuming market configured to 5 decimal places.
      */
-    price?: string;
+    price: string;
     /**
      * Size remaining.
      */
-    remaining?: string;
+    remaining: string;
     /**
      * Side for the order, e.g. buy or sell.
      */

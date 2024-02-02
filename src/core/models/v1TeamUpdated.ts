@@ -5,6 +5,10 @@
 
 export type v1TeamUpdated = {
     /**
+     * List of public keys that are allowed to join the team.
+     */
+    allowList?: Array<string>;
+    /**
      * Link to an image of the team's avatar.
      */
     avatarUrl?: string;

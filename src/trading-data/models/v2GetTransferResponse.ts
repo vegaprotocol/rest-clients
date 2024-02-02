@@ -3,12 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { vegaeventsv1Transfer } from './vegaeventsv1Transfer';
+import type { v2TransferNode } from './v2TransferNode';
 
 export type v2GetTransferResponse = {
     /**
-     * Transfer requested by ID.
+     * Transfer and its fees requested by ID.
      */
-    transfer?: vegaeventsv1Transfer;
+    transferNode?: v2TransferNode;
 };
 

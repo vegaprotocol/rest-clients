@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaLiquidityFeeSettings } from './vegaLiquidityFeeSettings';
 import type { vegaLiquiditySLAParameters } from './vegaLiquiditySLAParameters';
 import type { vegaLogNormalRiskModel } from './vegaLogNormalRiskModel';
 import type { vegaPriceMonitoringParameters } from './vegaPriceMonitoringParameters';
@@ -10,6 +11,10 @@ import type { vegaSimpleModelParams } from './vegaSimpleModelParams';
 import type { vegaTargetStakeParameters } from './vegaTargetStakeParameters';
 
 export type vegaUpdateSpotMarketConfiguration = {
+    /**
+     * Specifies how the liquidity fee for the market will be calculated.
+     */
+    liquidityFeeSettings?: vegaLiquidityFeeSettings;
     /**
      * Log normal risk model parameters, valid only if MODEL_LOG_NORMAL is selected.
      */

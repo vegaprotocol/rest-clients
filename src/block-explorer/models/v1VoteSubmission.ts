@@ -6,7 +6,7 @@
 import type { vegaVoteValue } from './vegaVoteValue';
 
 /**
- * Command to submit a new vote for a governance proposal.
+ * Command that allows a token holder to vote for or against an active governance proposal.
  */
 export type v1VoteSubmission = {
     /**

@@ -52,7 +52,7 @@ export class GovernanceService {
      * - STATE_PASSED: Proposal has gained enough support to be executed
      * - STATE_REJECTED: Proposal wasn't accepted i.e. proposal terms failed validation due to wrong configuration or failed to meet network requirements.
      * - STATE_DECLINED: Proposal didn't get enough votes, e.g. either failed to gain required participation or majority level.
-     * - STATE_ENACTED: Proposal enacted
+     * - STATE_ENACTED: Proposal enacted.
      * - STATE_WAITING_FOR_NODE_VOTE: Waiting for node validation of the proposal
      * @param proposalType Restrict proposals to those with the given type.
      *
@@ -63,6 +63,13 @@ export class GovernanceService {
      * - TYPE_NEW_ASSET: New asset proposals
      * - TYPE_NEW_FREE_FORM: Proposals for creating a new free form proposal
      * - TYPE_UPDATE_ASSET: Update asset proposals
+     * - TYPE_NEW_SPOT_MARKET: Propose a new spot market
+     * - TYPE_UPDATE_SPOT_MARKET: Update an existing spot market
+     * - TYPE_NEW_TRANSFER: Propose a new transfer
+     * - TYPE_CANCEL_TRANSFER: Proposal to cancel a transfer
+     * - TYPE_UPDATE_MARKET_STATE: Proposal for updating the state of a market
+     * - TYPE_UPDATE_REFERRAL_PROGRAM: Proposal to update the referral program
+     * - TYPE_UPDATE_VOLUME_DISCOUNT_PROGRAM: Proposal to update the volume discount program
      * @param proposerPartyId Restrict proposals to those proposed by the given party ID.
      * @param proposalReference Restrict proposals to those with the given reference.
      * @param paginationFirst Number of records to be returned that sort greater than row identified by cursor supplied in 'after'.
@@ -76,7 +83,7 @@ export class GovernanceService {
      */
     public static tradingDataServiceListGovernanceData(
         proposalState: 'STATE_UNSPECIFIED' | 'STATE_FAILED' | 'STATE_OPEN' | 'STATE_PASSED' | 'STATE_REJECTED' | 'STATE_DECLINED' | 'STATE_ENACTED' | 'STATE_WAITING_FOR_NODE_VOTE' = 'STATE_UNSPECIFIED',
-        proposalType: 'TYPE_UNSPECIFIED' | 'TYPE_ALL' | 'TYPE_NEW_MARKET' | 'TYPE_UPDATE_MARKET' | 'TYPE_NETWORK_PARAMETERS' | 'TYPE_NEW_ASSET' | 'TYPE_NEW_FREE_FORM' | 'TYPE_UPDATE_ASSET' = 'TYPE_UNSPECIFIED',
+        proposalType: 'TYPE_UNSPECIFIED' | 'TYPE_ALL' | 'TYPE_NEW_MARKET' | 'TYPE_UPDATE_MARKET' | 'TYPE_NETWORK_PARAMETERS' | 'TYPE_NEW_ASSET' | 'TYPE_NEW_FREE_FORM' | 'TYPE_UPDATE_ASSET' | 'TYPE_NEW_SPOT_MARKET' | 'TYPE_UPDATE_SPOT_MARKET' | 'TYPE_NEW_TRANSFER' | 'TYPE_CANCEL_TRANSFER' | 'TYPE_UPDATE_MARKET_STATE' | 'TYPE_UPDATE_REFERRAL_PROGRAM' | 'TYPE_UPDATE_VOLUME_DISCOUNT_PROGRAM' = 'TYPE_UNSPECIFIED',
         proposerPartyId?: string,
         proposalReference?: string,
         paginationFirst?: number,

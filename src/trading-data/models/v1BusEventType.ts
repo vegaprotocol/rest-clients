@@ -82,6 +82,15 @@
  * - BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_ENDED: Event indicating a volume discount program ended.
  * - BUS_EVENT_TYPE_REFERRAL_SET_STATS_UPDATED: Event indicating the updated statistics for a referral set.
  * - BUS_EVENT_TYPE_VESTING_STATS_UPDATED: Event indicating the updated statistics for the vesting program.
+ * - BUS_EVENT_TYPE_VOLUME_DISCOUNT_STATS_UPDATED: Event indicating the updated statistics for the volume discount.
+ * - BUS_EVENT_TYPE_FEES_STATS_UPDATED: Event indicating the fees statistics per market at end of epoch
+ * - BUS_EVENT_TYPE_FUNDING_PAYMENTS: Event indicating a funding period has ended and resulted in funding payment transfers.
+ * - BUS_EVENT_TYPE_PAID_LIQUIDITY_FEES_STATS_UPDATED: Event used to report the updated paid liquidity fee statistics for the market at the end of the epoch
+ * - BUS_EVENT_TYPE_VESTING_SUMMARY: Event used to report the summary of vesting and locked balances at the end of the epoch
+ * - BUS_EVENT_TYPE_TRANSFER_FEES_PAID: Event used to link ledger entries to the transfer that triggered the fees being collected.
+ * - BUS_EVENT_TYPE_TRANSFER_FEES_DISCOUNT_UPDATED: Event indicating that a party's available transfer fee discount has changed, per asset.
+ * - BUS_EVENT_TYPE_PARTY_MARGIN_MODE_UPDATED: Event indicating that a party updated their margin mode on a market.
+ * - BUS_EVENT_TYPE_PARTY_PROFILE_UPDATED: Event indicating that a party updated their profile.
  * - BUS_EVENT_TYPE_MARKET: Event indicating a market related event, for example when a market opens
  * - BUS_EVENT_TYPE_TX_ERROR: Event used to report failed transactions back to a user, this is excluded from the ALL type
  */
@@ -164,6 +173,15 @@ export enum v1BusEventType {
     BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_ENDED = 'BUS_EVENT_TYPE_VOLUME_DISCOUNT_PROGRAM_ENDED',
     BUS_EVENT_TYPE_REFERRAL_SET_STATS_UPDATED = 'BUS_EVENT_TYPE_REFERRAL_SET_STATS_UPDATED',
     BUS_EVENT_TYPE_VESTING_STATS_UPDATED = 'BUS_EVENT_TYPE_VESTING_STATS_UPDATED',
+    BUS_EVENT_TYPE_VOLUME_DISCOUNT_STATS_UPDATED = 'BUS_EVENT_TYPE_VOLUME_DISCOUNT_STATS_UPDATED',
+    BUS_EVENT_TYPE_FEES_STATS_UPDATED = 'BUS_EVENT_TYPE_FEES_STATS_UPDATED',
+    BUS_EVENT_TYPE_FUNDING_PAYMENTS = 'BUS_EVENT_TYPE_FUNDING_PAYMENTS',
+    BUS_EVENT_TYPE_PAID_LIQUIDITY_FEES_STATS_UPDATED = 'BUS_EVENT_TYPE_PAID_LIQUIDITY_FEES_STATS_UPDATED',
+    BUS_EVENT_TYPE_VESTING_SUMMARY = 'BUS_EVENT_TYPE_VESTING_SUMMARY',
+    BUS_EVENT_TYPE_TRANSFER_FEES_PAID = 'BUS_EVENT_TYPE_TRANSFER_FEES_PAID',
+    BUS_EVENT_TYPE_TRANSFER_FEES_DISCOUNT_UPDATED = 'BUS_EVENT_TYPE_TRANSFER_FEES_DISCOUNT_UPDATED',
+    BUS_EVENT_TYPE_PARTY_MARGIN_MODE_UPDATED = 'BUS_EVENT_TYPE_PARTY_MARGIN_MODE_UPDATED',
+    BUS_EVENT_TYPE_PARTY_PROFILE_UPDATED = 'BUS_EVENT_TYPE_PARTY_PROFILE_UPDATED',
     BUS_EVENT_TYPE_MARKET = 'BUS_EVENT_TYPE_MARKET',
     BUS_EVENT_TYPE_TX_ERROR = 'BUS_EVENT_TYPE_TX_ERROR',
 }

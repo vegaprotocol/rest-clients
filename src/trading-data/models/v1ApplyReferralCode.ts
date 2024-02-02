@@ -4,14 +4,13 @@
 /* eslint-disable */
 
 /**
- * A party that joins a referral team is called a referee. A referee cannot
- * create a referral set or join multiple sets.
- * To switch, the referee can ask to join another set, and the switch will
- * be effective at the end of the epoch.
+ * Command that allows the submitter to join a referral set and earn a collective reduction in fees based on the activity of all members of that set.
+ * A party that joins a referral set is called a referee. A referee can only be a member of one referral set and cannot themselves be or become a referrer.
+ * To switch to another referral set, a subsequent command can be sent and the switch will take effect at the end of the epoch.
  */
 export type v1ApplyReferralCode = {
     /**
-     * Referral code for the set to join.
+     * Referral code, normally the referral set ID, for the party to join.
      */
     id?: string;
 };

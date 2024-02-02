@@ -3,9 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { vegaVolumeDiscountProgram } from './vegaVolumeDiscountProgram';
+import type { vegaVolumeDiscountProgramChanges } from './vegaVolumeDiscountProgramChanges';
 
 export type vegaUpdateVolumeDiscountProgram = {
-    changes?: vegaVolumeDiscountProgram;
+    changes?: vegaVolumeDiscountProgramChanges;
 };
 

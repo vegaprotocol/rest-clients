@@ -7,9 +7,11 @@ export type v1RewardPayoutEvent = {
     amount?: string;
     asset?: string;
     epochSeq?: string;
-    market?: string;
+    gameId?: string;
+    lockedUntilEpoch?: string;
     party?: string;
     percentOfTotalReward?: string;
+    quantumAmount?: string;
     rewardType?: string;
     timestamp?: string;
 };

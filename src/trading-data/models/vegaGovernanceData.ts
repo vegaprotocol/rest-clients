@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaGovernanceDataType } from './vegaGovernanceDataType';
 import type { vegaProposal } from './vegaProposal';
 import type { vegaVote } from './vegaVote';
 
@@ -21,6 +22,14 @@ export type vegaGovernanceData = {
      * Governance proposal that is being voted on.
      */
     proposal?: vegaProposal;
+    /**
+     * Type of proposal this data is for.
+     */
+    proposalType?: vegaGovernanceDataType;
+    /**
+     * If proposal type is batch, proposals will contain all the proposals that are make up the batch.
+     */
+    proposals?: Array<vegaProposal>;
     /**
      * All YES votes in favour of the proposal above.
      */

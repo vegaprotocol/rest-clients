@@ -5,13 +5,16 @@
 
 import type { v1Signature } from './v1Signature';
 
+/**
+ * A command that allows a new node operator to announce themselves to the network as a new validator.
+ */
 export type v1AnnounceNode = {
     /**
-     * AvatarURL of the validator.
+     * URL to the node operator's avatar.
      */
     avatarUrl?: string;
     /**
-     * Public key for the blockchain, required field.
+     * Public key for the blockchain, currently the node's CometBFT key.
      */
     chainPubKey?: string;
     /**
@@ -19,28 +22,27 @@ export type v1AnnounceNode = {
      */
     country?: string;
     /**
-     * Ethereum public key, required field.
+     * Ethereum public key of the node being announced.
      */
     ethereumAddress?: string;
     /**
-     * Signature from the validator made using the ethereum wallet.
+     * Signature from the node made using the ethereum wallet.
      */
     ethereumSignature?: v1Signature;
     /**
-     * Epoch from which the validator is expected
-     * to be ready to validate blocks.
+     * Epoch from which the node is expected to be ready to validate blocks.
      */
     fromEpoch?: string;
     /**
-     * Node ID of the validator, i.e. the node's public master key.
+     * Node ID of the validator, which is the node's public master key.
      */
     id?: string;
     /**
-     * URL with more info on the node.
+     * URL to the node operators homepage allowing stake holders to make an informed decision when delegating.
      */
     infoUrl?: string;
     /**
-     * Name of the validator.
+     * Human-readable name of the node.
      */
     name?: string;
     /**
@@ -48,7 +50,7 @@ export type v1AnnounceNode = {
      */
     submitterAddress?: string;
     /**
-     * Vega public key, required field.
+     * Vega public key of the node being announced.
      */
     vegaPubKey?: string;
     /**
@@ -56,7 +58,7 @@ export type v1AnnounceNode = {
      */
     vegaPubKeyIndex?: number;
     /**
-     * Signature from the validator made using the Vega wallet.
+     * Signature from the node made using the Vega wallet.
      */
     vegaSignature?: v1Signature;
 };

@@ -8,7 +8,7 @@
  */
 export type v2ReferralSet = {
     /**
-     * Time in Unix nanoseconds when the set was created.
+     * Timestamp, in Unix nanoseconds, when the set was created.
      */
     createdAt?: string;
     /**
@@ -20,7 +20,7 @@ export type v2ReferralSet = {
      */
     referrer?: string;
     /**
-     * Time in Unix nanoseconds when the set was updated.
+     * Timestamp, in Unix nanoseconds, when the set was updated.
      */
     updatedAt?: string;
 };

@@ -17,6 +17,14 @@ export type vegaReward = {
      */
     epoch?: string;
     /**
+     * ID of the game the reward payment was made for if the payment was made for participation in a game.
+     */
+    gameId?: string;
+    /**
+     * The epoch when the reward is being released.
+     */
+    lockedUntilEpoch?: string;
+    /**
      * Market ID in which the reward is being paid.
      */
     marketId?: string;
@@ -29,6 +37,10 @@ export type vegaReward = {
      */
     percentageOfTotal?: string;
     /**
+     * Amount paid as a reward, expressed in asset's quantum unit.
+     */
+    quantumAmount?: string;
+    /**
      * Timestamp at which the reward was paid as Unix nano time.
      */
     receivedAt?: string;
@@ -36,5 +48,11 @@ export type vegaReward = {
      * Type of reward being paid.
      */
     rewardType?: string;
+    /**
+     * ID of the team the party is a member of, if the party is a member of a participating team,
+     * and the reward payment was made for participation in a game.
+     * This field is currently only populated by the rewards API.
+     */
+    teamId?: string;
 };
 

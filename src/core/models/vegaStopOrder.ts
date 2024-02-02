@@ -5,6 +5,8 @@
 
 import type { StopOrderExpiryStrategy } from './StopOrderExpiryStrategy';
 import type { StopOrderRejectionReason } from './StopOrderRejectionReason';
+import type { StopOrderSizeOverrideSetting } from './StopOrderSizeOverrideSetting';
+import type { StopOrderSizeOverrideValue } from './StopOrderSizeOverrideValue';
 import type { StopOrderTriggerDirection } from './StopOrderTriggerDirection';
 import type { vegaStopOrderStatus } from './vegaStopOrderStatus';
 
@@ -40,6 +42,8 @@ export type vegaStopOrder = {
      */
     price?: string;
     rejectionReason?: StopOrderRejectionReason;
+    sizeOverrideSetting?: StopOrderSizeOverrideSetting;
+    sizeOverrideValue?: StopOrderSizeOverrideValue;
     /**
      * Status of the stop order.
      */

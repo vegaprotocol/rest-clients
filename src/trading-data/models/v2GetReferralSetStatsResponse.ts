@@ -3,9 +3,15 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { v2ReferralSetStats } from './v2ReferralSetStats';
+import type { v2ReferralSetStatsConnection } from './v2ReferralSetStatsConnection';
 
+/**
+ * Response containing the volume discount statistics for the given epoch.
+ */
 export type v2GetReferralSetStatsResponse = {
-    stats?: v2ReferralSetStats;
+    /**
+     * Referral set statistics for the epoch.
+     */
+    stats?: v2ReferralSetStatsConnection;
 };
 

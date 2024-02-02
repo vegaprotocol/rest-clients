@@ -44,6 +44,10 @@ export type vegaEthCallSpec = {
     normalisers?: Array<vegaNormaliser>;
     requiredConfirmations?: string;
     /**
+     * The ID of the EVM based chain which is to be used to source the oracle data.
+     */
+    sourceChainId?: string;
+    /**
      * Conditions for determining when to call the contract method.
      */
     trigger?: vegaEthCallTrigger;

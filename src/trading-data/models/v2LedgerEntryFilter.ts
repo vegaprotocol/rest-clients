@@ -17,13 +17,14 @@ export type v2LedgerEntryFilter = {
      */
     closeOnAccountFilters?: boolean;
     /**
-     * Used to set values for filtering sender accounts.
+     * Used to set values for filtering sender accounts. Party must be provided in this filter or 'to' account filter, or both.
      */
     fromAccountFilter?: v2AccountFilter;
     /**
-     * Used to set values for filtering receiver accounts.
+     * Used to set values for filtering receiver accounts. Party must be provided in this filter or 'from' account filter, or both.
      */
     toAccountFilter?: v2AccountFilter;
+    transferId?: string;
     /**
      * List of transfer types that is used for filtering sender and receiver accounts.
      */

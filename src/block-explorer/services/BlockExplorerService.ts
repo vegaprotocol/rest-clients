@@ -30,24 +30,27 @@ export class BlockExplorerService {
 
     /**
      * List transactions
-     * List transactions from the Vega blockchain
-     * @param limit Number of transactions to be returned from the blockchain.
-     * This is deprecated, use first and last instead.
-     * @param before Optional cursor to paginate the request.
-     * @param after Optional cursor to paginate the request.
+     * List transactions from the Vega blockchain from the newest to the oldest transactions.
+     * @param before Cursor to paginate the request. It can be used in conjunction with the `after` cursor.
+     * @param after Cursor to paginate the request. It can be used in conjunction with the `before` cursor.
      * @param cmdTypes Transaction command types filter, for listing transactions with specified command types.
      * @param excludeCmdTypes Transaction command types exclusion filter, for listing all the transactions except the ones with specified command types.
      * @param parties Party IDs filter, can be sender or receiver.
-     * @param first Number of transactions to be returned from the blockchain. Use in conjunction with the `after` cursor to paginate forwards.
-     * On its own, this will return the first `first` transactions.
-     * @param last Number of transactions to be returned from the blockchain. Use in conjunction with the `before` cursor to paginate backwards.
-     * On its own, this will return the last `last` transactions.
+     * @param first Number of transactions to be returned from the blockchain.
+     * Use in conjunction with the `after` cursor to paginate forwards. Paginating forwards means toward the most recent
+     * transactions.
+     * It cannot be used in conjunction with the `before` cursor.
+     * On its own, this will return the `first` most recent transactions.
+     * @param last Number of transactions to be returned from the blockchain.
+     * Use in conjunction with the `before` cursor to paginate backwards. Paginating forwards means toward the least recent
+     * transactions.
+     * It cannot be used in conjunction with the `after` cursor.
+     * On its own, this will return the `last` oldest transactions.
      * @returns v1ListTransactionsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
      */
     public static blockExplorerListTransactions(
-        limit?: number,
         before?: string,
         after?: string,
         cmdTypes?: Array<string>,
@@ -60,7 +63,6 @@ export class BlockExplorerService {
             method: 'GET',
             url: '/transactions',
             query: {
-                'limit': limit,
                 'before': before,
                 'after': after,
                 'cmdTypes': cmdTypes,

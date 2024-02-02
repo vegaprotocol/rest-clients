@@ -14,7 +14,7 @@ export type v2OrderFilter = {
      */
     dateRange?: v2DateRange;
     /**
-     * Indicator if liquidity provision orders should be included or not in the list.
+     * Indicator if liquidity provisions should be included or not in the list.
      */
     excludeLiquidity?: boolean;
     /**

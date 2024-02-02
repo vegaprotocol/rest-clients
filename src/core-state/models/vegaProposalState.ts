@@ -10,7 +10,7 @@
  * - STATE_PASSED: Proposal has gained enough support to be executed
  * - STATE_REJECTED: Proposal wasn't accepted i.e. proposal terms failed validation due to wrong configuration or failed to meet network requirements.
  * - STATE_DECLINED: Proposal didn't get enough votes, e.g. either failed to gain required participation or majority level.
- * - STATE_ENACTED: Proposal enacted
+ * - STATE_ENACTED: Proposal enacted.
  * - STATE_WAITING_FOR_NODE_VOTE: Waiting for node validation of the proposal
  */
 export enum vegaProposalState {

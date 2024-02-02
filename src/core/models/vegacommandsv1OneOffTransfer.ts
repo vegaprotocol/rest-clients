@@ -3,9 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
+/**
+ * Details for a one-off transfer.
+ */
 export type vegacommandsv1OneOffTransfer = {
     /**
-     * Timestamp in Unix nanoseconds for when the transfer should be delivered into the receiver's account.
+     * Timestamp, in Unix nanoseconds, for when the transfer should be executed, i.e., assets transferred into the receiver's account.
      */
     deliverOn?: string;
 };

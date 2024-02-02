@@ -17,7 +17,7 @@ export type vegaLiquidityProvision = {
      */
     commitmentAmount?: string;
     /**
-     * Timestamp in Unix nanoseconds for when the order was created.
+     * Timestamp in Unix nanoseconds for when the liquidity provision was created.
      */
     createdAt?: string;
     /**
@@ -29,7 +29,7 @@ export type vegaLiquidityProvision = {
      */
     id?: string;
     /**
-     * Market ID for the order.
+     * Market ID for the liquidity provision.
      */
     marketId?: string;
     /**
@@ -45,15 +45,15 @@ export type vegaLiquidityProvision = {
      */
     sells?: Array<vegaLiquidityOrderReference>;
     /**
-     * Status of this liquidity provision order.
+     * Status of this liquidity provision.
      */
     status?: vegaLiquidityProvisionStatus;
     /**
-     * Timestamp in Unix nanoseconds for when the order was updated.
+     * Timestamp in Unix nanoseconds for when the liquidity provision was updated.
      */
     updatedAt?: string;
     /**
-     * Version of this liquidity provision order.
+     * Version of this liquidity provision.
      */
     version?: string;
 };

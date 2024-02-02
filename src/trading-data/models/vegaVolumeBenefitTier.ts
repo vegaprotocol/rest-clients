@@ -9,6 +9,9 @@ export type vegaVolumeBenefitTier = {
      * to access this tier.
      */
     minimumRunningNotionalTakerVolume?: string;
+    /**
+     * Proportion of the taker fees to be discounted.
+     */
     volumeDiscountFactor?: string;
 };
 

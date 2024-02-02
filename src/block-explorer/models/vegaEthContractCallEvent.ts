@@ -21,6 +21,10 @@ export type vegaEthContractCallEvent = {
      */
     result?: string;
     /**
+     * Source chain for this chain event.
+     */
+    sourceChainId?: string;
+    /**
      * ID of the data source spec that triggered this contract call.
      */
     specId?: string;

@@ -5,9 +5,14 @@
 
 import type { vegaWithdrawExt } from './vegaWithdrawExt';
 
+/**
+ * Command to instruct the network to process an asset withdrawal from the Vega network.
+ * The process is specific to the destination foreign chain, for example, a withdrawal to Ethereum will generate signatures
+ * that allow funds to be taken across the bridge.
+ */
 export type v1WithdrawSubmission = {
     /**
-     * Amount to be withdrawn. This field is an unsigned integer scaled to the asset's decimal places.
+     * Amount to be withdrawn, as an unsigned integer scaled to the asset's decimal places.
      */
     amount?: string;
     /**
@@ -15,7 +20,7 @@ export type v1WithdrawSubmission = {
      */
     asset?: string;
     /**
-     * Foreign chain specifics.
+     * Details specific to the foreign chain, such as the receiver address.
      */
     ext?: vegaWithdrawExt;
 };

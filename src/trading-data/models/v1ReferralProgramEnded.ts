@@ -5,6 +5,14 @@
 
 export type v1ReferralProgramEnded = {
     /**
+     * Epoch at which the referral program ended.
+     */
+    atEpoch?: string;
+    /**
+     * Time in Unix nanoseconds when the referral program ended.
+     */
+    endedAt?: string;
+    /**
      * Unique ID of the referral program.
      */
     id?: string;

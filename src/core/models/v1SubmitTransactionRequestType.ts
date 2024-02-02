@@ -4,12 +4,12 @@
 /* eslint-disable */
 
 /**
- * - TYPE_ASYNC: Transaction will be submitted without waiting for response
- * - TYPE_SYNC: Transaction will be submitted, and blocking until the
- * tendermint mempool returns a response
- * - TYPE_COMMIT: Transaction will be submitted, and blocking until the tendermint
- * network has committed it into a block. Used only for debugging,
- * not for submitting transactions
+ * Blockchain transaction type.
+ *
+ * - TYPE_ASYNC: Transaction will be submitted without waiting for a response.
+ * - TYPE_SYNC: Transaction will be submitted, and blocking until the mempool returns a response.
+ * - TYPE_COMMIT: Transaction will be submitted, and blocking until the network has committed it into a block.
+ * Used only for debugging local network, not for submitting transactions.
  */
 export enum v1SubmitTransactionRequestType {
     TYPE_UNSPECIFIED = 'TYPE_UNSPECIFIED',

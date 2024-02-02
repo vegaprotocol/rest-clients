@@ -32,6 +32,10 @@ export type vegaLedgerEntry = {
      */
     toAccountBalance?: string;
     /**
+     * Transfer ID the ledger entry relates to.
+     */
+    transferId?: string;
+    /**
      * Transfer type for this entry.
      */
     type?: vegaTransferType;

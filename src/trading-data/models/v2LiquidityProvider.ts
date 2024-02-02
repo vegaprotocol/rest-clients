@@ -4,6 +4,7 @@
 /* eslint-disable */
 
 import type { vegaLiquidityProviderFeeShare } from './vegaLiquidityProviderFeeShare';
+import type { vegaLiquidityProviderSLA } from './vegaLiquidityProviderSLA';
 
 /**
  * Liquidity provider information.
@@ -22,5 +23,9 @@ export type v2LiquidityProvider = {
      * Party ID of the liquidity provider.
      */
     partyId?: string;
+    /**
+     * Information about LP's SLA performance.
+     */
+    sla?: vegaLiquidityProviderSLA;
 };
 

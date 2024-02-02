@@ -11,6 +11,10 @@ export type vegaVote = {
      */
     partyId?: string;
     /**
+     * The per market weight of the vote compared to the total amount of equity-like share on the market.. It is only populated if the vote is for a batch type proposal.
+     */
+    perMarketEquityLikeShareWeight?: Record<string, string>;
+    /**
      * Proposal ID being voted on.
      */
     proposalId?: string;
@@ -19,7 +23,7 @@ export type vegaVote = {
      */
     timestamp?: string;
     /**
-     * The weight of the vote compared to the total amount of equity-like share on the market.
+     * The weight of the vote compared to the total amount of equity-like share on the market. It is only populated if the vote is for a single type proposal.
      */
     totalEquityLikeShareWeight?: string;
     /**

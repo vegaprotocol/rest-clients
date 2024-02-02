@@ -5,17 +5,20 @@
 
 import type { v1Signature } from './v1Signature';
 
+/**
+ * A validator command sent manually that allows a node operator to indicate to the network that their node's Ethereum key will be rotated.
+ */
 export type v1EthereumKeyRotateSubmission = {
     /**
-     * Currently used public address.
+     * Ethereum address of the node's current Ethereum keys.
      */
     currentAddress?: string;
     /**
-     * Signature that can be verified using the new ethereum address.
+     * Signature signed by the new Ethereum key that can be verified to prove ownership.
      */
     ethereumSignature?: v1Signature;
     /**
-     * New address to rotate to.
+     * Ethereum address that is being rotated to.
      */
     newAddress?: string;
     /**
@@ -23,7 +26,7 @@ export type v1EthereumKeyRotateSubmission = {
      */
     submitterAddress?: string;
     /**
-     * Target block at which the key rotation will take effect on.
+     * Block height at which the key rotation will take effect.
      */
     targetBlock?: string;
 };

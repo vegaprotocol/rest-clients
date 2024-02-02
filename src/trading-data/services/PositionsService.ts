@@ -15,12 +15,25 @@ export class PositionsService {
 
     /**
      * Estimate position
-     * Estimate the margin that would be required for maintaining the specified position.
-     * If the optional collateral available argument is supplied, the response also contains the estimate of the liquidation price.
+     * Estimate the margin that would be required for maintaining the specified position, collateral increase needed to open the specified position and the liquidation price estimate.
+     * Margin estimates are scaled to asset decimal places.
+     * Liquidation price estimates are scaled to asset decimal places by default, unless an argument to scale to market decimal places is specified in the request.
      * @param marketId Market ID to estimate position for.
      * @param openVolume Open volume. This field is a signed integer scaled to the market's position decimal places.
      * A negative number denotes a short position.
-     * @param collateralAvailable Optional argument specifying collateral available for the position, if provided then response will contain the liquidation price estimate.
+     * @param averageEntryPrice Average entry price corresponding to the open volume. The price is an unsigned integer. For example `123456` is a correctly
+     * formatted price of `1.23456` assuming market configured to 5 decimal places.
+     * @param marginAccountBalance Margin account balance. Needs to be provided scaled to asset decimal places.
+     * @param generalAccountBalance General account balance. Needs to be provided scaled to asset decimal places.
+     * @param orderMarginAccountBalance Order margin account balance. Needs to be provided scaled to asset decimal places.
+     * @param marginMode Margin mode for the party, cross margin or isolated margin.
+     *
+     * - MARGIN_MODE_UNSPECIFIED: Never valid.
+     * - MARGIN_MODE_CROSS_MARGIN: Cross margin mode - margin is dynamically acquired and released as a position is marked to market
+     * - MARGIN_MODE_ISOLATED_MARGIN: Isolated margin mode - margin for any newly opened position volume is transferred to the margin account when the trade is executed
+     * @param marginFactor Margin factor to be used along with isolated margin mode.
+     * @param includeCollateralIncreaseInAvailableCollateral Whether the estimated collateral increase should be included in available collateral for liquidation price calculation in isolated margin mode.
+     * @param scaleLiquidationPriceToMarketDecimals Whether the liquidation price estimates should be scaled to market decimal places or by asset decimal places. If not set, asset decimal places are used.
      * @returns v2EstimatePositionResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -28,7 +41,14 @@ export class PositionsService {
     public static tradingDataServiceEstimatePosition(
         marketId: string,
         openVolume: string,
-        collateralAvailable?: string,
+        averageEntryPrice: string,
+        marginAccountBalance: string,
+        generalAccountBalance: string,
+        orderMarginAccountBalance: string,
+        marginMode: 'MARGIN_MODE_UNSPECIFIED' | 'MARGIN_MODE_CROSS_MARGIN' | 'MARGIN_MODE_ISOLATED_MARGIN' = 'MARGIN_MODE_UNSPECIFIED',
+        marginFactor?: string,
+        includeCollateralIncreaseInAvailableCollateral?: boolean,
+        scaleLiquidationPriceToMarketDecimals?: boolean,
     ): CancelablePromise<v2EstimatePositionResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -36,7 +56,14 @@ export class PositionsService {
             query: {
                 'marketId': marketId,
                 'openVolume': openVolume,
-                'collateralAvailable': collateralAvailable,
+                'averageEntryPrice': averageEntryPrice,
+                'marginAccountBalance': marginAccountBalance,
+                'generalAccountBalance': generalAccountBalance,
+                'orderMarginAccountBalance': orderMarginAccountBalance,
+                'marginMode': marginMode,
+                'marginFactor': marginFactor,
+                'includeCollateralIncreaseInAvailableCollateral': includeCollateralIncreaseInAvailableCollateral,
+                'scaleLiquidationPriceToMarketDecimals': scaleLiquidationPriceToMarketDecimals,
             },
             errors: {
                 500: `An internal server error`,

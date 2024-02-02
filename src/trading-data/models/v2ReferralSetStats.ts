@@ -3,25 +3,47 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { v1RefereeStats } from './v1RefereeStats';
-
+/**
+ * Referral set statistics for a given epoch for a party.
+ */
 export type v2ReferralSetStats = {
     /**
-     * Epoch at which the set's statistics are updated.
+     * Epoch at which the set's statistics were updated.
      */
     atEpoch?: string;
     /**
-     * Referees' statistics for that epoch.
+     * Discount factor applied to the party.
      */
-    refereesStats?: Array<v1RefereeStats>;
+    discountFactor?: string;
+    /**
+     * Current referee notional taker volume.
+     */
+    epochNotionalTakerVolume?: string;
+    /**
+     * Party ID.
+     */
+    partyId?: string;
     /**
      * Running volume for the set based on the window length of the current
      * referral program.
      */
     referralSetRunningNotionalTakerVolume?: string;
+    referrerTakerVolume?: string;
     /**
-     * Unique ID of the set.
+     * Reward factor applied to the party.
      */
-    setId?: string;
+    rewardFactor?: string;
+    /**
+     * Proportion of the referee's taker fees to be rewarded to the referrer.
+     */
+    rewardsFactorMultiplier?: string;
+    /**
+     * Multiplier applied to the referral reward factor when calculating referral rewards due to the referrer.
+     */
+    rewardsMultiplier?: string;
+    /**
+     * Indicates if the referral set was eligible to be part of the referral program.
+     */
+    wasEligible?: boolean;
 };
 

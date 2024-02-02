@@ -25,6 +25,8 @@ export class RewardsService {
      * @param paginationNewestFirst Whether to order the results with the newest records first. If not set, the default value is true.
      * @param fromEpoch Restrict rewards data to those that were paid after and including the given epoch ID.
      * @param toEpoch Restrict rewards data to those that were paid up to and including the given epoch ID.
+     * @param teamId Filter for rewards paid if the party is a member of the given team.
+     * @param gameId Filter for rewards paid if the party participated in the given game.
      * @returns v2ListRewardsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -39,6 +41,8 @@ export class RewardsService {
         paginationNewestFirst?: boolean,
         fromEpoch?: string,
         toEpoch?: string,
+        teamId?: string,
+        gameId?: string,
     ): CancelablePromise<v2ListRewardsResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -53,6 +57,8 @@ export class RewardsService {
                 'pagination.newestFirst': paginationNewestFirst,
                 'fromEpoch': fromEpoch,
                 'toEpoch': toEpoch,
+                'teamId': teamId,
+                'gameId': gameId,
             },
             errors: {
                 500: `An internal server error`,

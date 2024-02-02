@@ -11,15 +11,16 @@ export type commandsv1RecurringTransfer = {
      */
     dispatchStrategy?: vegaDispatchStrategy;
     /**
-     * Last epoch at which this transfer shall be paid.
+     * Last epoch at which this transfer shall be executed.
      */
     endEpoch?: string;
     /**
-     * Factor needs to be > 0.
+     * Factor that the initial transfer amount is multiplied by for each epoch that it is executed.
+     * For example if the initial transfer amount is 1000 and the factor is 0.5, then the amounts transferred per epoch will be 1000, 500, 250, 125, etc.
      */
     factor?: string;
     /**
-     * First epoch from which this transfer shall be paid.
+     * First epoch from which this transfer shall be executed.
      */
     startEpoch?: string;
 };

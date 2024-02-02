@@ -3,15 +3,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { vegaLiquidityOrder } from './vegaLiquidityOrder';
-
+/**
+ * A command that indicates to the network the party's intention to supply liquidity to the given market and become a liquidity provider.
+ * An active liquidity provider for a market will earn fees based on the trades that occur in the market.
+ */
 export type v1LiquidityProvisionSubmission = {
     /**
-     * Set of liquidity buy orders to meet the liquidity provision obligation.
-     */
-    buys?: Array<vegaLiquidityOrder>;
-    /**
-     * Specified as a unitless number that represents the amount of settlement asset of the market.
+     * Amount that the submitter will commit as liquidity to the market, specified as a unitless number in the settlement asset of the market.
      * This field is an unsigned integer scaled using the asset's decimal places.
      */
     commitmentAmount?: string;
@@ -20,16 +18,12 @@ export type v1LiquidityProvisionSubmission = {
      */
     fee?: string;
     /**
-     * Market ID for the order.
+     * Market that the submitter wishes to provide liquidity for.
      */
     marketId?: string;
     /**
-     * Reference to be added to every order created out of this liquidity provision submission.
+     * Arbitrary reference to be added to every order created out of this liquidity provision submission.
      */
     reference?: string;
-    /**
-     * Set of liquidity sell orders to meet the liquidity provision obligation.
-     */
-    sells?: Array<vegaLiquidityOrder>;
 };
 

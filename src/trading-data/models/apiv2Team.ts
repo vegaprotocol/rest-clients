@@ -8,15 +8,21 @@
  */
 export type apiv2Team = {
     /**
+     * List of public keys that are allowed to join the team.
+     * Only applicable to closed teams.
+     */
+    allowList?: Array<string>;
+    /**
      * Link to an image of the team's avatar.
      */
     avatarUrl?: string;
     /**
-     * Tells if a party can join the team or not.
+     * Whether or not the team is closed to new party members. When closed, only parties specified in the allow list can
+     * join the team.
      */
     closed?: boolean;
     /**
-     * Time in Unix nanoseconds when the team was created.
+     * Timestamp in Unix nanoseconds when the team was created.
      */
     createdAt?: string;
     /**

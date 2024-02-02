@@ -3,7 +3,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaCompositePriceConfiguration } from './vegaCompositePriceConfiguration';
 import type { vegaInstrumentConfiguration } from './vegaInstrumentConfiguration';
+import type { vegaLiquidationStrategy } from './vegaLiquidationStrategy';
+import type { vegaLiquidityFeeSettings } from './vegaLiquidityFeeSettings';
 import type { vegaLiquidityMonitoringParameters } from './vegaLiquidityMonitoringParameters';
 import type { vegaLiquiditySLAParameters } from './vegaLiquiditySLAParameters';
 import type { vegaLogNormalRiskModel } from './vegaLogNormalRiskModel';
@@ -25,6 +28,14 @@ export type vegaNewMarketConfiguration = {
      */
     linearSlippageFactor?: string;
     /**
+     * Liquidation strategy for this market.
+     */
+    liquidationStrategy?: vegaLiquidationStrategy;
+    /**
+     * Specifies how the liquidity fee for the market will be calculated.
+     */
+    liquidityFeeSettings?: vegaLiquidityFeeSettings;
+    /**
      * Liquidity monitoring parameters.
      */
     liquidityMonitoringParameters?: vegaLiquidityMonitoringParameters;
@@ -36,9 +47,13 @@ export type vegaNewMarketConfiguration = {
     /**
      * DEPRECATED: Use liquidity SLA parameters instead.
      * Percentage move up and down from the mid price which specifies the range of
-     * price levels over which automated liquidity provision orders will be deployed.
+     * price levels over which automated liquidity provisions will be deployed.
      */
     lpPriceRange?: string;
+    /**
+     * Mark price configuration.
+     */
+    markPriceConfiguration?: vegaCompositePriceConfiguration;
     /**
      * Optional new futures market metadata, tags.
      */

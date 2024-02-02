@@ -9,7 +9,7 @@ import type { vegacommandsv1RecurringTransfer } from './vegacommandsv1RecurringT
 
 export type vegacommandsv1Transfer = {
     /**
-     * Amount to be taken from the source account. This field is an unsigned integer scaled to the asset's decimal places.
+     * Amount to be taken from the source account, as an unsigned integer scaled to the asset's decimal places.
      */
     amount?: string;
     /**
@@ -17,11 +17,16 @@ export type vegacommandsv1Transfer = {
      */
     asset?: string;
     /**
-     * Account type from which the funds of the party
-     * should be taken.
+     * Account type from which the funds of the party should be taken.
      */
     fromAccountType?: vegaAccountType;
+    /**
+     * Details of a one-off transfer that is executed once at a specified time.
+     */
     oneOff?: vegacommandsv1OneOffTransfer;
+    /**
+     * Details of a transfer that is executed once every epoch until stopped.
+     */
     recurring?: vegacommandsv1RecurringTransfer;
     /**
      * Reference to be attached to the transfer.
