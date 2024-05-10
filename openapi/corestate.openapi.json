@@ -1,11 +1,26 @@
 {
   "openapi": "3.0.0",
-  "info": { "title": "Vega core state APIs", "version": "v0.76.1" },
+  "info": {
+    "title": "Vega core state APIs",
+    "version": "v0.76.0-preview.6"
+  },
   "servers": [
-    { "url": "https://n00.testnet.vega.rocks", "description": "n00" },
-    { "url": "https://n06.testnet.vega.rocks", "description": "n06" },
-    { "url": "https://n07.testnet.vega.rocks", "description": "n07" },
-    { "url": "https://n08.testnet.vega.rocks", "description": "n08" }
+    {
+      "url": "https://n00.testnet.vega.rocks",
+      "description": "n00"
+    },
+    {
+      "url": "https://n06.testnet.vega.rocks",
+      "description": "n06"
+    },
+    {
+      "url": "https://n07.testnet.vega.rocks",
+      "description": "n07"
+    },
+    {
+      "url": "https://n08.testnet.vega.rocks",
+      "description": "n08"
+    }
   ],
   "paths": {
     "/accounts": {
@@ -15,13 +30,17 @@
             "in": "query",
             "name": "party",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "market",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -38,13 +57,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of accounts. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListAccounts",
         "summary": "Accounts list"
@@ -57,7 +80,9 @@
             "in": "query",
             "name": "asset",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -74,13 +99,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of assets. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListAssets",
         "summary": "Assets list"
@@ -93,19 +122,25 @@
             "in": "query",
             "name": "party",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "node",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "epochSeq",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -122,13 +157,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of delegations. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListDelegations",
         "summary": "Delegations list"
@@ -141,7 +180,9 @@
             "in": "query",
             "name": "market",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -158,13 +199,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of markets. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListMarkets",
         "summary": "Markets list"
@@ -177,7 +222,9 @@
             "in": "query",
             "name": "market",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -194,13 +241,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of markets' data. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListMarketsData",
         "summary": "Markets data list"
@@ -222,13 +273,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of network limits. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListNetworkLimits",
         "summary": "Network limits list"
@@ -241,7 +296,9 @@
             "in": "query",
             "name": "networkParameterKey",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -258,13 +315,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of network parameters. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListNetworkParameters",
         "summary": "Network parameters list"
@@ -286,13 +347,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of parties. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListParties",
         "summary": "Parties list"
@@ -305,7 +370,9 @@
             "in": "query",
             "name": "party",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -322,13 +389,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of parties' stake. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListPartiesStake",
         "summary": "Parties stake list"
@@ -341,13 +412,17 @@
             "in": "query",
             "name": "proposal",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "proposer",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -364,13 +439,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of proposals. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListProposals",
         "summary": "Proposals list"
@@ -392,13 +471,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of validators. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListValidators",
         "summary": "Validators list"
@@ -411,20 +494,26 @@
             "in": "query",
             "name": "proposal",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "party",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/v1ListVotesResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/v1ListVotesResponse"
+                }
               }
             },
             "description": "A successful response."
@@ -432,13 +521,17 @@
           "default": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/googlerpcStatus" }
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
               }
             },
             "description": "An unexpected error response."
           }
         },
-        "tags": ["CoreStateService"],
+        "tags": [
+          "CoreStateService"
+        ],
         "description": "Get a list of votes. This endpoint may not be exposed by mainnet nodes.",
         "operationId": "CoreStateService_ListVotes",
         "summary": "Votes list"
@@ -477,34 +570,57 @@
       },
       "apiv1Account": {
         "properties": {
-          "asset": { "type": "string" },
-          "balance": { "type": "string" },
-          "market": { "type": "string" },
-          "party": { "type": "string" },
-          "type": { "type": "string" }
+          "asset": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "string"
+          },
+          "market": {
+            "type": "string"
+          },
+          "party": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
         },
         "type": "object"
       },
       "googlerpcStatus": {
         "properties": {
-          "code": { "format": "int32", "type": "integer" },
+          "code": {
+            "format": "int32",
+            "type": "integer"
+          },
           "details": {
-            "items": { "$ref": "#/components/schemas/protobufAny" },
+            "items": {
+              "$ref": "#/components/schemas/protobufAny"
+            },
             "type": "array"
           },
-          "message": { "type": "string" }
+          "message": {
+            "type": "string"
+          }
         },
         "type": "object"
       },
       "protobufAny": {
         "additionalProperties": {},
-        "properties": { "@type": { "type": "string" } },
+        "properties": {
+          "@type": {
+            "type": "string"
+          }
+        },
         "type": "object"
       },
       "protobufNullValue": {
         "default": "NULL_VALUE",
         "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value.",
-        "enum": ["NULL_VALUE"],
+        "enum": [
+          "NULL_VALUE"
+        ],
         "type": "string"
       },
       "v1Condition": {
@@ -522,7 +638,11 @@
         "type": "object"
       },
       "v1ETHAddress": {
-        "properties": { "address": { "type": "string" } },
+        "properties": {
+          "address": {
+            "type": "string"
+          }
+        },
         "type": "object"
       },
       "v1Filter": {
@@ -530,7 +650,9 @@
         "properties": {
           "conditions": {
             "description": "Conditions that should be matched by the data to be\nconsidered of interest.",
-            "items": { "$ref": "#/components/schemas/v1Condition" },
+            "items": {
+              "$ref": "#/components/schemas/v1Condition"
+            },
             "type": "array"
           },
           "key": {
@@ -559,7 +681,9 @@
       "v1ListAccountsResponse": {
         "properties": {
           "accounts": {
-            "items": { "$ref": "#/components/schemas/apiv1Account" },
+            "items": {
+              "$ref": "#/components/schemas/apiv1Account"
+            },
             "type": "array"
           }
         },
@@ -568,7 +692,9 @@
       "v1ListAssetsResponse": {
         "properties": {
           "assets": {
-            "items": { "$ref": "#/components/schemas/vegaAsset" },
+            "items": {
+              "$ref": "#/components/schemas/vegaAsset"
+            },
             "type": "array"
           }
         },
@@ -577,7 +703,9 @@
       "v1ListDelegationsResponse": {
         "properties": {
           "delegations": {
-            "items": { "$ref": "#/components/schemas/vegaDelegation" },
+            "items": {
+              "$ref": "#/components/schemas/vegaDelegation"
+            },
             "type": "array"
           }
         },
@@ -586,7 +714,9 @@
       "v1ListMarketsDataResponse": {
         "properties": {
           "marketsData": {
-            "items": { "$ref": "#/components/schemas/vegaMarketData" },
+            "items": {
+              "$ref": "#/components/schemas/vegaMarketData"
+            },
             "type": "array"
           }
         },
@@ -595,7 +725,9 @@
       "v1ListMarketsResponse": {
         "properties": {
           "markets": {
-            "items": { "$ref": "#/components/schemas/vegaMarket" },
+            "items": {
+              "$ref": "#/components/schemas/vegaMarket"
+            },
             "type": "array"
           }
         },
@@ -603,14 +735,18 @@
       },
       "v1ListNetworkLimitsResponse": {
         "properties": {
-          "networkLimits": { "$ref": "#/components/schemas/vegaNetworkLimits" }
+          "networkLimits": {
+            "$ref": "#/components/schemas/vegaNetworkLimits"
+          }
         },
         "type": "object"
       },
       "v1ListNetworkParametersResponse": {
         "properties": {
           "networkParameters": {
-            "items": { "$ref": "#/components/schemas/vegaNetworkParameter" },
+            "items": {
+              "$ref": "#/components/schemas/vegaNetworkParameter"
+            },
             "type": "array"
           }
         },
@@ -619,7 +755,9 @@
       "v1ListPartiesResponse": {
         "properties": {
           "parties": {
-            "items": { "$ref": "#/components/schemas/vegaParty" },
+            "items": {
+              "$ref": "#/components/schemas/vegaParty"
+            },
             "type": "array"
           }
         },
@@ -628,7 +766,9 @@
       "v1ListPartiesStakeResponse": {
         "properties": {
           "partiesStake": {
-            "items": { "$ref": "#/components/schemas/v1PartyStake" },
+            "items": {
+              "$ref": "#/components/schemas/v1PartyStake"
+            },
             "type": "array"
           }
         },
@@ -637,7 +777,9 @@
       "v1ListProposalsResponse": {
         "properties": {
           "proposals": {
-            "items": { "$ref": "#/components/schemas/vegaProposal" },
+            "items": {
+              "$ref": "#/components/schemas/vegaProposal"
+            },
             "type": "array"
           }
         },
@@ -646,7 +788,9 @@
       "v1ListValidatorsResponse": {
         "properties": {
           "validators": {
-            "items": { "$ref": "#/components/schemas/v1ValidatorUpdate" },
+            "items": {
+              "$ref": "#/components/schemas/v1ValidatorUpdate"
+            },
             "type": "array"
           }
         },
@@ -655,7 +799,9 @@
       "v1ListVotesResponse": {
         "properties": {
           "votes": {
-            "items": { "$ref": "#/components/schemas/vegaVote" },
+            "items": {
+              "$ref": "#/components/schemas/vegaVote"
+            },
             "type": "array"
           }
         },
@@ -663,10 +809,16 @@
       },
       "v1PartyStake": {
         "properties": {
-          "currentStakeAvailable": { "type": "string" },
-          "party": { "type": "string" },
+          "currentStakeAvailable": {
+            "type": "string"
+          },
+          "party": {
+            "type": "string"
+          },
           "stakeLinkings": {
-            "items": { "$ref": "#/components/schemas/v1StakeLinking" },
+            "items": {
+              "$ref": "#/components/schemas/v1StakeLinking"
+            },
             "type": "array"
           }
         },
@@ -675,7 +827,10 @@
       "v1PropertyKey": {
         "description": "PropertyKey describes the property key contained in data source data.",
         "properties": {
-          "name": { "description": "Name of the property.", "type": "string" },
+          "name": {
+            "description": "Name of the property.",
+            "type": "string"
+          },
           "numberDecimalPlaces": {
             "format": "uint64",
             "title": "Optional decimal place to be be applied on the provided value\nvalid only for PropertyType of type DECIMAL and INTEGER",
@@ -704,7 +859,11 @@
       },
       "v1PubKey": {
         "description": "PubKey is the public key that signed this data.\nDifferent public keys coming from different sources will be further separated.",
-        "properties": { "key": { "type": "string" } },
+        "properties": {
+          "key": {
+            "type": "string"
+          }
+        },
         "type": "object"
       },
       "v1Signer": {
@@ -792,7 +951,11 @@
       },
       "v1StakeLinkingType": {
         "default": "TYPE_UNSPECIFIED",
-        "enum": ["TYPE_UNSPECIFIED", "TYPE_LINK", "TYPE_UNLINK"],
+        "enum": [
+          "TYPE_UNSPECIFIED",
+          "TYPE_LINK",
+          "TYPE_UNLINK"
+        ],
         "title": "- TYPE_UNSPECIFIED: Default value\n - TYPE_LINK: Indicate of a stake deposit instruction\n - TYPE_UNLINK: Indicate of a stake remove instruction",
         "type": "string"
       },
@@ -828,7 +991,10 @@
             "title": "URL with more info on the node",
             "type": "string"
           },
-          "name": { "title": "Name of the validator", "type": "string" },
+          "name": {
+            "title": "Name of the validator",
+            "type": "string"
+          },
           "nodeId": {
             "title": "Node ID of the validator node",
             "type": "string"
@@ -837,7 +1003,10 @@
             "title": "Ethereum public key being used as the submitter to allow automatic signature generation",
             "type": "string"
           },
-          "tmPubKey": { "title": "Public key of Tendermint", "type": "string" },
+          "tmPubKey": {
+            "title": "Public key of Tendermint",
+            "type": "string"
+          },
           "vegaPubKey": {
             "title": "Vega public key of validator node",
             "type": "string"
@@ -1171,12 +1340,16 @@
           },
           "sourceStalenessTolerance": {
             "description": "For how long a price source is considered valid. One entry for each data source\nsuch that the first is for the trade based mark price, the second is for the book based price\nthe third is for the first oracle, followed by more oracle data source staleness tolerance.",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "type": "array"
           },
           "sourceWeights": {
             "description": "Weights for each composite price data source.",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "type": "array"
           }
         },
@@ -1268,7 +1441,9 @@
             "title": "Creation date and time",
             "type": "string"
           },
-          "data": { "$ref": "#/components/schemas/vegaDataSourceDefinition" },
+          "data": {
+            "$ref": "#/components/schemas/vegaDataSourceDefinition"
+          },
           "id": {
             "description": "Hash generated from the DataSpec data.",
             "type": "string"
@@ -1290,12 +1465,16 @@
         "properties": {
           "filters": {
             "description": "Filters describes which source data are considered of interest or not for\nthe product (or the risk model).",
-            "items": { "$ref": "#/components/schemas/v1Filter" },
+            "items": {
+              "$ref": "#/components/schemas/v1Filter"
+            },
             "type": "array"
           },
           "signers": {
             "description": "Signers is the list of authorized signatures that signed the data for this\nsource. All the signatures in the data source data should be contained in\nthis external source. All the signatures in the data should be contained in\nthis list.",
-            "items": { "$ref": "#/components/schemas/v1Signer" },
+            "items": {
+              "$ref": "#/components/schemas/v1Signer"
+            },
             "type": "array"
           }
         },
@@ -1306,7 +1485,9 @@
         "properties": {
           "conditions": {
             "description": "Conditions that the timestamps should meet in order to be considered.",
-            "items": { "$ref": "#/components/schemas/v1Condition" },
+            "items": {
+              "$ref": "#/components/schemas/v1Condition"
+            },
             "type": "array"
           }
         },
@@ -1317,11 +1498,15 @@
         "properties": {
           "conditions": {
             "description": "Conditions that the timestamps need to meet in order to be considered.",
-            "items": { "$ref": "#/components/schemas/v1Condition" },
+            "items": {
+              "$ref": "#/components/schemas/v1Condition"
+            },
             "type": "array"
           },
           "triggers": {
-            "items": { "$ref": "#/components/schemas/v1InternalTimeTrigger" },
+            "items": {
+              "$ref": "#/components/schemas/v1InternalTimeTrigger"
+            },
             "title": "An internal time trigger",
             "type": "array"
           }
@@ -1331,7 +1516,11 @@
       "vegaDataSourceSpecStatus": {
         "default": "STATUS_UNSPECIFIED",
         "description": "- STATUS_UNSPECIFIED: Default value.\n - STATUS_ACTIVE: STATUS_ACTIVE describes an active data source spec.\n - STATUS_DEACTIVATED: STATUS_DEACTIVATED describes a data source spec that is not listening to\ndata anymore.",
-        "enum": ["STATUS_UNSPECIFIED", "STATUS_ACTIVE", "STATUS_DEACTIVATED"],
+        "enum": [
+          "STATUS_UNSPECIFIED",
+          "STATUS_ACTIVE",
+          "STATUS_DEACTIVATED"
+        ],
         "title": "Status describe the status of the data source spec",
         "type": "string"
       },
@@ -1430,7 +1619,9 @@
           },
           "markets": {
             "description": "Optional markets in scope.",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "type": "array"
           },
           "metric": {
@@ -1447,7 +1638,9 @@
           },
           "rankTable": {
             "description": "Ordered list, using start rank, defining the rank bands and share ratio for each band. Mandatory for the rank distribution strategy.",
-            "items": { "$ref": "#/components/schemas/vegaRank" },
+            "items": {
+              "$ref": "#/components/schemas/vegaRank"
+            },
             "type": "array"
           },
           "stakingRequirement": {
@@ -1455,7 +1648,9 @@
             "type": "string"
           },
           "teamScope": {
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "title": "Optional list applicable if the reward type has a scope of teams, which allows the funder to define a list of team IDs that are eligible to be rewarded from this transfer",
             "type": "array"
           },
@@ -1540,11 +1735,15 @@
           },
           "args": {
             "description": "List of arguments to pass to method call.\nProtobuf 'Value' wraps an arbitrary JSON type that is mapped to an Ethereum\ntype according to the ABI.",
-            "items": { "type": "object" },
+            "items": {
+              "type": "object"
+            },
             "type": "array"
           },
           "filters": {
-            "items": { "$ref": "#/components/schemas/v1Filter" },
+            "items": {
+              "$ref": "#/components/schemas/v1Filter"
+            },
             "title": "Filters the data returned from the contract method",
             "type": "array"
           },
@@ -1554,7 +1753,9 @@
           },
           "normalisers": {
             "description": "Normalisers are used to convert the data returned from the contract method\ninto a standard format. The key of the map is the name of the property,\nwhich identifies the specific piece of data to other parts of the data\nsourcing framework, for example filters. The value is a JSONPath expression\nfor expressing where in the contract call result the required data is\nlocated, for example $[0] indicates the first result. $[1].price would look\nin the second result returned from the contract for a structure with a key\ncalled 'price' and use that if it exists.",
-            "items": { "$ref": "#/components/schemas/vegaNormaliser" },
+            "items": {
+              "$ref": "#/components/schemas/vegaNormaliser"
+            },
             "type": "array"
           },
           "requiredConfirmations": {
@@ -1577,7 +1778,9 @@
       "vegaEthCallTrigger": {
         "description": "Determines when the contract method should be called.",
         "properties": {
-          "timeTrigger": { "$ref": "#/components/schemas/vegaEthTimeTrigger" }
+          "timeTrigger": {
+            "$ref": "#/components/schemas/vegaEthTimeTrigger"
+          }
         },
         "type": "object"
       },
@@ -1716,7 +1919,10 @@
             "$ref": "#/components/schemas/vegaFuture",
             "description": "Future."
           },
-          "id": { "description": "Unique instrument ID.", "type": "string" },
+          "id": {
+            "description": "Unique instrument ID.",
+            "type": "string"
+          },
           "metadata": {
             "$ref": "#/components/schemas/vegaInstrumentMetadata",
             "description": "Collection of instrument meta-data."
@@ -1747,7 +1953,10 @@
             "$ref": "#/components/schemas/vegaFutureProduct",
             "description": "Future."
           },
-          "name": { "description": "Instrument name.", "type": "string" },
+          "name": {
+            "description": "Instrument name.",
+            "type": "string"
+          },
           "perpetual": {
             "$ref": "#/components/schemas/vegaPerpetualProduct",
             "description": "Perpetual."
@@ -1764,7 +1973,9 @@
         "properties": {
           "tags": {
             "description": "List of 0 or more tags.",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "type": "array"
           }
         },
@@ -1877,7 +2088,9 @@
           },
           "hysteresisPeriodFeePenalties": {
             "description": "Determines how the fee penalties from past epochs affect future fee revenue.",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "type": "array"
           },
           "lastEpochBondPenalty": {
@@ -1923,7 +2136,9 @@
             "format": "uint64",
             "type": "string"
           },
-          "priceRange": { "type": "string" },
+          "priceRange": {
+            "type": "string"
+          },
           "slaCompetitionFactor": {
             "description": "Specifies the maximum fraction of their accrued fees an LP that meets the SLA implied by market.liquidity.commitmentMinTimeFraction will lose to liquidity providers\nthat achieved a higher SLA performance than them.",
             "type": "string"
@@ -2165,7 +2380,10 @@
             "$ref": "#/components/schemas/vegaCompositePriceType",
             "description": "The method used for calculating the mark price."
           },
-          "market": { "title": "Market ID for the data", "type": "string" },
+          "market": {
+            "title": "Market ID for the data",
+            "type": "string"
+          },
           "marketGrowth": {
             "description": "Market growth at the last market time window.",
             "type": "string"
@@ -2296,8 +2514,14 @@
       "vegaMetadata": {
         "description": "Generic structure holding a key/value pair.",
         "properties": {
-          "key": { "description": "Key of the metadata.", "type": "string" },
-          "value": { "description": "Value of the metadata.", "type": "string" }
+          "key": {
+            "description": "Key of the metadata.",
+            "type": "string"
+          },
+          "value": {
+            "description": "Value of the metadata.",
+            "type": "string"
+          }
         },
         "type": "object"
       },
@@ -2428,7 +2652,9 @@
           },
           "metadata": {
             "description": "Optional new futures market metadata, tags.",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "type": "array"
           },
           "positionDecimalPlaces": {
@@ -2486,7 +2712,9 @@
           },
           "metadata": {
             "description": "Optional new spot market metadata, tags.",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "type": "array"
           },
           "priceDecimalPlaces": {
@@ -2535,8 +2763,14 @@
       },
       "vegaNewTransferConfiguration": {
         "properties": {
-          "amount": { "title": "Maximum amount to transfer", "type": "string" },
-          "asset": { "title": "ID of asset to transfer", "type": "string" },
+          "amount": {
+            "title": "Maximum amount to transfer",
+            "type": "string"
+          },
+          "asset": {
+            "title": "ID of asset to transfer",
+            "type": "string"
+          },
           "destination": {
             "title": "Specifies the account to transfer to, depending on the account type:\nNetwork treasury: leave empty\nParty: party's public key\nMarket insurance pool: market ID",
             "type": "string"
@@ -2549,8 +2783,12 @@
             "title": "Maximum fraction of the source account's balance to transfer as a decimal - i.e. 0.1 = 10% of the balance",
             "type": "string"
           },
-          "oneOff": { "$ref": "#/components/schemas/vegaOneOffTransfer" },
-          "recurring": { "$ref": "#/components/schemas/vegaRecurringTransfer" },
+          "oneOff": {
+            "$ref": "#/components/schemas/vegaOneOffTransfer"
+          },
+          "recurring": {
+            "$ref": "#/components/schemas/vegaRecurringTransfer"
+          },
           "source": {
             "title": "If network treasury, field is empty, otherwise uses the market ID",
             "type": "string"
@@ -2568,8 +2806,12 @@
       },
       "vegaNormaliser": {
         "properties": {
-          "expression": { "type": "string" },
-          "name": { "type": "string" }
+          "expression": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
         },
         "type": "object"
       },
@@ -2596,7 +2838,9 @@
           },
           "metadata": {
             "description": "Metadata to associate to a party, in a key/value format where the key\ndescribes the type of metadata in the value field.",
-            "items": { "$ref": "#/components/schemas/vegaMetadata" },
+            "items": {
+              "$ref": "#/components/schemas/vegaMetadata"
+            },
             "type": "array"
           }
         },
@@ -2839,7 +3083,9 @@
       "vegaProductData": {
         "description": "Represents market data specific to a particular product type.",
         "properties": {
-          "perpetualData": { "$ref": "#/components/schemas/vegaPerpetualData" }
+          "perpetualData": {
+            "$ref": "#/components/schemas/vegaPerpetualData"
+          }
         },
         "type": "object"
       },
@@ -2857,7 +3103,10 @@
             "description": "Detailed error associated to the reason.",
             "type": "string"
           },
-          "id": { "description": "Unique proposal ID.", "type": "string" },
+          "id": {
+            "description": "Unique proposal ID.",
+            "type": "string"
+          },
           "partyId": {
             "description": "Party ID i.e. public key of the party submitting the proposal.",
             "type": "string"
@@ -3128,8 +3377,14 @@
       },
       "vegaRank": {
         "properties": {
-          "shareRatio": { "format": "int64", "type": "integer" },
-          "startRank": { "format": "int64", "type": "integer" }
+          "shareRatio": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "startRank": {
+            "format": "int64",
+            "type": "integer"
+          }
         },
         "type": "object"
       },
@@ -3144,7 +3399,10 @@
             "format": "uint64",
             "type": "string"
           },
-          "startEpoch": { "format": "uint64", "type": "string" }
+          "startEpoch": {
+            "format": "uint64",
+            "type": "string"
+          }
         },
         "title": "Specific details for a recurring transfer",
         "type": "object"
@@ -3153,7 +3411,9 @@
         "properties": {
           "benefitTiers": {
             "description": "Defined benefit tiers in increasing order. First element will give Tier 1,\nsecond element will give Tier 2, and so on. Determines the level of\nbenefit a party can expect based on performance criteria.",
-            "items": { "$ref": "#/components/schemas/vegaBenefitTier" },
+            "items": {
+              "$ref": "#/components/schemas/vegaBenefitTier"
+            },
             "type": "array"
           },
           "endOfProgramTimestamp": {
@@ -3163,7 +3423,9 @@
           },
           "stakingTiers": {
             "description": "Defined staking tiers in increasing order. First element will give Tier 1,\nsecond element will give Tier 2, and so on. Determines the level of\nbenefit a party can expect based on their staking.",
-            "items": { "$ref": "#/components/schemas/vegaStakingTier" },
+            "items": {
+              "$ref": "#/components/schemas/vegaStakingTier"
+            },
             "type": "array"
           },
           "windowLength": {
@@ -3262,8 +3524,14 @@
       },
       "vegaSpotProduct": {
         "properties": {
-          "baseAsset": { "description": "Base asset ID.", "type": "string" },
-          "quoteAsset": { "description": "Quote asset ID.", "type": "string" }
+          "baseAsset": {
+            "description": "Base asset ID.",
+            "type": "string"
+          },
+          "quoteAsset": {
+            "description": "Quote asset ID.",
+            "type": "string"
+          }
         },
         "title": "Spot product configuration",
         "type": "object"
@@ -3379,7 +3647,10 @@
             "$ref": "#/components/schemas/vegaUpdateFutureProduct",
             "description": "Future."
           },
-          "name": { "title": "Instrument name", "type": "string" },
+          "name": {
+            "title": "Instrument name",
+            "type": "string"
+          },
           "perpetual": {
             "$ref": "#/components/schemas/vegaUpdatePerpetualProduct",
             "description": "Perpetual."
@@ -3442,7 +3713,9 @@
           },
           "metadata": {
             "description": "Optional futures market metadata, tags.",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "type": "array"
           },
           "priceMonitoringParameters": {
@@ -3476,7 +3749,10 @@
       },
       "vegaUpdateMarketStateConfiguration": {
         "properties": {
-          "marketId": { "title": "ID of the market", "type": "string" },
+          "marketId": {
+            "title": "ID of the market",
+            "type": "string"
+          },
           "price": {
             "title": "Settlement price, relevant only for market termination for futures markets",
             "type": "string"
@@ -3567,7 +3843,10 @@
             "description": "Instrument code, human-readable shortcode used to describe the instrument.",
             "type": "string"
           },
-          "name": { "title": "Instrument name", "type": "string" }
+          "name": {
+            "title": "Instrument name",
+            "type": "string"
+          }
         },
         "type": "object"
       },
@@ -3601,7 +3880,9 @@
           },
           "metadata": {
             "description": "Optional spot market metadata, tags.",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "type": "array"
           },
           "priceMonitoringParameters": {
@@ -3654,7 +3935,9 @@
         "properties": {
           "benefitTiers": {
             "description": "Defined benefit tiers in increasing order. First element will give Tier 1,\nsecond element will give Tier 2, and so on. Determines the level of\nbenefit a party can expect based on performance criteria.",
-            "items": { "$ref": "#/components/schemas/vegaVolumeBenefitTier" },
+            "items": {
+              "$ref": "#/components/schemas/vegaVolumeBenefitTier"
+            },
             "type": "array"
           },
           "endOfProgramTimestamp": {
@@ -3674,10 +3957,15 @@
         "properties": {
           "elsPerMarket": {
             "description": "The per market weight of the vote compared to the total amount of equity-like share on the market.. It is only populated if the vote is for a batch type proposal.",
-            "items": { "$ref": "#/components/schemas/vegaVoteELSPair" },
+            "items": {
+              "$ref": "#/components/schemas/vegaVoteELSPair"
+            },
             "type": "array"
           },
-          "partyId": { "description": "Voter's party ID.", "type": "string" },
+          "partyId": {
+            "description": "Voter's party ID.",
+            "type": "string"
+          },
           "proposalId": {
             "description": "Proposal ID being voted on.",
             "type": "string"
@@ -3713,18 +4001,29 @@
             "description": "The equity-like share weight for this market.",
             "type": "string"
           },
-          "marketId": { "description": "The market ID.", "type": "string" }
+          "marketId": {
+            "description": "The market ID.",
+            "type": "string"
+          }
         },
         "type": "object"
       },
       "vegaVoteValue": {
         "default": "VALUE_UNSPECIFIED",
         "description": "- VALUE_UNSPECIFIED: Default value, always invalid\n - VALUE_NO: Vote against the proposal\n - VALUE_YES: Vote in favour of the proposal",
-        "enum": ["VALUE_UNSPECIFIED", "VALUE_NO", "VALUE_YES"],
+        "enum": [
+          "VALUE_UNSPECIFIED",
+          "VALUE_NO",
+          "VALUE_YES"
+        ],
         "title": "Vote value",
         "type": "string"
       }
     }
   },
-  "tags": [{ "name": "CoreStateService" }]
+  "tags": [
+    {
+      "name": "CoreStateService"
+    }
+  ]
 }
