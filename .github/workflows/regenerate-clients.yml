@@ -19,7 +19,6 @@ jobs:
       - id: version
         uses: vegaprotocol/github-action-get-vega-version@v0.0.1
         with:
-          include-preview-versions: true
           previous-version: ${{ steps.current-vega-version.outputs.version }}
   regenerate-clients:
     if: needs.check-for-new-version.outputs.new-version == 'true'
