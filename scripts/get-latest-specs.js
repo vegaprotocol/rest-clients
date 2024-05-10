@@ -1,27 +1,30 @@
 const fs = require("fs");
 
-const version = "0.76.0";
-
-const FILES = [
-  {
-    destination: "./openapi/blockexplorer.openapi.json",
-    source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/v${version}/blockexplorer.openapi.json`,
-  },
-  {
-    destination: "./openapi/core.openapi.json",
-    source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/v${version}/core.openapi.json`,
-  },
-  {
-    destination: "./openapi/corestate.openapi.json",
-    source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/v${version}/corestate.openapi.json`,
-  },
-  {
-    destination: "./openapi/trading_data_v2.openapi.json",
-    source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/v${version}/trading_data_v2.openapi.json`,
-  },
-];
 const run = async () => {
-  for (const file of FILES) {
+  const version = process.argv[2];
+  console.log("Regenerating for version:", version);
+  if (!version) {
+    throw new Error("Please provide a version number, e.g. v0.1.0");
+  }
+  const files = [
+    {
+      destination: "./openapi/blockexplorer.openapi.json",
+      source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/${version}/blockexplorer.openapi.json`,
+    },
+    {
+      destination: "./openapi/core.openapi.json",
+      source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/${version}/core.openapi.json`,
+    },
+    {
+      destination: "./openapi/corestate.openapi.json",
+      source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/${version}/corestate.openapi.json`,
+    },
+    {
+      destination: "./openapi/trading_data_v2.openapi.json",
+      source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/${version}/trading_data_v2.openapi.json`,
+    },
+  ];
+  for (const file of files) {
     const response = await fetch(file.source);
     const data = await response.json();
     fs.writeFileSync(file.destination, JSON.stringify(data, null, 2));
