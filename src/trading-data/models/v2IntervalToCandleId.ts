@@ -5,7 +5,7 @@
 
 export type v2IntervalToCandleId = {
     /**
-     * Unique id of the candle.
+     * Unique ID of the candle.
      */
     candleId?: string;
     /**

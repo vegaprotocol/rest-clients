@@ -9,10 +9,6 @@ export type vegaSpot = {
      */
     baseAsset?: string;
     /**
-     * Name of the instrument.
-     */
-    name?: string;
-    /**
      * Asset ID of the underlying quote asset for the spot product.
      */
     quoteAsset?: string;

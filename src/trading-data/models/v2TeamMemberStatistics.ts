@@ -4,6 +4,7 @@
 /* eslint-disable */
 
 import type { v2QuantumRewardsPerEpoch } from './v2QuantumRewardsPerEpoch';
+import type { v2QuantumVolumesPerEpoch } from './v2QuantumVolumesPerEpoch';
 
 /**
  * Team member's statistics record containing the team member's information.
@@ -22,6 +23,11 @@ export type v2TeamMemberStatistics = {
      * value for each epoch.
      */
     quantumRewards?: Array<v2QuantumRewardsPerEpoch>;
+    /**
+     * List of volumes over the requested epoch period, expressed in quantum
+     * value for each epoch.
+     */
+    quantumVolumes?: Array<v2QuantumVolumesPerEpoch>;
     /**
      * Total number of games played.
      */

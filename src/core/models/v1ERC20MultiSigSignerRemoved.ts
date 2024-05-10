@@ -6,6 +6,10 @@
 import type { v1ERC20MultiSigSignerRemovedSubmitter } from './v1ERC20MultiSigSignerRemovedSubmitter';
 
 export type v1ERC20MultiSigSignerRemoved = {
+    /**
+     * EVM chain ID that the multisig control contract lives on.
+     */
+    chainId?: string;
     epochSeq?: string;
     /**
      * Nonce used.

@@ -33,6 +33,7 @@ export type { v1BatchProposalSubmissionTerms } from './models/v1BatchProposalSub
 export type { v1BeginBlock } from './models/v1BeginBlock';
 export type { v1BusEvent } from './models/v1BusEvent';
 export { v1BusEventType } from './models/v1BusEventType';
+export type { v1CancelledOrders } from './models/v1CancelledOrders';
 export type { v1CheckpointEvent } from './models/v1CheckpointEvent';
 export type { v1CheckRawTransactionRequest } from './models/v1CheckRawTransactionRequest';
 export type { v1CheckRawTransactionResponse } from './models/v1CheckRawTransactionResponse';
@@ -153,8 +154,12 @@ export type { v1SubmitTransactionRequest } from './models/v1SubmitTransactionReq
 export { v1SubmitTransactionRequestType } from './models/v1SubmitTransactionRequestType';
 export type { v1SubmitTransactionResponse } from './models/v1SubmitTransactionResponse';
 export type { v1TeamCreated } from './models/v1TeamCreated';
+export type { v1TeamMemberStats } from './models/v1TeamMemberStats';
+export type { v1TeamsStatsUpdated } from './models/v1TeamsStatsUpdated';
+export type { v1TeamStats } from './models/v1TeamStats';
 export type { v1TeamUpdated } from './models/v1TeamUpdated';
 export type { v1TimeUpdate } from './models/v1TimeUpdate';
+export type { v1TimeWeightedNotionalPositionUpdated } from './models/v1TimeWeightedNotionalPositionUpdated';
 export type { v1TradeSettlement } from './models/v1TradeSettlement';
 export type { v1Transaction } from './models/v1Transaction';
 export type { v1TransactionResult } from './models/v1TransactionResult';
@@ -202,6 +207,8 @@ export type { vegacommandsv1OneOffTransfer } from './models/vegacommandsv1OneOff
 export type { vegacommandsv1RecurringTransfer } from './models/vegacommandsv1RecurringTransfer';
 export type { vegacommandsv1Transfer } from './models/vegacommandsv1Transfer';
 export type { vegaCompositePriceConfiguration } from './models/vegaCompositePriceConfiguration';
+export type { vegaCompositePriceSource } from './models/vegaCompositePriceSource';
+export type { vegaCompositePriceState } from './models/vegaCompositePriceState';
 export { vegaCompositePriceType } from './models/vegaCompositePriceType';
 export type { vegaDataSourceDefinition } from './models/vegaDataSourceDefinition';
 export type { vegaDataSourceDefinitionExternal } from './models/vegaDataSourceDefinitionExternal';
@@ -333,6 +340,7 @@ export type { vegaUpdateMarketStateConfiguration } from './models/vegaUpdateMark
 export type { vegaUpdateNetworkParameter } from './models/vegaUpdateNetworkParameter';
 export type { vegaUpdatePerpetualProduct } from './models/vegaUpdatePerpetualProduct';
 export type { vegaUpdateReferralProgram } from './models/vegaUpdateReferralProgram';
+export type { vegaUpdateSpotInstrumentConfiguration } from './models/vegaUpdateSpotInstrumentConfiguration';
 export type { vegaUpdateSpotMarket } from './models/vegaUpdateSpotMarket';
 export type { vegaUpdateSpotMarketConfiguration } from './models/vegaUpdateSpotMarketConfiguration';
 export type { vegaUpdateVolumeDiscountProgram } from './models/vegaUpdateVolumeDiscountProgram';
@@ -340,6 +348,7 @@ export type { vegaVolumeBenefitTier } from './models/vegaVolumeBenefitTier';
 export type { vegaVolumeDiscountProgram } from './models/vegaVolumeDiscountProgram';
 export type { vegaVolumeDiscountProgramChanges } from './models/vegaVolumeDiscountProgramChanges';
 export type { vegaVote } from './models/vegaVote';
+export type { vegaVoteELSPair } from './models/vegaVoteELSPair';
 export { vegaVoteValue } from './models/vegaVoteValue';
 export type { vegaWithdrawal } from './models/vegaWithdrawal';
 export { vegaWithdrawalStatus } from './models/vegaWithdrawalStatus';

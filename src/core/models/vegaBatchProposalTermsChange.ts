@@ -4,6 +4,7 @@
 /* eslint-disable */
 
 import type { vegaCancelTransfer } from './vegaCancelTransfer';
+import type { vegaNewAsset } from './vegaNewAsset';
 import type { vegaNewFreeform } from './vegaNewFreeform';
 import type { vegaNewMarket } from './vegaNewMarket';
 import type { vegaNewSpotMarket } from './vegaNewSpotMarket';
@@ -26,6 +27,10 @@ export type vegaBatchProposalTermsChange = {
      * constrained by `minEnact` and `maxEnact` network parameters.
      */
     enactmentTimestamp?: string;
+    /**
+     * Proposal change for adding a new asset.
+     */
+    newAsset?: vegaNewAsset;
     /**
      * Proposal change for a freeform request, which can be voted on but does not change the behaviour of the system,
      * and can be used to gauge community sentiment.
@@ -71,5 +76,9 @@ export type vegaBatchProposalTermsChange = {
      * Proposal change for updating the volume discount program.
      */
     updateVolumeDiscountProgram?: vegaUpdateVolumeDiscountProgram;
+    /**
+     * Validation timestamp as Unix time in seconds.
+     */
+    validationTimestamp?: string;
 };
 

@@ -14,9 +14,9 @@ export class FeesService {
 
     /**
      * Get fees statistics
-     * Get accumulated fees, rewards, and applied discount information. Either a market or an asset must be supplied as filter.
-     * @param marketId Restrict fee statistics to those related for the given market.
-     * @param assetId Restrict fee statistics to those related for the given asset.
+     * Get accumulated fees, rewards, and applied discount information. Either a market or an asset must be supplied as a filter.
+     * @param marketId Restrict fee statistics to those related to the given market.
+     * @param assetId Restrict fee statistics to those related to the given asset.
      * @param epochSeq Epoch to get referral fee statistics for. If not set, the last complete epoch is used.
      * @param partyId Restrict fee statistics to those for the given party.
      * @returns v2GetFeesStatsResponse A successful response.
@@ -46,7 +46,7 @@ export class FeesService {
 
     /**
      * Get fees statistics for a party
-     * Get accumulated fees, rewards, and applied discount information. A party ID must be supplied as filter.
+     * Get accumulated fees, rewards, and applied discount information. A party ID must be supplied as a filter.
      * @param partyId Restrict fees statistics to those for the given party.
      * @param assetId Restrict fees statistics to those related to the given asset.
      * @param fromEpoch Epoch to filter from (included). If omitted, the range goes from the oldest epoch to the `to epoch`.

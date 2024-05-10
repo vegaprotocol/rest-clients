@@ -6,6 +6,7 @@
 export type v1ERC20MultiSigThresholdSetEvent = {
     blockNumber?: string;
     blockTime?: string;
+    chainId?: string;
     id?: string;
     logIndex?: string;
     newThreshold?: number;

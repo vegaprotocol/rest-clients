@@ -19,7 +19,7 @@ export type vegaMarket = {
     /**
      * Number of decimal places that a price must be shifted by in order to get a
      * correct price denominated in the currency of the market, for example:
-     * `realPrice = price / 10^decimalPlaces`.
+     * `realPrice = price / 10^decimalPlaces`. On spot markets, also called 'size decimal places'.
      */
     decimalPlaces?: string;
     /**
@@ -71,6 +71,7 @@ export type vegaMarket = {
     parentMarketId?: string;
     /**
      * The number of decimal places for a position.
+     * On spot markets, used for order size, also known as 'size decimal places'.
      */
     positionDecimalPlaces?: string;
     /**
@@ -89,6 +90,7 @@ export type vegaMarket = {
      * ID of the market that succeeds this market if it exists. This will be populated by the system when the successor market is enabled.
      */
     successorMarketId?: string;
+    tickSize?: string;
     /**
      * Tradable instrument configuration.
      */

@@ -9,7 +9,7 @@ export type v2GetERC20WithdrawalApprovalResponse = {
      */
     amount?: string;
     /**
-     * Address of asset on Ethereum.
+     * Address of asset on the bridged EVM chain.
      */
     assetSource?: string;
     /**
@@ -26,7 +26,11 @@ export type v2GetERC20WithdrawalApprovalResponse = {
      */
     signatures?: string;
     /**
-     * Ethereum address, prefixed with `0x`, that will receive the withdrawn assets.
+     * Chain ID of the bridged EVM chain.
+     */
+    sourceChainId?: string;
+    /**
+     * Address, prefixed with `0x`, that will receive the withdrawn assets.
      */
     targetAddress?: string;
 };

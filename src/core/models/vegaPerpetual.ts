@@ -41,13 +41,13 @@ export type vegaPerpetual = {
      */
     fundingRateUpperBound?: string;
     /**
-     * Optional configuration for the index price used in funding payment calculation.
-     */
-    indexPriceConfig?: vegaCompositePriceConfiguration;
-    /**
      * Continuously compounded interest rate used in funding rate calculation, in the range [-1, 1].
      */
     interestRate?: string;
+    /**
+     * Optional configuration for the internal composite price used in funding payment calculation.
+     */
+    internalCompositePriceConfig?: vegaCompositePriceConfiguration;
     /**
      * Controls how much the upcoming funding payment liability contributes to party's margin, in the range [0, 1].
      */

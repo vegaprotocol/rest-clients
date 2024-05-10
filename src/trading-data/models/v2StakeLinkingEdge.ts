@@ -14,7 +14,7 @@ export type v2StakeLinkingEdge = {
      */
     cursor?: string;
     /**
-     * Stake linking represent the intent from a party to deposit.
+     * Stake linking representing the intent from a party to deposit.
      */
     node?: v1StakeLinking;
 };

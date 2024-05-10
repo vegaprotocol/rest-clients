@@ -9,8 +9,13 @@ import type { vegaLogNormalRiskModel } from './vegaLogNormalRiskModel';
 import type { vegaPriceMonitoringParameters } from './vegaPriceMonitoringParameters';
 import type { vegaSimpleModelParams } from './vegaSimpleModelParams';
 import type { vegaTargetStakeParameters } from './vegaTargetStakeParameters';
+import type { vegaUpdateSpotInstrumentConfiguration } from './vegaUpdateSpotInstrumentConfiguration';
 
 export type vegaUpdateSpotMarketConfiguration = {
+    /**
+     * Specifies the name and code of the spot instrument.
+     */
+    instrument?: vegaUpdateSpotInstrumentConfiguration;
     /**
      * Specifies how the liquidity fee for the market will be calculated.
      */
@@ -39,5 +44,6 @@ export type vegaUpdateSpotMarketConfiguration = {
      * Specifies parameters related to target stake calculation.
      */
     targetStakeParameters?: vegaTargetStakeParameters;
+    tickSize?: string;
 };
 

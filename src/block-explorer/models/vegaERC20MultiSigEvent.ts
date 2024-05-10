@@ -9,6 +9,10 @@ import type { vegaERC20ThresholdSet } from './vegaERC20ThresholdSet';
 
 export type vegaERC20MultiSigEvent = {
     block?: string;
+    /**
+     * ID of the source chain for this event.
+     */
+    chainId?: string;
     index?: string;
     signerAdded?: vegaERC20SignerAdded;
     signerRemoved?: vegaERC20SignerRemoved;

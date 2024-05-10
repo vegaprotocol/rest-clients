@@ -12,9 +12,11 @@ import type { vegaDispatchMetric } from './vegaDispatchMetric';
 export type v2TeamGameEntity = {
     rank?: string;
     rewardEarned?: string;
+    rewardEarnedQuantum?: string;
     rewardMetric?: vegaDispatchMetric;
     team?: v2TeamGameParticipation;
     totalRewardsEarned?: string;
+    totalRewardsEarnedQuantum?: string;
     volume?: string;
 };
 

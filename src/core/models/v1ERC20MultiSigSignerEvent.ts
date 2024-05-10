@@ -8,6 +8,7 @@ import type { v1ERC20MultiSigSignerEventType } from './v1ERC20MultiSigSignerEven
 export type v1ERC20MultiSigSignerEvent = {
     blockNumber?: string;
     blockTime?: string;
+    chainId?: string;
     id?: string;
     logIndex?: string;
     nonce?: string;

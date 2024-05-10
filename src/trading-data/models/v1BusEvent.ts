@@ -6,6 +6,7 @@
 import type { v1AuctionEvent } from './v1AuctionEvent';
 import type { v1BeginBlock } from './v1BeginBlock';
 import type { v1BusEventType } from './v1BusEventType';
+import type { v1CancelledOrders } from './v1CancelledOrders';
 import type { v1CheckpointEvent } from './v1CheckpointEvent';
 import type { v1CoreSnapshotData } from './v1CoreSnapshotData';
 import type { v1DelegationBalanceEvent } from './v1DelegationBalanceEvent';
@@ -54,8 +55,10 @@ import type { v1StakeLinking } from './v1StakeLinking';
 import type { v1StateVar } from './v1StateVar';
 import type { v1StopOrderEvent } from './v1StopOrderEvent';
 import type { v1TeamCreated } from './v1TeamCreated';
+import type { v1TeamsStatsUpdated } from './v1TeamsStatsUpdated';
 import type { v1TeamUpdated } from './v1TeamUpdated';
 import type { v1TimeUpdate } from './v1TimeUpdate';
+import type { v1TimeWeightedNotionalPositionUpdated } from './v1TimeWeightedNotionalPositionUpdated';
 import type { v1TransactionResult } from './v1TransactionResult';
 import type { v1TransferFees } from './v1TransferFees';
 import type { v1TransferFeesDiscount } from './v1TransferFeesDiscount';
@@ -95,6 +98,10 @@ export type v1BusEvent = {
     auction?: v1AuctionEvent;
     beginBlock?: v1BeginBlock;
     block?: string;
+    /**
+     * Event notifying of multiple orders being cancelled for a given party, on a given market.
+     */
+    cancelledOrders?: v1CancelledOrders;
     chainId?: string;
     checkpoint?: v1CheckpointEvent;
     coreSnapshotEvent?: v1CoreSnapshotData;
@@ -209,7 +216,12 @@ export type v1BusEvent = {
      * Event notifying of an update to a team.
      */
     teamUpdated?: v1TeamUpdated;
+    /**
+     * Event notifying of an update of teams' statistics.
+     */
+    teamsStatsUpdated?: v1TeamsStatsUpdated;
     timeUpdate?: v1TimeUpdate;
+    timeWeightedNotionalPositionUpdated?: v1TimeWeightedNotionalPositionUpdated;
     trade?: vegaTrade;
     transactionResult?: v1TransactionResult;
     transfer?: vegaeventsv1Transfer;

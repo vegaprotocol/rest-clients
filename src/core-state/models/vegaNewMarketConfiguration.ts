@@ -78,5 +78,6 @@ export type vegaNewMarketConfiguration = {
      * Successor configuration. If this proposal is meant to succeed a given market, then this should be set.
      */
     successor?: vegaSuccessorConfiguration;
+    tickSize?: string;
 };
 

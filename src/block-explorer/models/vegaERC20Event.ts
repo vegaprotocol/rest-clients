@@ -35,6 +35,10 @@ export type vegaERC20Event = {
      */
     bridgeStopped?: boolean;
     /**
+     * ID of the source chain for this event.
+     */
+    chainId?: string;
+    /**
      * Deposit ERC20 asset.
      */
     deposit?: vegaERC20Deposit;

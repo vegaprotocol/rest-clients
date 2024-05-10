@@ -21,7 +21,7 @@ export type apiv2FundingPayment = {
      */
     partyId?: string;
     /**
-     * Timestamp, in Unix nanoseconds, at which this funding payment occured.
+     * Timestamp, in Unix nanoseconds, at which this funding payment occurred.
      */
     timestamp?: string;
 };

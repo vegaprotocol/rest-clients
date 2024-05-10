@@ -87,7 +87,7 @@ export class Erc20BridgeService {
     }
 
     /**
-     * List ERC20 multi-sig signer added bundles
+     * List ERC20 multisig signer added bundles
      * Get a list of the signature bundles to add a particular validator to the signer list of the multisig contract
      * @param nodeId Node ID of the validator for which a signature bundle is required.
      * @param submitter Ethereum address of the validator that will submit the bundle.
@@ -97,6 +97,7 @@ export class Erc20BridgeService {
      * @param paginationLast Number of records to be returned that sort less than row identified by cursor supplied in 'before'.
      * @param paginationBefore If paging forwards, the cursor string for the first row of the previous page.
      * @param paginationNewestFirst Whether to order the results with the newest records first. If not set, the default value is true.
+     * @param chainId Filter signature bundles to those related to the contract on the given chain ID.
      * @returns v2ListERC20MultiSigSignerAddedBundlesResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -110,6 +111,7 @@ export class Erc20BridgeService {
         paginationLast?: number,
         paginationBefore?: string,
         paginationNewestFirst?: boolean,
+        chainId?: string,
     ): CancelablePromise<v2ListERC20MultiSigSignerAddedBundlesResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -123,6 +125,7 @@ export class Erc20BridgeService {
                 'pagination.last': paginationLast,
                 'pagination.before': paginationBefore,
                 'pagination.newestFirst': paginationNewestFirst,
+                'chainId': chainId,
             },
             errors: {
                 500: `An internal server error`,
@@ -131,7 +134,7 @@ export class Erc20BridgeService {
     }
 
     /**
-     * List ERC20 multi-sig signer removed bundles
+     * List ERC20 multisig signer removed bundles
      * Get a list of the signature bundles to remove a particular validator from signer list of the multisig contract
      * @param nodeId Node ID of the validator of which a signature bundle is required.
      * @param submitter Ethereum address of the validator that will submit the bundle.
@@ -141,6 +144,7 @@ export class Erc20BridgeService {
      * @param paginationLast Number of records to be returned that sort less than row identified by cursor supplied in 'before'.
      * @param paginationBefore If paging forwards, the cursor string for the first row of the previous page.
      * @param paginationNewestFirst Whether to order the results with the newest records first. If not set, the default value is true.
+     * @param chainId Filter signature bundles to those related to the contract on the given chain ID.
      * @returns v2ListERC20MultiSigSignerRemovedBundlesResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -154,6 +158,7 @@ export class Erc20BridgeService {
         paginationLast?: number,
         paginationBefore?: string,
         paginationNewestFirst?: boolean,
+        chainId?: string,
     ): CancelablePromise<v2ListERC20MultiSigSignerRemovedBundlesResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -167,6 +172,7 @@ export class Erc20BridgeService {
                 'pagination.last': paginationLast,
                 'pagination.before': paginationBefore,
                 'pagination.newestFirst': paginationNewestFirst,
+                'chainId': chainId,
             },
             errors: {
                 500: `An internal server error`,

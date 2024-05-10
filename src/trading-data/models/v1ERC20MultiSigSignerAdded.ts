@@ -4,6 +4,10 @@
 /* eslint-disable */
 
 export type v1ERC20MultiSigSignerAdded = {
+    /**
+     * EVM chain ID that the multisig control contract lives on.
+     */
+    chainId?: string;
     epochSeq?: string;
     newSigner?: string;
     /**

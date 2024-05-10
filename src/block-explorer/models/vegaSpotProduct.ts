@@ -9,10 +9,6 @@ export type vegaSpotProduct = {
      */
     baseAsset?: string;
     /**
-     * Product name.
-     */
-    name?: string;
-    /**
      * Quote asset ID.
      */
     quoteAsset?: string;

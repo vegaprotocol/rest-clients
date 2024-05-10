@@ -5,6 +5,7 @@
 
 import type { MarketTradingMode } from './MarketTradingMode';
 import type { vegaAuctionTrigger } from './vegaAuctionTrigger';
+import type { vegaCompositePriceState } from './vegaCompositePriceState';
 import type { vegaCompositePriceType } from './vegaCompositePriceType';
 import type { vegaLiquidityProviderFeeShare } from './vegaLiquidityProviderFeeShare';
 import type { vegaLiquidityProviderSLA } from './vegaLiquidityProviderSLA';
@@ -75,7 +76,7 @@ export type vegaMarketData = {
      */
     lastTradedPrice?: string;
     /**
-     * Equity like share of liquidity fee for each liquidity provider.
+     * Equity-like share of liquidity fee for each liquidity provider.
      */
     liquidityProviderFeeShare?: Array<vegaLiquidityProviderFeeShare>;
     /**
@@ -87,6 +88,10 @@ export type vegaMarketData = {
      * formatted price of `1.23456` assuming market configured to 5 decimal places.
      */
     markPrice?: string;
+    /**
+     * State of the internal composite price.
+     */
+    markPriceState?: vegaCompositePriceState;
     /**
      * The method used for calculating the mark price.
      */

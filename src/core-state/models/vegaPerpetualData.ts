@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaCompositePriceState } from './vegaCompositePriceState';
 import type { vegaCompositePriceType } from './vegaCompositePriceType';
 
 /**
@@ -22,22 +23,30 @@ export type vegaPerpetualData = {
      */
     fundingRate?: string;
     /**
-     * The index price used for perps.
+     * The internal composite price used for perpetual markets.
      */
-    indexPrice?: string;
+    internalCompositePrice?: string;
     /**
-     * The method used for calculating the index price (perps only).
+     * State of the internal composite price.
      */
-    indexPriceType?: vegaCompositePriceType;
+    internalCompositePriceState?: vegaCompositePriceState;
+    /**
+     * The method used for calculating the internal composite price, for perpetual markets only.
+     */
+    internalCompositePriceType?: vegaCompositePriceType;
     /**
      * Time-weighted-average the internal data-points for the in-progress funding period.
      */
     internalTwap?: string;
     /**
-     * The next time the index price is calculated for perps.
+     * The next time the internal composite price is calculated for the perpetual market, in Unix nanoseconds.
      */
-    nextIndexPriceCalc?: string;
+    nextInternalCompositePriceCalc?: string;
     seqNum?: string;
     startTime?: string;
+    /**
+     * Last seen value of the settlement oracle.
+     */
+    underlyingIndexPrice?: string;
 };
 

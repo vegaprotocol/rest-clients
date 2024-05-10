@@ -17,8 +17,10 @@ export type v2IndividualGameEntity = {
      */
     rank?: string;
     rewardEarned?: string;
+    rewardEarnedQuantum?: string;
     rewardMetric?: vegaDispatchMetric;
     totalRewardsEarned?: string;
+    totalRewardsEarnedQuantum?: string;
     volume?: string;
 };
 

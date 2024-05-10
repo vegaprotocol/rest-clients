@@ -20,6 +20,10 @@ export type v2ReferralSet = {
      */
     referrer?: string;
     /**
+     * Current number of members in the referral set.
+     */
+    totalMembers?: string;
+    /**
      * Timestamp, in Unix nanoseconds, when the set was updated.
      */
     updatedAt?: string;

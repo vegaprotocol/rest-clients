@@ -17,6 +17,10 @@ export type vegaEthContractCallEvent = {
      */
     error?: string;
     /**
+     * If true the event does not correspond to a contract call and is only a notification to core of the last checked block height.
+     */
+    heartbeat?: boolean;
+    /**
      * Result of contract call, packed according to the ABI stored in the associated data source spec.
      */
     result?: string;

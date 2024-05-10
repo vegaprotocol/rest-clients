@@ -180,6 +180,7 @@ export type { vegaUpdateMarketStateConfiguration } from './models/vegaUpdateMark
 export type { vegaUpdateNetworkParameter } from './models/vegaUpdateNetworkParameter';
 export type { vegaUpdatePerpetualProduct } from './models/vegaUpdatePerpetualProduct';
 export type { vegaUpdateReferralProgram } from './models/vegaUpdateReferralProgram';
+export type { vegaUpdateSpotInstrumentConfiguration } from './models/vegaUpdateSpotInstrumentConfiguration';
 export type { vegaUpdateSpotMarket } from './models/vegaUpdateSpotMarket';
 export type { vegaUpdateSpotMarketConfiguration } from './models/vegaUpdateSpotMarketConfiguration';
 export type { vegaUpdateVolumeDiscountProgram } from './models/vegaUpdateVolumeDiscountProgram';

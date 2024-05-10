@@ -91,6 +91,9 @@
  * - BUS_EVENT_TYPE_TRANSFER_FEES_DISCOUNT_UPDATED: Event indicating that a party's available transfer fee discount has changed, per asset.
  * - BUS_EVENT_TYPE_PARTY_MARGIN_MODE_UPDATED: Event indicating that a party updated their margin mode on a market.
  * - BUS_EVENT_TYPE_PARTY_PROFILE_UPDATED: Event indicating that a party updated their profile.
+ * - BUS_EVENT_TYPE_TEAMS_STATS_UPDATED: Event indicating that teams' statistics have been updated.
+ * - BUS_EVENT_TYPE_TIME_WEIGHTED_NOTIONAL_POSITION_UPDATED: Event indicating time weighted notional position has been updated.
+ * - BUS_EVENT_TYPE_CANCELLED_ORDERS: Event containing the IDs of orders cancelled by a party on a market.
  * - BUS_EVENT_TYPE_MARKET: Event indicating a market related event, for example when a market opens
  * - BUS_EVENT_TYPE_TX_ERROR: Event used to report failed transactions back to a user, this is excluded from the ALL type
  */
@@ -182,6 +185,9 @@ export enum v1BusEventType {
     BUS_EVENT_TYPE_TRANSFER_FEES_DISCOUNT_UPDATED = 'BUS_EVENT_TYPE_TRANSFER_FEES_DISCOUNT_UPDATED',
     BUS_EVENT_TYPE_PARTY_MARGIN_MODE_UPDATED = 'BUS_EVENT_TYPE_PARTY_MARGIN_MODE_UPDATED',
     BUS_EVENT_TYPE_PARTY_PROFILE_UPDATED = 'BUS_EVENT_TYPE_PARTY_PROFILE_UPDATED',
+    BUS_EVENT_TYPE_TEAMS_STATS_UPDATED = 'BUS_EVENT_TYPE_TEAMS_STATS_UPDATED',
+    BUS_EVENT_TYPE_TIME_WEIGHTED_NOTIONAL_POSITION_UPDATED = 'BUS_EVENT_TYPE_TIME_WEIGHTED_NOTIONAL_POSITION_UPDATED',
+    BUS_EVENT_TYPE_CANCELLED_ORDERS = 'BUS_EVENT_TYPE_CANCELLED_ORDERS',
     BUS_EVENT_TYPE_MARKET = 'BUS_EVENT_TYPE_MARKET',
     BUS_EVENT_TYPE_TX_ERROR = 'BUS_EVENT_TYPE_TX_ERROR',
 }

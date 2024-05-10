@@ -7,7 +7,7 @@ import type { vegaLedgerMovement } from './vegaLedgerMovement';
 
 export type v2ObserveLedgerMovementsResponse = {
     /**
-     * Ledger movements data with list of ledger entries and and post-transfer balances.
+     * Ledger movements data with list of ledger entries and post-transfer balances.
      */
     ledgerMovement?: vegaLedgerMovement;
 };

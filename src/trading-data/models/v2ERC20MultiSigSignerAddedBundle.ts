@@ -5,6 +5,10 @@
 
 export type v2ERC20MultiSigSignerAddedBundle = {
     /**
+     * ID of the EVM chain this signature bundle is valid for.
+     */
+    chainId?: string;
+    /**
      * Epoch in which the validator was added.
      */
     epochSeq?: string;

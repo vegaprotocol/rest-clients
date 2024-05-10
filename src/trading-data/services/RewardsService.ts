@@ -69,7 +69,7 @@ export class RewardsService {
     /**
      * List epoch reward summaries
      * Get a list of reward summaries by epoch for a given range of epochs.
-     * The result is filtered by list of asset IDs, market IDs and starting and ending epochs, for which to return rewards.
+     * The result is filtered by a list of asset IDs, market IDs and starting and ending epochs, for which to return rewards.
      * If no data is provided, all reward summaries will be returned, grouped by epochs, market IDs, asset IDs and reward type.
      * @param filterAssetIds Restrict reward summaries to those connected to the assets in the given list.
      * @param filterMarketIds Restrict reward summaries to those connected to the markets in the given list.

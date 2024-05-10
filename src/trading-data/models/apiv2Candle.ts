@@ -21,7 +21,8 @@ export type apiv2Candle = {
      */
     low?: string;
     /**
-     * Total notional value traded during the candle interval.
+     * Total notional value traded during the candle interval. This value is determined by multiplying price, using market decimal places, by size, using position decimal places.
+     * The number of decimal places needed to convert this value to a decimal is market decimal places plus position decimal places.
      */
     notional?: string;
     /**

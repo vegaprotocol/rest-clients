@@ -353,7 +353,7 @@ export class OrdersService {
      * Observe orders
      * Subscribe to a stream of orders
      * @param marketIds Restrict orders to those placed on the given markets.
-     * @param partyIds Restrict orders to those placed on the by the given parties.
+     * @param partyIds Restrict orders to those placed on the market by the given parties.
      * @param excludeLiquidity Whether liquidity orders should be excluded from the stream. If not set, liquidity orders will be included.
      * @returns any A successful response.(streaming responses)
      * @returns googlerpcStatus An unexpected error response.

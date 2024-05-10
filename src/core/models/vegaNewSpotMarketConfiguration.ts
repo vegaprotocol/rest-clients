@@ -13,10 +13,6 @@ import type { vegaTargetStakeParameters } from './vegaTargetStakeParameters';
 
 export type vegaNewSpotMarketConfiguration = {
     /**
-     * Decimal places used for the new spot market, sets the smallest price increment on the book.
-     */
-    decimalPlaces?: string;
-    /**
      * New spot market instrument configuration.
      */
     instrument?: vegaInstrumentConfiguration;
@@ -33,9 +29,9 @@ export type vegaNewSpotMarketConfiguration = {
      */
     metadata?: Array<string>;
     /**
-     * Decimal places for order sizes, sets what size the smallest order / position on the spot market can be.
+     * Decimal places used for the new spot market, sets the smallest price increment on the book.
      */
-    positionDecimalPlaces?: string;
+    priceDecimalPlaces?: string;
     /**
      * Price monitoring parameters.
      */
@@ -45,6 +41,10 @@ export type vegaNewSpotMarketConfiguration = {
      */
     simple?: vegaSimpleModelParams;
     /**
+     * Decimal places for order sizes, sets what size the smallest order / position on the spot market can be.
+     */
+    sizeDecimalPlaces?: string;
+    /**
      * Specifies the liquidity provision SLA parameters.
      */
     slaParams?: vegaLiquiditySLAParameters;
@@ -52,5 +52,6 @@ export type vegaNewSpotMarketConfiguration = {
      * Specifies parameters related to target stake calculation.
      */
     targetStakeParameters?: vegaTargetStakeParameters;
+    tickSize?: string;
 };
 

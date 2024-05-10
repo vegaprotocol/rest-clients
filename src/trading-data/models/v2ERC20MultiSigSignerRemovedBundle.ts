@@ -5,6 +5,10 @@
 
 export type v2ERC20MultiSigSignerRemovedBundle = {
     /**
+     * ID of the EVM chain this signature bundle is valid for.
+     */
+    chainId?: string;
+    /**
      * Epoch in which the validator was removed.
      */
     epochSeq?: string;

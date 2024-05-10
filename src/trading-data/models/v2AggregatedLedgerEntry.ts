@@ -52,6 +52,10 @@ export type v2AggregatedLedgerEntry = {
      */
     toAccountType?: vegaAccountType;
     /**
+     * Transfer ID associated with the ledger entry.
+     */
+    transferId?: string;
+    /**
      * Transfer type.
      */
     transferType?: vegaTransferType;

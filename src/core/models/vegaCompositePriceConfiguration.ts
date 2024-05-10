@@ -20,7 +20,7 @@ export type vegaCompositePriceConfiguration = {
      */
     compositePriceType?: vegaCompositePriceType;
     /**
-     * Additional price sources to be used for index price calculation.
+     * Additional price sources to be used for internal composite price calculation.
      */
     dataSourcesSpec?: Array<vegaDataSourceDefinition>;
     dataSourcesSpecBinding?: Array<vegaSpecBindingForCompositePrice>;

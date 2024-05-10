@@ -45,5 +45,9 @@ export type apiv2Team = {
      * Link to the team's homepage.
      */
     teamUrl?: string;
+    /**
+     * Current number of members in the team.
+     */
+    totalMembers?: string;
 };
 

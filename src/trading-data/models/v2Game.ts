@@ -20,6 +20,10 @@ export type v2Game = {
      * The number of participants in the game.
      */
     participants?: string;
+    /**
+     * ID of the asset rewarded for involvement in the game.
+     */
+    rewardAssetId?: string;
     team?: v2TeamGameEntities;
 };
 

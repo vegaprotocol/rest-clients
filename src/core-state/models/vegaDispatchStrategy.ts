@@ -14,6 +14,10 @@ export type vegaDispatchStrategy = {
      * Asset to use for metric.
      */
     assetForMetric?: string;
+    /**
+     * If set, the actual amount of rewards transferred to each public key during distribution for this transfer will be `min(calculated_reward_in_quantum, cap_reward_fee_multiple × fees_paid_this_epoch_in_quantum).
+     */
+    capRewardFeeMultiple?: string;
     distributionStrategy?: vegaDistributionStrategy;
     /**
      * Mandatory enum that defines the entities within scope.
@@ -40,6 +44,10 @@ export type vegaDispatchStrategy = {
     rankTable?: Array<vegaRank>;
     stakingRequirement?: string;
     teamScope?: Array<string>;
+    /**
+     * Number of epochs between transfers, i.e. when 4, funds will be transferred every 4 epochs with the first transfer occurring 4 epochs after the transaction is processed.
+     */
+    transferInterval?: number;
     windowLength?: string;
 };
 

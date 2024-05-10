@@ -22,7 +22,7 @@ export type v2GetERC20SetAssetLimitsBundleResponse = {
      */
     signatures?: string;
     /**
-     * Threshold withdraw for this asset.
+     * Withdrawal threshold for this asset.
      */
     threshold?: string;
     /**

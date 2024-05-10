@@ -62,5 +62,6 @@ export type vegaUpdateMarketConfiguration = {
      * Simple risk model parameters, valid only if MODEL_SIMPLE is selected.
      */
     simple?: vegaSimpleModelParams;
+    tickSize?: string;
 };
 

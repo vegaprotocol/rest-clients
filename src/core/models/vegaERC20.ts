@@ -5,6 +5,10 @@
 
 export type vegaERC20 = {
     /**
+     * Chain ID the asset originated from.
+     */
+    chainId?: string;
+    /**
      * Address of the contract for the token, on the ethereum network.
      */
     contractAddress?: string;

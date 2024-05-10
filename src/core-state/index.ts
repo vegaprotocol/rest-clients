@@ -52,6 +52,8 @@ export type { vegaBuiltinAsset } from './models/vegaBuiltinAsset';
 export type { vegaCancelTransfer } from './models/vegaCancelTransfer';
 export type { vegaCancelTransferConfiguration } from './models/vegaCancelTransferConfiguration';
 export type { vegaCompositePriceConfiguration } from './models/vegaCompositePriceConfiguration';
+export type { vegaCompositePriceSource } from './models/vegaCompositePriceSource';
+export type { vegaCompositePriceState } from './models/vegaCompositePriceState';
 export { vegaCompositePriceType } from './models/vegaCompositePriceType';
 export type { vegaDataSourceDefinition } from './models/vegaDataSourceDefinition';
 export type { vegaDataSourceDefinitionExternal } from './models/vegaDataSourceDefinitionExternal';
@@ -148,12 +150,14 @@ export type { vegaUpdateMarketStateConfiguration } from './models/vegaUpdateMark
 export type { vegaUpdateNetworkParameter } from './models/vegaUpdateNetworkParameter';
 export type { vegaUpdatePerpetualProduct } from './models/vegaUpdatePerpetualProduct';
 export type { vegaUpdateReferralProgram } from './models/vegaUpdateReferralProgram';
+export type { vegaUpdateSpotInstrumentConfiguration } from './models/vegaUpdateSpotInstrumentConfiguration';
 export type { vegaUpdateSpotMarket } from './models/vegaUpdateSpotMarket';
 export type { vegaUpdateSpotMarketConfiguration } from './models/vegaUpdateSpotMarketConfiguration';
 export type { vegaUpdateVolumeDiscountProgram } from './models/vegaUpdateVolumeDiscountProgram';
 export type { vegaVolumeBenefitTier } from './models/vegaVolumeBenefitTier';
 export type { vegaVolumeDiscountProgramChanges } from './models/vegaVolumeDiscountProgramChanges';
 export type { vegaVote } from './models/vegaVote';
+export type { vegaVoteELSPair } from './models/vegaVoteELSPair';
 export { vegaVoteValue } from './models/vegaVoteValue';
 
 export { CoreStateServiceService } from './services/CoreStateServiceService';

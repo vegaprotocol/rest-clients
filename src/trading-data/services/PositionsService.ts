@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { googlerpcStatus } from '../models/googlerpcStatus';
 import type { v2EstimatePositionResponse } from '../models/v2EstimatePositionResponse';
+import type { v2GetTimeWeightedNotionalPositionResponse } from '../models/v2GetTimeWeightedNotionalPositionResponse';
 import type { v2ListAllPositionsResponse } from '../models/v2ListAllPositionsResponse';
 import type { v2ObservePositionsResponse } from '../models/v2ObservePositionsResponse';
 
@@ -23,16 +24,16 @@ export class PositionsService {
      * A negative number denotes a short position.
      * @param averageEntryPrice Average entry price corresponding to the open volume. The price is an unsigned integer. For example `123456` is a correctly
      * formatted price of `1.23456` assuming market configured to 5 decimal places.
-     * @param marginAccountBalance Margin account balance. Needs to be provided scaled to asset decimal places.
-     * @param generalAccountBalance General account balance. Needs to be provided scaled to asset decimal places.
-     * @param orderMarginAccountBalance Order margin account balance. Needs to be provided scaled to asset decimal places.
+     * @param marginAccountBalance Margin account balance. Needs to scaled by asset decimal places.
+     * @param generalAccountBalance General account balance. Needs to scaled by asset decimal places.
+     * @param orderMarginAccountBalance Order margin account balance. Needs to be scaled by asset decimal places.
      * @param marginMode Margin mode for the party, cross margin or isolated margin.
      *
      * - MARGIN_MODE_UNSPECIFIED: Never valid.
      * - MARGIN_MODE_CROSS_MARGIN: Cross margin mode - margin is dynamically acquired and released as a position is marked to market
      * - MARGIN_MODE_ISOLATED_MARGIN: Isolated margin mode - margin for any newly opened position volume is transferred to the margin account when the trade is executed
      * @param marginFactor Margin factor to be used along with isolated margin mode.
-     * @param includeCollateralIncreaseInAvailableCollateral Whether the estimated collateral increase should be included in available collateral for liquidation price calculation in isolated margin mode.
+     * @param includeRequiredPositionMarginInAvailableCollateral Whether the estimated position margin increase should be included in available collateral for liquidation price calculation in isolated margin mode.
      * @param scaleLiquidationPriceToMarketDecimals Whether the liquidation price estimates should be scaled to market decimal places or by asset decimal places. If not set, asset decimal places are used.
      * @returns v2EstimatePositionResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -47,7 +48,7 @@ export class PositionsService {
         orderMarginAccountBalance: string,
         marginMode: 'MARGIN_MODE_UNSPECIFIED' | 'MARGIN_MODE_CROSS_MARGIN' | 'MARGIN_MODE_ISOLATED_MARGIN' = 'MARGIN_MODE_UNSPECIFIED',
         marginFactor?: string,
-        includeCollateralIncreaseInAvailableCollateral?: boolean,
+        includeRequiredPositionMarginInAvailableCollateral?: boolean,
         scaleLiquidationPriceToMarketDecimals?: boolean,
     ): CancelablePromise<v2EstimatePositionResponse | googlerpcStatus> {
         return __request(OpenAPI, {
@@ -62,7 +63,7 @@ export class PositionsService {
                 'orderMarginAccountBalance': orderMarginAccountBalance,
                 'marginMode': marginMode,
                 'marginFactor': marginFactor,
-                'includeCollateralIncreaseInAvailableCollateral': includeCollateralIncreaseInAvailableCollateral,
+                'includeRequiredPositionMarginInAvailableCollateral': includeRequiredPositionMarginInAvailableCollateral,
                 'scaleLiquidationPriceToMarketDecimals': scaleLiquidationPriceToMarketDecimals,
             },
             errors: {
@@ -135,6 +136,41 @@ export class PositionsService {
             query: {
                 'partyId': partyId,
                 'marketId': marketId,
+            },
+            errors: {
+                500: `An internal server error`,
+            },
+        });
+    }
+
+    /**
+     * Get time weighted notional position
+     * Get the time weighted notional position for a given party and asset. The time weighted notional position
+     * is used to check if a party qualifies for a reward.
+     * If no epoch is specified, the final time weighted notional position from the end of the most recently completed epoch is returned.
+     * If an epoch is specified, the final time weighted notional position at that epoch is returned.
+     * @param assetId Asset ID to filter for.
+     * @param partyId Party ID to filter for.
+     * @param gameId Game ID to filter for.
+     * @param atEpoch Epoch to filter for.
+     * @returns v2GetTimeWeightedNotionalPositionResponse A successful response.
+     * @returns googlerpcStatus An unexpected error response.
+     * @throws ApiError
+     */
+    public static tradingDataServiceGetTimeWeightedNotionalPosition(
+        assetId?: string,
+        partyId?: string,
+        gameId?: string,
+        atEpoch?: string,
+    ): CancelablePromise<v2GetTimeWeightedNotionalPositionResponse | googlerpcStatus> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v2/time-weighted-notional-position',
+            query: {
+                'assetId': assetId,
+                'partyId': partyId,
+                'gameId': gameId,
+                'atEpoch': atEpoch,
             },
             errors: {
                 500: `An internal server error`,

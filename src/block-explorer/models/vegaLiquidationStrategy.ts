@@ -12,6 +12,11 @@ export type vegaLiquidationStrategy = {
      */
     disposalFraction?: string;
     /**
+     * Decimal > 0 specifying the range range above and below the mid price within which the network will trade to dispose of its position.
+     * The value can be > 1. For example, if set to 1.5, the minimum price will be 0, ie max(0, mid_price * (1 - 1.5)), and the maximum price will be mid_price * (1 + 1.5).
+     */
+    disposalSlippageRange?: string;
+    /**
      * Interval, in seconds, at which the network will attempt to close its position.
      */
     disposalTimeStep?: string;

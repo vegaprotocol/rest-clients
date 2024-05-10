@@ -63,8 +63,8 @@ export type v1TransactionResult = {
      * Status of the transaction, did it succeed or an error was raised.
      */
     status?: boolean;
-    stopOrderCancellation?: v1StopOrdersCancellation;
-    stopOrderSubmission?: v1StopOrdersSubmission;
+    stopOrdersCancellation?: v1StopOrdersCancellation;
+    stopOrdersSubmission?: v1StopOrdersSubmission;
     success?: TransactionResultSuccessDetails;
     transfer?: vegacommandsv1Transfer;
     undelegateSubmission?: v1UndelegateSubmission;

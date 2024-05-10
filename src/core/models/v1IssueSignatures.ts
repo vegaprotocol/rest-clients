@@ -12,6 +12,10 @@ import type { v1NodeSignatureKind } from './v1NodeSignatureKind';
  */
 export type v1IssueSignatures = {
     /**
+     * Chain ID of the bridge to generate signatures for.
+     */
+    chainId?: string;
+    /**
      * What kind of signatures to generate, namely for whether a signer is being added or removed.
      */
     kind?: v1NodeSignatureKind;

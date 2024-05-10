@@ -3,17 +3,18 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaVoteELSPair } from './vegaVoteELSPair';
 import type { vegaVoteValue } from './vegaVoteValue';
 
 export type vegaVote = {
     /**
+     * The per market weight of the vote compared to the total amount of equity-like share on the market.. It is only populated if the vote is for a batch type proposal.
+     */
+    elsPerMarket?: Array<vegaVoteELSPair>;
+    /**
      * Voter's party ID.
      */
     partyId?: string;
-    /**
-     * The per market weight of the vote compared to the total amount of equity-like share on the market.. It is only populated if the vote is for a batch type proposal.
-     */
-    perMarketEquityLikeShareWeight?: Record<string, string>;
     /**
      * Proposal ID being voted on.
      */
