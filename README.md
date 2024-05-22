@@ -7,13 +7,13 @@ WIP project that autogenerates types and clients for interacting with the Vega R
 Install the client you wish to use:
 
 ```bash
-npm i @vegaprotocol/rest-client
+npm i @vegaprotocol/rest-clients
 ```
 
 or
 
 ```bash
-yarn add @vegaprotocol/rest-client
+yarn add @vegaprotocol/rest-clients
 ```
 
 Then use it in your code:
