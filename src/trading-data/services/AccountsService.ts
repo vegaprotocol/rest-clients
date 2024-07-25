@@ -72,6 +72,8 @@ export class AccountsService {
      * @param paginationLast Number of records to be returned that sort less than row identified by cursor supplied in 'before'.
      * @param paginationBefore If paging forwards, the cursor string for the first row of the previous page.
      * @param paginationNewestFirst Whether to order the results with the newest records first. If not set, the default value is true.
+     * @param includeDerivedParties Whether to return all derived parties from AMMs for the given party.
+     * If used, party ID is required.
      * @returns v2ListAccountsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -86,6 +88,7 @@ export class AccountsService {
         paginationLast?: number,
         paginationBefore?: string,
         paginationNewestFirst?: boolean,
+        includeDerivedParties?: boolean,
     ): CancelablePromise<v2ListAccountsResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -100,6 +103,7 @@ export class AccountsService {
                 'pagination.last': paginationLast,
                 'pagination.before': paginationBefore,
                 'pagination.newestFirst': paginationNewestFirst,
+                'includeDerivedParties': includeDerivedParties,
             },
             errors: {
                 500: `An internal server error`,
@@ -259,6 +263,8 @@ export class AccountsService {
      * - ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD: Per asset account for pending fee referral reward payouts
      * - ACCOUNT_TYPE_ORDER_MARGIN: Per asset market account for party in isolated margin mode
      * - ACCOUNT_TYPE_REWARD_REALISED_RETURN: Per asset market reward account for realised return
+     * @param includeDerivedParties Whether to return all derived parties from AMMs for the given party.
+     * If used, party ID is required.
      * @returns any A successful response.(streaming responses)
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -268,6 +274,7 @@ export class AccountsService {
         partyId?: string,
         asset?: string,
         type: 'ACCOUNT_TYPE_UNSPECIFIED' | 'ACCOUNT_TYPE_INSURANCE' | 'ACCOUNT_TYPE_SETTLEMENT' | 'ACCOUNT_TYPE_MARGIN' | 'ACCOUNT_TYPE_GENERAL' | 'ACCOUNT_TYPE_FEES_INFRASTRUCTURE' | 'ACCOUNT_TYPE_FEES_LIQUIDITY' | 'ACCOUNT_TYPE_FEES_MAKER' | 'ACCOUNT_TYPE_BOND' | 'ACCOUNT_TYPE_EXTERNAL' | 'ACCOUNT_TYPE_GLOBAL_INSURANCE' | 'ACCOUNT_TYPE_GLOBAL_REWARD' | 'ACCOUNT_TYPE_PENDING_TRANSFERS' | 'ACCOUNT_TYPE_REWARD_MAKER_PAID_FEES' | 'ACCOUNT_TYPE_REWARD_MAKER_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_LP_RECEIVED_FEES' | 'ACCOUNT_TYPE_REWARD_MARKET_PROPOSERS' | 'ACCOUNT_TYPE_HOLDING' | 'ACCOUNT_TYPE_LP_LIQUIDITY_FEES' | 'ACCOUNT_TYPE_LIQUIDITY_FEES_BONUS_DISTRIBUTION' | 'ACCOUNT_TYPE_NETWORK_TREASURY' | 'ACCOUNT_TYPE_VESTING_REWARDS' | 'ACCOUNT_TYPE_VESTED_REWARDS' | 'ACCOUNT_TYPE_REWARD_AVERAGE_POSITION' | 'ACCOUNT_TYPE_REWARD_RELATIVE_RETURN' | 'ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY' | 'ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING' | 'ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD' | 'ACCOUNT_TYPE_ORDER_MARGIN' | 'ACCOUNT_TYPE_REWARD_REALISED_RETURN' = 'ACCOUNT_TYPE_UNSPECIFIED',
+        includeDerivedParties?: boolean,
     ): CancelablePromise<{
         error?: googlerpcStatus;
         result?: v2ObserveAccountsResponse;
@@ -280,6 +287,7 @@ export class AccountsService {
                 'partyId': partyId,
                 'asset': asset,
                 'type': type,
+                'includeDerivedParties': includeDerivedParties,
             },
             errors: {
                 500: `An internal server error`,

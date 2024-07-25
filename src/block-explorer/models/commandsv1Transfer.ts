@@ -17,6 +17,13 @@ export type commandsv1Transfer = {
      */
     asset?: string;
     /**
+     * AMM key from which assets are to be transferred, if applicable.
+     * The submitter of the transaction must be the owner of this AMM key.
+     * If provided, the 'from_account_type' must be REWARDS_VESTED, and the asset in this account
+     * must match the asset specified in the transfer.
+     */
+    from?: string;
+    /**
      * Account type from which the funds of the party should be taken.
      */
     fromAccountType?: vegaAccountType;

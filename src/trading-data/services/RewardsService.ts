@@ -27,6 +27,7 @@ export class RewardsService {
      * @param toEpoch Restrict rewards data to those that were paid up to and including the given epoch ID.
      * @param teamId Filter for rewards paid if the party is a member of the given team.
      * @param gameId Filter for rewards paid if the party participated in the given game.
+     * @param includeDerivedParties Whether to return all derived parties from AMMs for the given party.
      * @returns v2ListRewardsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -43,6 +44,7 @@ export class RewardsService {
         toEpoch?: string,
         teamId?: string,
         gameId?: string,
+        includeDerivedParties?: boolean,
     ): CancelablePromise<v2ListRewardsResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -59,6 +61,7 @@ export class RewardsService {
                 'toEpoch': toEpoch,
                 'teamId': teamId,
                 'gameId': gameId,
+                'includeDerivedParties': includeDerivedParties,
             },
             errors: {
                 500: `An internal server error`,
@@ -128,6 +131,8 @@ export class RewardsService {
      * @param paginationLast Number of records to be returned that sort less than row identified by cursor supplied in 'before'.
      * @param paginationBefore If paging forwards, the cursor string for the first row of the previous page.
      * @param paginationNewestFirst Whether to order the results with the newest records first. If not set, the default value is true.
+     * @param includeDerivedParties Whether to return rewards for all derived parties from AMMs for the given party.
+     * If used, party ID is required.
      * @returns v2ListRewardSummariesResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -140,6 +145,7 @@ export class RewardsService {
         paginationLast?: number,
         paginationBefore?: string,
         paginationNewestFirst?: boolean,
+        includeDerivedParties?: boolean,
     ): CancelablePromise<v2ListRewardSummariesResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -152,6 +158,7 @@ export class RewardsService {
                 'pagination.last': paginationLast,
                 'pagination.before': paginationBefore,
                 'pagination.newestFirst': paginationNewestFirst,
+                'includeDerivedParties': includeDerivedParties,
             },
             errors: {
                 500: `An internal server error`,

@@ -7,6 +7,10 @@ import type { vegaPriceMonitoringTrigger } from './vegaPriceMonitoringTrigger';
 
 export type vegaPriceMonitoringBounds = {
     /**
+     * Has this bound been triggered yet or is it still active.
+     */
+    active?: boolean;
+    /**
      * Maximum price that isn't currently breaching the specified price monitoring trigger.
      * This field is an unsigned integer scaled to the market's decimal places.
      */

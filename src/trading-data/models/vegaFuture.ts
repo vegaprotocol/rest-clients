@@ -5,8 +5,13 @@
 
 import type { vegaDataSourceSpec } from './vegaDataSourceSpec';
 import type { vegaDataSourceSpecToFutureBinding } from './vegaDataSourceSpecToFutureBinding';
+import type { vegaFutureCap } from './vegaFutureCap';
 
 export type vegaFuture = {
+    /**
+     * If set, this product represents a capped future market.
+     */
+    cap?: vegaFutureCap;
     /**
      * Binding between the data spec and the data source.
      */

@@ -263,6 +263,8 @@ export class TransfersService {
      * @param toAccount Receiver's ID.
      * @param amount Amount to be transferred.
      * @param assetId Asset ID for the asset associated with the transaction.
+     * @param fromAmmKey AMM public key, if assets are being transferred from an AMM key to the AMM owner's public key.
+     * The `from_account` must be the owner of this AMM key.
      * @returns v2EstimateTransferFeeResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -273,6 +275,7 @@ export class TransfersService {
         toAccount?: string,
         amount?: string,
         assetId?: string,
+        fromAmmKey?: string,
     ): CancelablePromise<v2EstimateTransferFeeResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -283,6 +286,7 @@ export class TransfersService {
                 'toAccount': toAccount,
                 'amount': amount,
                 'assetId': assetId,
+                'fromAmmKey': fromAmmKey,
             },
             errors: {
                 500: `An internal server error`,

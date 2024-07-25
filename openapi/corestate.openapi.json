@@ -2,24 +2,20 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Vega core state APIs",
-    "version": "v0.76.0-preview.6"
+    "version": "v0.77.0-preview.5"
   },
   "servers": [
     {
-      "url": "https://n00.testnet.vega.rocks",
-      "description": "n00"
+      "url": "https://api.n00.testnet.vega.rocks",
+      "description": "n00 (data node)"
     },
     {
-      "url": "https://n06.testnet.vega.rocks",
-      "description": "n06"
+      "url": "https://api.n07.testnet.vega.rocks",
+      "description": "n07 (data node)"
     },
     {
-      "url": "https://n07.testnet.vega.rocks",
-      "description": "n07"
-    },
-    {
-      "url": "https://n08.testnet.vega.rocks",
-      "description": "n08"
+      "url": "https://api.n08.testnet.vega.rocks",
+      "description": "n08 (data node)"
     }
   ],
   "paths": {
@@ -1839,6 +1835,10 @@
       },
       "vegaFuture": {
         "properties": {
+          "cap": {
+            "$ref": "#/components/schemas/vegaFutureCap",
+            "description": "If set, this product represents a capped future market."
+          },
           "dataSourceSpecBinding": {
             "$ref": "#/components/schemas/vegaDataSourceSpecToFutureBinding",
             "description": "Binding between the data spec and the data source."
@@ -1863,8 +1863,29 @@
         "title": "Future product definition",
         "type": "object"
       },
+      "vegaFutureCap": {
+        "properties": {
+          "binarySettlement": {
+            "description": "If set to true, the settlement price must either be zero, or equal to the max price.",
+            "type": "boolean"
+          },
+          "fullyCollateralised": {
+            "description": "If set to true, positions must be fully collateralised so there is no default risk for any party.",
+            "type": "boolean"
+          },
+          "maxPrice": {
+            "description": "Set the maximum price for orders, and settlement data in market decimals.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "vegaFutureProduct": {
         "properties": {
+          "cap": {
+            "$ref": "#/components/schemas/vegaFutureCap",
+            "description": "If set, this product creates a capped future market."
+          },
           "dataSourceSpecBinding": {
             "$ref": "#/components/schemas/vegaDataSourceSpecToFutureBinding",
             "description": "Binding between the data source spec and the settlement data."
@@ -1900,12 +1921,13 @@
       },
       "vegaIndividualScope": {
         "default": "INDIVIDUAL_SCOPE_UNSPECIFIED",
-        "description": " - INDIVIDUAL_SCOPE_ALL: All parties on the network are within the scope of this reward.\n - INDIVIDUAL_SCOPE_IN_TEAM: All parties that are part of a team are within the scope of this reward.\n - INDIVIDUAL_SCOPE_NOT_IN_TEAM: All parties that are not part of a team are within the scope of this reward.",
+        "description": " - INDIVIDUAL_SCOPE_ALL: All parties on the network are within the scope of this reward.\n - INDIVIDUAL_SCOPE_IN_TEAM: All parties that are part of a team are within the scope of this reward.\n - INDIVIDUAL_SCOPE_NOT_IN_TEAM: All parties that are not part of a team are within the scope of this reward.\n - INDIVIDUAL_SCOPE_AMM: All keys representing AMMs are within the scope of this reward.",
         "enum": [
           "INDIVIDUAL_SCOPE_UNSPECIFIED",
           "INDIVIDUAL_SCOPE_ALL",
           "INDIVIDUAL_SCOPE_IN_TEAM",
-          "INDIVIDUAL_SCOPE_NOT_IN_TEAM"
+          "INDIVIDUAL_SCOPE_NOT_IN_TEAM",
+          "INDIVIDUAL_SCOPE_AMM"
         ],
         "type": "string"
       },
@@ -2178,6 +2200,10 @@
             "format": "double",
             "type": "number"
           },
+          "riskFactorOverride": {
+            "$ref": "#/components/schemas/vegaRiskFactorOverride",
+            "description": "And optional override for the risk factor calculated by the risk model."
+          },
           "tau": {
             "description": "Tau parameter of the risk model, projection horizon measured as a year fraction used in the expected shortfall\ncalculation to obtain the maintenance margin, must be a strictly non-negative real number.",
             "format": "double",
@@ -2189,6 +2215,10 @@
       },
       "vegaMarginCalculator": {
         "properties": {
+          "fullyCollateralised": {
+            "description": "If set to true, positions must be fully collateralised so there is no default risk for any party (capped futures).",
+            "type": "boolean"
+          },
           "scalingFactors": {
             "$ref": "#/components/schemas/vegaScalingFactors",
             "description": "Scaling factors for margin calculation."
@@ -2203,6 +2233,10 @@
             "description": "Number of decimal places that a price must be shifted by in order to get a\ncorrect price denominated in the currency of the market, for example:\n`realPrice = price / 10^decimalPlaces`. On spot markets, also called 'size decimal places'.",
             "format": "uint64",
             "type": "string"
+          },
+          "enableTransactionReordering": {
+            "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
+            "type": "boolean"
           },
           "fees": {
             "$ref": "#/components/schemas/vegaFees",
@@ -2543,6 +2577,10 @@
             "description": "Are spot market proposals allowed at this point in time.",
             "type": "boolean"
           },
+          "canUseAmm": {
+            "description": "Can parties use AMM related transactions.",
+            "type": "boolean"
+          },
           "genesisLoaded": {
             "description": "True once the genesis file is loaded.",
             "type": "boolean"
@@ -2613,6 +2651,10 @@
             "description": "Decimal places used for the new futures market, sets the smallest price increment on the book.",
             "format": "uint64",
             "type": "string"
+          },
+          "enableTransactionReordering": {
+            "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
+            "type": "boolean"
           },
           "instrument": {
             "$ref": "#/components/schemas/vegaInstrumentConfiguration",
@@ -2698,6 +2740,10 @@
       },
       "vegaNewSpotMarketConfiguration": {
         "properties": {
+          "enableTransactionReordering": {
+            "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
+            "type": "boolean"
+          },
           "instrument": {
             "$ref": "#/components/schemas/vegaInstrumentConfiguration",
             "description": "New spot market instrument configuration."
@@ -3018,6 +3064,10 @@
       },
       "vegaPriceMonitoringBounds": {
         "properties": {
+          "active": {
+            "description": "Has this bound been triggered yet or is it still active.",
+            "type": "boolean"
+          },
           "maxValidPrice": {
             "description": "Maximum price that isn't currently breaching the specified price monitoring trigger.\nThis field is an unsigned integer scaled to the market's decimal places.",
             "type": "string"
@@ -3399,6 +3449,10 @@
             "format": "uint64",
             "type": "string"
           },
+          "factor": {
+            "description": "Factor that the initial transfer amount is multiplied by for each epoch that it is executed.\nFor example if the initial transfer amount is 1000 and the factor is 0.5, then the amounts transferred per epoch will be 1000, 500, 250, 125, etc.",
+            "type": "string"
+          },
           "startEpoch": {
             "format": "uint64",
             "type": "string"
@@ -3434,6 +3488,20 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "vegaRiskFactorOverride": {
+        "properties": {
+          "long": {
+            "description": "Long Risk factor value.",
+            "type": "string"
+          },
+          "short": {
+            "description": "Short Risk factor value.",
+            "type": "string"
+          }
+        },
+        "title": "Risk factor override to control stable leverage",
         "type": "object"
       },
       "vegaScalingFactors": {
@@ -3675,6 +3743,10 @@
       },
       "vegaUpdateMarketConfiguration": {
         "properties": {
+          "enableTransactionReordering": {
+            "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
+            "type": "boolean"
+          },
           "instrument": {
             "$ref": "#/components/schemas/vegaUpdateInstrumentConfiguration",
             "description": "Updated futures market instrument configuration."
@@ -3866,6 +3938,10 @@
       },
       "vegaUpdateSpotMarketConfiguration": {
         "properties": {
+          "enableTransactionReordering": {
+            "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
+            "type": "boolean"
+          },
           "instrument": {
             "$ref": "#/components/schemas/vegaUpdateSpotInstrumentConfiguration",
             "description": "Specifies the name and code of the spot instrument."

@@ -119,6 +119,8 @@ export class PositionsService {
      * information about current positions, followed by updates to those positions.
      * @param partyId Restrict position updates to those related to the given parties.
      * @param marketId Restrict position updates to those related to the given markets.
+     * @param includeDerivedParties Whether to return all derived parties from AMMs for the given party.
+     * If used, party ID is required.
      * @returns any A successful response.(streaming responses)
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -126,6 +128,7 @@ export class PositionsService {
     public static tradingDataServiceObservePositions(
         partyId?: string,
         marketId?: string,
+        includeDerivedParties?: boolean,
     ): CancelablePromise<{
         error?: googlerpcStatus;
         result?: v2ObservePositionsResponse;
@@ -136,6 +139,7 @@ export class PositionsService {
             query: {
                 'partyId': partyId,
                 'marketId': marketId,
+                'includeDerivedParties': includeDerivedParties,
             },
             errors: {
                 500: `An internal server error`,

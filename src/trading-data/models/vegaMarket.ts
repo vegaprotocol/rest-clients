@@ -22,6 +22,7 @@ export type vegaMarket = {
      * `realPrice = price / 10^decimalPlaces`. On spot markets, also called 'size decimal places'.
      */
     decimalPlaces?: string;
+    enableTransactionReordering?: boolean;
     /**
      * Fees configuration that apply to the market.
      */

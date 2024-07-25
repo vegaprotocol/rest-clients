@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Vega block explorer APIs",
-    "version": "v0.76.0-preview.6"
+    "version": "v0.77.0-preview.5"
   },
   "servers": [
     {
@@ -394,6 +394,10 @@
             "description": "Asset ID of the asset to be transferred.",
             "type": "string"
           },
+          "from": {
+            "description": "AMM key from which assets are to be transferred, if applicable.\nThe submitter of the transaction must be the owner of this AMM key.\nIf provided, the 'from_account_type' must be REWARDS_VESTED, and the asset in this account\nmust match the asset specified in the transfer.",
+            "type": "string"
+          },
           "fromAccountType": {
             "$ref": "#/components/schemas/vegaAccountType",
             "description": "Account type from which the funds of the party should be taken."
@@ -456,6 +460,58 @@
           "NULL_VALUE"
         ],
         "type": "string"
+      },
+      "v1AmendAMM": {
+        "description": "Command to amend an existing automated market maker on a market.",
+        "properties": {
+          "commitmentAmount": {
+            "description": "Amount to be committed to the AMM. If not supplied the commitment will remain unchanged.",
+            "type": "string"
+          },
+          "concentratedLiquidityParameters": {
+            "$ref": "#/components/schemas/v1AmendAMMConcentratedLiquidityParameters",
+            "description": "Concentrated liquidity parameters defining the shape of the AMM's volume curves. If not supplied the parameters will remain unchanged."
+          },
+          "marketId": {
+            "description": "Market ID for the AMM to be amended.",
+            "type": "string"
+          },
+          "proposedFee": {
+            "description": "Nominated liquidity fee factor, which is an input to the calculation of taker fees on the market. If not supplied the proposed fee will remain unchanged.",
+            "type": "string"
+          },
+          "slippageTolerance": {
+            "description": "Slippage tolerance for rebasing position when updating the AMM.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v1AmendAMMConcentratedLiquidityParameters": {
+        "description": "Liquidity parameters that define the size and range of the AMM's tradeable volume.",
+        "properties": {
+          "base": {
+            "description": "Price that the AMM will quote as its \"fair price\" when its position is zero.",
+            "type": "string"
+          },
+          "leverageAtLowerBound": {
+            "description": "Leverage at lower bound. If not set the markets risk-factors will be used to calculate leverage.",
+            "type": "string"
+          },
+          "leverageAtUpperBound": {
+            "description": "Leverage at upper bound. If not set the markets risk-factors will be used to calculate leverage.",
+            "type": "string"
+          },
+          "lowerBound": {
+            "description": "Price at which the AMM will stop quoting buy volume. If not supplied the AMM will never hold a long position.",
+            "type": "string"
+          },
+          "upperBound": {
+            "description": "Price at which the AMM will stop quoting sell volume. If not supplied the AMM will never hold a short position.",
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "v1AnnounceNode": {
         "description": "A command that allows a new node operator to announce themselves to the network as a new validator.",
@@ -611,6 +667,30 @@
         "title": "Terms for a batch governance proposal submission",
         "type": "object"
       },
+      "v1CancelAMM": {
+        "description": "Command to cancel an automated market maker for a given market.",
+        "properties": {
+          "marketId": {
+            "description": "Market ID to cancel an AMM for.",
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/v1CancelAMMMethod",
+            "description": "Method to use to cancel the AMM."
+          }
+        },
+        "type": "object"
+      },
+      "v1CancelAMMMethod": {
+        "default": "METHOD_UNSPECIFIED",
+        "description": " - METHOD_IMMEDIATE: Cancellation will be immediate and any open positions will be transferred to the network for liquidation.\n - METHOD_REDUCE_ONLY: AMM will only trade to reduce its position, and will be cancelled once its position reaches zero.",
+        "enum": [
+          "METHOD_UNSPECIFIED",
+          "METHOD_IMMEDIATE",
+          "METHOD_REDUCE_ONLY"
+        ],
+        "type": "string"
+      },
       "v1ChainEvent": {
         "description": "A validator command sent automatically that provides information of events that have happened on foreign chains.",
         "properties": {
@@ -698,6 +778,23 @@
           "teamUrl": {
             "description": "External link to the team's homepage.",
             "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v1DelayedTransactionsWrapper": {
+        "description": "Internal transactions used to convey delayed transactions to be included in the next block.",
+        "properties": {
+          "height": {
+            "format": "uint64",
+            "type": "string"
+          },
+          "transactions": {
+            "items": {
+              "format": "byte",
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -809,6 +906,10 @@
       "v1InputData": {
         "description": "Input data for a transaction containing a network command for the Vega network to execute.\nOnce populated the protobuf message should be marshalled into a byte array and included in a transaction message.",
         "properties": {
+          "amendAmm": {
+            "$ref": "#/components/schemas/v1AmendAMM",
+            "title": "Command to amend an AMM pool on a market"
+          },
           "announceNode": {
             "$ref": "#/components/schemas/v1AnnounceNode",
             "description": "Command used by a node operator to announce its node as a pending validator."
@@ -830,6 +931,10 @@
             "format": "uint64",
             "type": "string"
           },
+          "cancelAmm": {
+            "$ref": "#/components/schemas/v1CancelAMM",
+            "title": "Command to cancel an AMM pool on a market"
+          },
           "cancelTransfer": {
             "$ref": "#/components/schemas/commandsv1CancelTransfer",
             "description": "Command to cancel a recurring transfer."
@@ -841,6 +946,10 @@
           "createReferralSet": {
             "$ref": "#/components/schemas/v1CreateReferralSet",
             "description": "Command to create a referral set."
+          },
+          "delayedTransactionsWrapper": {
+            "$ref": "#/components/schemas/v1DelayedTransactionsWrapper",
+            "description": "Internal transactions used to convey delayed transactions to be included in the next block."
           },
           "delegateSubmission": {
             "$ref": "#/components/schemas/v1DelegateSubmission",
@@ -922,6 +1031,10 @@
           "stopOrdersSubmission": {
             "$ref": "#/components/schemas/v1StopOrdersSubmission",
             "description": "Command to submit a pair of stop orders."
+          },
+          "submitAmm": {
+            "$ref": "#/components/schemas/v1SubmitAMM",
+            "title": "Command to submit an AMM pool to a market"
           },
           "transfer": {
             "$ref": "#/components/schemas/commandsv1Transfer",
@@ -1485,6 +1598,58 @@
           "risesAbove": {
             "$ref": "#/components/schemas/v1StopOrderSetup",
             "description": "Stop order that will be triggered if the price rises above a given trigger price."
+          }
+        },
+        "type": "object"
+      },
+      "v1SubmitAMM": {
+        "description": "Command to create an automated market maker for a given market.",
+        "properties": {
+          "commitmentAmount": {
+            "description": "Amount to be committed to the AMM.",
+            "type": "string"
+          },
+          "concentratedLiquidityParameters": {
+            "$ref": "#/components/schemas/v1SubmitAMMConcentratedLiquidityParameters",
+            "description": "Concentrated liquidity parameters defining the shape of the AMM's volume curves."
+          },
+          "marketId": {
+            "description": "Market ID for which to create an AMM.",
+            "type": "string"
+          },
+          "proposedFee": {
+            "description": "Nominated liquidity fee factor, which is an input to the calculation of taker fees on the market.",
+            "type": "string"
+          },
+          "slippageTolerance": {
+            "title": "Slippage tolerance used for rebasing the AMM if its base price crosses with existing order",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v1SubmitAMMConcentratedLiquidityParameters": {
+        "description": "Liquidity parameters that define the size and range of the AMM's tradeable volume.",
+        "properties": {
+          "base": {
+            "description": "Price that the AMM will quote as its \"fair price\" when its position is zero.",
+            "type": "string"
+          },
+          "leverageAtLowerBound": {
+            "description": "Leverage at lower bound. If not set the markets risk-factors will be used to calculate leverage.",
+            "type": "string"
+          },
+          "leverageAtUpperBound": {
+            "description": "Leverage at upper bound. If not set the markets risk-factors will be used to calculate leverage.",
+            "type": "string"
+          },
+          "lowerBound": {
+            "description": "Price at which the AMM will stop quoting buy volume. If not supplied the AMM will never hold a long position.",
+            "type": "string"
+          },
+          "upperBound": {
+            "description": "Price at which the AMM will stop quoting sell volume. If not supplied the AMM will never hold a short position.",
+            "type": "string"
           }
         },
         "type": "object"
@@ -2594,8 +2759,29 @@
         },
         "type": "object"
       },
+      "vegaFutureCap": {
+        "properties": {
+          "binarySettlement": {
+            "description": "If set to true, the settlement price must either be zero, or equal to the max price.",
+            "type": "boolean"
+          },
+          "fullyCollateralised": {
+            "description": "If set to true, positions must be fully collateralised so there is no default risk for any party.",
+            "type": "boolean"
+          },
+          "maxPrice": {
+            "description": "Set the maximum price for orders, and settlement data in market decimals.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "vegaFutureProduct": {
         "properties": {
+          "cap": {
+            "$ref": "#/components/schemas/vegaFutureCap",
+            "description": "If set, this product creates a capped future market."
+          },
           "dataSourceSpecBinding": {
             "$ref": "#/components/schemas/vegaDataSourceSpecToFutureBinding",
             "description": "Binding between the data source spec and the settlement data."
@@ -2631,12 +2817,13 @@
       },
       "vegaIndividualScope": {
         "default": "INDIVIDUAL_SCOPE_UNSPECIFIED",
-        "description": " - INDIVIDUAL_SCOPE_ALL: All parties on the network are within the scope of this reward.\n - INDIVIDUAL_SCOPE_IN_TEAM: All parties that are part of a team are within the scope of this reward.\n - INDIVIDUAL_SCOPE_NOT_IN_TEAM: All parties that are not part of a team are within the scope of this reward.",
+        "description": " - INDIVIDUAL_SCOPE_ALL: All parties on the network are within the scope of this reward.\n - INDIVIDUAL_SCOPE_IN_TEAM: All parties that are part of a team are within the scope of this reward.\n - INDIVIDUAL_SCOPE_NOT_IN_TEAM: All parties that are not part of a team are within the scope of this reward.\n - INDIVIDUAL_SCOPE_AMM: All keys representing AMMs are within the scope of this reward.",
         "enum": [
           "INDIVIDUAL_SCOPE_UNSPECIFIED",
           "INDIVIDUAL_SCOPE_ALL",
           "INDIVIDUAL_SCOPE_IN_TEAM",
-          "INDIVIDUAL_SCOPE_NOT_IN_TEAM"
+          "INDIVIDUAL_SCOPE_NOT_IN_TEAM",
+          "INDIVIDUAL_SCOPE_AMM"
         ],
         "type": "string"
       },
@@ -2805,6 +2992,10 @@
             "format": "double",
             "type": "number"
           },
+          "riskFactorOverride": {
+            "$ref": "#/components/schemas/vegaRiskFactorOverride",
+            "description": "And optional override for the risk factor calculated by the risk model."
+          },
           "tau": {
             "description": "Tau parameter of the risk model, projection horizon measured as a year fraction used in the expected shortfall\ncalculation to obtain the maintenance margin, must be a strictly non-negative real number.",
             "format": "double",
@@ -2895,6 +3086,10 @@
             "format": "uint64",
             "type": "string"
           },
+          "enableTransactionReordering": {
+            "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
+            "type": "boolean"
+          },
           "instrument": {
             "$ref": "#/components/schemas/vegaInstrumentConfiguration",
             "description": "New futures market instrument configuration."
@@ -2979,6 +3174,10 @@
       },
       "vegaNewSpotMarketConfiguration": {
         "properties": {
+          "enableTransactionReordering": {
+            "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
+            "type": "boolean"
+          },
           "instrument": {
             "$ref": "#/components/schemas/vegaInstrumentConfiguration",
             "description": "New spot market instrument configuration."
@@ -3346,6 +3545,10 @@
             "format": "uint64",
             "type": "string"
           },
+          "factor": {
+            "description": "Factor that the initial transfer amount is multiplied by for each epoch that it is executed.\nFor example if the initial transfer amount is 1000 and the factor is 0.5, then the amounts transferred per epoch will be 1000, 500, 250, 125, etc.",
+            "type": "string"
+          },
           "startEpoch": {
             "format": "uint64",
             "type": "string"
@@ -3381,6 +3584,20 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "vegaRiskFactorOverride": {
+        "properties": {
+          "long": {
+            "description": "Long Risk factor value.",
+            "type": "string"
+          },
+          "short": {
+            "description": "Short Risk factor value.",
+            "type": "string"
+          }
+        },
+        "title": "Risk factor override to control stable leverage",
         "type": "object"
       },
       "vegaScalarValue": {
@@ -3690,6 +3907,10 @@
       },
       "vegaUpdateMarketConfiguration": {
         "properties": {
+          "enableTransactionReordering": {
+            "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
+            "type": "boolean"
+          },
           "instrument": {
             "$ref": "#/components/schemas/vegaUpdateInstrumentConfiguration",
             "description": "Updated futures market instrument configuration."
@@ -3881,6 +4102,10 @@
       },
       "vegaUpdateSpotMarketConfiguration": {
         "properties": {
+          "enableTransactionReordering": {
+            "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
+            "type": "boolean"
+          },
           "instrument": {
             "$ref": "#/components/schemas/vegaUpdateSpotInstrumentConfiguration",
             "description": "Specifies the name and code of the spot instrument."

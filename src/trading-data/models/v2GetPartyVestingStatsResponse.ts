@@ -20,5 +20,13 @@ export type v2GetPartyVestingStatsResponse = {
      * Reward bonus multiplier.
      */
     rewardBonusMultiplier?: string;
+    /**
+     * The balance of the party and derived keys, in quantum.
+     */
+    summedQuantumBalance?: string;
+    /**
+     * Bonus multiplier applied on the reward, summed across all derived accounts.
+     */
+    summedRewardBonusMultiplier?: string;
 };
 

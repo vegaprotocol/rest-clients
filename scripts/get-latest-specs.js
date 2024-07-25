@@ -1,5 +1,6 @@
 const fs = require("fs");
 
+
 const run = async () => {
   const version = process.argv[2];
   console.log("Regenerating for version:", version);
@@ -12,8 +13,8 @@ const run = async () => {
       source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/${version}/blockexplorer.openapi.json`,
     },
     {
-      destination: "./openapi/core.openapi.json",
-      source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/${version}/core.openapi.json`,
+      destination: "./openapi/transaction.openapi.json",
+      source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/${version}/transaction.openapi.json`,
     },
     {
       destination: "./openapi/corestate.openapi.json",
@@ -23,8 +24,15 @@ const run = async () => {
       destination: "./openapi/trading_data_v2.openapi.json",
       source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/${version}/trading_data_v2.openapi.json`,
     },
+    {
+      destination: "./openapi/wallet.openapi.json",
+      source: `https://raw.githubusercontent.com/vegaprotocol/documentation/main/specs/${version}/wallet.openapi.json`,
+    },
   ];
   for (const file of files) {
+
+    console.log(`Fetching ${file.source}`);
+
     const response = await fetch(file.source);
     const data = await response.json();
     fs.writeFileSync(file.destination, JSON.stringify(data, null, 2));

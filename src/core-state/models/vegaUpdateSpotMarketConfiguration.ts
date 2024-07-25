@@ -12,6 +12,7 @@ import type { vegaTargetStakeParameters } from './vegaTargetStakeParameters';
 import type { vegaUpdateSpotInstrumentConfiguration } from './vegaUpdateSpotInstrumentConfiguration';
 
 export type vegaUpdateSpotMarketConfiguration = {
+    enableTransactionReordering?: boolean;
     /**
      * Specifies the name and code of the spot instrument.
      */

@@ -21,6 +21,10 @@ export type vegaNetworkLimits = {
      */
     canProposeSpotMarket?: boolean;
     /**
+     * Can parties use AMM related transactions.
+     */
+    canUseAmm?: boolean;
+    /**
      * True once the genesis file is loaded.
      */
     genesisLoaded?: boolean;

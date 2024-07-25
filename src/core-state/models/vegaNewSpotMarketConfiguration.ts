@@ -12,6 +12,7 @@ import type { vegaSimpleModelParams } from './vegaSimpleModelParams';
 import type { vegaTargetStakeParameters } from './vegaTargetStakeParameters';
 
 export type vegaNewSpotMarketConfiguration = {
+    enableTransactionReordering?: boolean;
     /**
      * New spot market instrument configuration.
      */

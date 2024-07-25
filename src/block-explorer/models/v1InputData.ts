@@ -5,12 +5,15 @@
 
 import type { commandsv1CancelTransfer } from './commandsv1CancelTransfer';
 import type { commandsv1Transfer } from './commandsv1Transfer';
+import type { v1AmendAMM } from './v1AmendAMM';
 import type { v1AnnounceNode } from './v1AnnounceNode';
 import type { v1ApplyReferralCode } from './v1ApplyReferralCode';
 import type { v1BatchMarketInstructions } from './v1BatchMarketInstructions';
 import type { v1BatchProposalSubmission } from './v1BatchProposalSubmission';
+import type { v1CancelAMM } from './v1CancelAMM';
 import type { v1ChainEvent } from './v1ChainEvent';
 import type { v1CreateReferralSet } from './v1CreateReferralSet';
+import type { v1DelayedTransactionsWrapper } from './v1DelayedTransactionsWrapper';
 import type { v1DelegateSubmission } from './v1DelegateSubmission';
 import type { v1EthereumKeyRotateSubmission } from './v1EthereumKeyRotateSubmission';
 import type { v1IssueSignatures } from './v1IssueSignatures';
@@ -30,6 +33,7 @@ import type { v1ProtocolUpgradeProposal } from './v1ProtocolUpgradeProposal';
 import type { v1StateVariableProposal } from './v1StateVariableProposal';
 import type { v1StopOrdersCancellation } from './v1StopOrdersCancellation';
 import type { v1StopOrdersSubmission } from './v1StopOrdersSubmission';
+import type { v1SubmitAMM } from './v1SubmitAMM';
 import type { v1UndelegateSubmission } from './v1UndelegateSubmission';
 import type { v1UpdateMarginMode } from './v1UpdateMarginMode';
 import type { v1UpdatePartyProfile } from './v1UpdatePartyProfile';
@@ -43,6 +47,7 @@ import type { v1WithdrawSubmission } from './v1WithdrawSubmission';
  * Once populated the protobuf message should be marshalled into a byte array and included in a transaction message.
  */
 export type v1InputData = {
+    amendAmm?: v1AmendAMM;
     /**
      * Command used by a node operator to announce its node as a pending validator.
      */
@@ -63,6 +68,7 @@ export type v1InputData = {
      * Block height which has been used to calculate the transaction proof-of-work.
      */
     blockHeight?: string;
+    cancelAmm?: v1CancelAMM;
     /**
      * Command to cancel a recurring transfer.
      */
@@ -75,6 +81,10 @@ export type v1InputData = {
      * Command to create a referral set.
      */
     createReferralSet?: v1CreateReferralSet;
+    /**
+     * Internal transactions used to convey delayed transactions to be included in the next block.
+     */
+    delayedTransactionsWrapper?: v1DelayedTransactionsWrapper;
     /**
      * Command to delegate tokens to a validator.
      */
@@ -156,6 +166,7 @@ export type v1InputData = {
      * Command to submit a pair of stop orders.
      */
     stopOrdersSubmission?: v1StopOrdersSubmission;
+    submitAmm?: v1SubmitAMM;
     /**
      * Command to submit a transfer.
      */

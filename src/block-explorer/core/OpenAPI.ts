@@ -21,7 +21,7 @@ export type OpenAPIConfig = {
 
 export const OpenAPI: OpenAPIConfig = {
     BASE: 'https://be.testnet.vega.xyz/rest',
-    VERSION: '0.76.1',
+    VERSION: '0.77.0-preview.5',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',
     TOKEN: undefined,

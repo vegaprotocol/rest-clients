@@ -19,6 +19,7 @@ export type vegaNewMarketConfiguration = {
      * Decimal places used for the new futures market, sets the smallest price increment on the book.
      */
     decimalPlaces?: string;
+    enableTransactionReordering?: boolean;
     /**
      * New futures market instrument configuration.
      */

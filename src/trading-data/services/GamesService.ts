@@ -3,7 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { googlerpcStatus } from '../models/googlerpcStatus';
+import type { v2ListGamePartyScoresResponse } from '../models/v2ListGamePartyScoresResponse';
 import type { v2ListGamesResponse } from '../models/v2ListGamesResponse';
+import type { v2ListGameTeamScoresResponse } from '../models/v2ListGameTeamScoresResponse';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -66,6 +68,103 @@ export class GamesService {
                 'pagination.newestFirst': paginationNewestFirst,
                 'teamId': teamId,
                 'partyId': partyId,
+            },
+            errors: {
+                500: `An internal server error`,
+            },
+        });
+    }
+
+    /**
+     * List game party scores
+     * Get a list of party scores for the given filters
+     * @param paginationFirst Number of records to be returned that sort greater than row identified by cursor supplied in 'after'.
+     * @param paginationAfter If paging forwards, the cursor string for the last row of the previous page.
+     * @param paginationLast Number of records to be returned that sort less than row identified by cursor supplied in 'before'.
+     * @param paginationBefore If paging forwards, the cursor string for the first row of the previous page.
+     * @param paginationNewestFirst Whether to order the results with the newest records first. If not set, the default value is true.
+     * @param filterGameIds Restrict game scores to those in the given games.
+     * @param filterTeamIds Restrict game scores to the parties in the given teams.
+     * @param filterPartyIds Restrict game scores to those relating to the given parties.
+     * @param filterEpochFrom Restrict game scores to those from a given epoch.
+     * @param filterEpochTo Restrict game scores to those up to a given epoch.
+     * @returns v2ListGamePartyScoresResponse A successful response.
+     * @returns googlerpcStatus An unexpected error response.
+     * @throws ApiError
+     */
+    public static tradingDataServiceListGamePartyScores(
+        paginationFirst?: number,
+        paginationAfter?: string,
+        paginationLast?: number,
+        paginationBefore?: string,
+        paginationNewestFirst?: boolean,
+        filterGameIds?: Array<string>,
+        filterTeamIds?: Array<string>,
+        filterPartyIds?: Array<string>,
+        filterEpochFrom?: string,
+        filterEpochTo?: string,
+    ): CancelablePromise<v2ListGamePartyScoresResponse | googlerpcStatus> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v2/games/party-scores',
+            query: {
+                'pagination.first': paginationFirst,
+                'pagination.after': paginationAfter,
+                'pagination.last': paginationLast,
+                'pagination.before': paginationBefore,
+                'pagination.newestFirst': paginationNewestFirst,
+                'filter.gameIds': filterGameIds,
+                'filter.teamIds': filterTeamIds,
+                'filter.partyIds': filterPartyIds,
+                'filter.epochFrom': filterEpochFrom,
+                'filter.epochTo': filterEpochTo,
+            },
+            errors: {
+                500: `An internal server error`,
+            },
+        });
+    }
+
+    /**
+     * List game team scores
+     * Get a list of team scores for the given filters
+     * @param paginationFirst Number of records to be returned that sort greater than row identified by cursor supplied in 'after'.
+     * @param paginationAfter If paging forwards, the cursor string for the last row of the previous page.
+     * @param paginationLast Number of records to be returned that sort less than row identified by cursor supplied in 'before'.
+     * @param paginationBefore If paging forwards, the cursor string for the first row of the previous page.
+     * @param paginationNewestFirst Whether to order the results with the newest records first. If not set, the default value is true.
+     * @param filterGameIds Restrict game scores to the given ones.
+     * @param filterTeamIds Restrict game scores to those for the given teams.
+     * @param filterEpochFrom Restrict game scores to those from a given epoch.
+     * @param filterEpochTo Restrict game scores to those up to a given epoch.
+     * @returns v2ListGameTeamScoresResponse A successful response.
+     * @returns googlerpcStatus An unexpected error response.
+     * @throws ApiError
+     */
+    public static tradingDataServiceListGameTeamScores(
+        paginationFirst?: number,
+        paginationAfter?: string,
+        paginationLast?: number,
+        paginationBefore?: string,
+        paginationNewestFirst?: boolean,
+        filterGameIds?: Array<string>,
+        filterTeamIds?: Array<string>,
+        filterEpochFrom?: string,
+        filterEpochTo?: string,
+    ): CancelablePromise<v2ListGameTeamScoresResponse | googlerpcStatus> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v2/games/team-scores',
+            query: {
+                'pagination.first': paginationFirst,
+                'pagination.after': paginationAfter,
+                'pagination.last': paginationLast,
+                'pagination.before': paginationBefore,
+                'pagination.newestFirst': paginationNewestFirst,
+                'filter.gameIds': filterGameIds,
+                'filter.teamIds': filterTeamIds,
+                'filter.epochFrom': filterEpochFrom,
+                'filter.epochTo': filterEpochTo,
             },
             errors: {
                 500: `An internal server error`,

@@ -17,9 +17,9 @@
     "generate": "openapi --client fetch",
     "generate:trading-data": "yarn generate --input ./openapi/trading_data_v2.openapi.json --output ./src/trading-data",
     "generate:core-state": "yarn generate --input ./openapi/corestate.openapi.json --output ./src/core-state",
-    "generate:core": "yarn generate --input ./openapi/core.openapi.json --output ./src/core",
+    "generate:transaction": "yarn generate --input ./openapi/transaction.openapi.json --output ./src/transaction",
     "generate:block-explorer": "yarn generate --input ./openapi/blockexplorer.openapi.json --output ./src/block-explorer",
-    "generate:all": "yarn generate:trading-data && yarn generate:core-state && yarn generate:core && yarn generate:block-explorer"
+    "generate:all": "yarn generate:trading-data && yarn generate:core-state && yarn generate:transaction && yarn generate:block-explorer"
   },
   "license": "MIT",
   "devDependencies": {

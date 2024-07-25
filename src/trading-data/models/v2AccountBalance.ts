@@ -27,6 +27,11 @@ export type v2AccountBalance = {
      */
     owner?: string;
     /**
+     * Parent party ID of the account.
+     * This field is optional and is used in cases where the account is derived from another party's account.
+     */
+    parentPartyId?: string;
+    /**
      * Account type of this account.
      */
     type?: vegaAccountType;

@@ -15,7 +15,8 @@ export class CandlesService {
 
     /**
      * List candle data
-     * Get a list of candle data for a given candle ID. Candle IDs can be obtained by calling list-candle-intervals
+     * Get a list of candle data for a given candle ID.
+     * A candle ID encapsulates a market ID and candle interval. A list of available candle IDs, and therefore candle intervals can be found using the list-candle-intervals API.
      * @param candleId Candle ID to retrieve candle data for.
      * @param fromTimestamp Timestamp in Unix nanoseconds to retrieve candles from.
      * @param toTimestamp Timestamp in Unix nanoseconds to retrieve candles to.
@@ -59,7 +60,7 @@ export class CandlesService {
 
     /**
      * List candle intervals
-     * Get a list of all available intervals for a given market along with the corresponding candle ID
+     * Get a list of all available candle intervals for a given market along with the corresponding candle ID.
      * @param marketId Unique ID for the market to list candle intervals for.
      * @returns v2ListCandleIntervalsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
@@ -82,7 +83,8 @@ export class CandlesService {
 
     /**
      * Observe candle data
-     * Subscribe to a stream of candle updates
+     * Subscribe to a stream of candle updates given a candle ID.
+     * A candle ID encapsulates a market ID and candle interval. A list of available candle IDs, and therefore candle intervals can be found using the list-candle-intervals API.
      * @param candleId Unique ID for the candle.
      * @returns any A successful response.(streaming responses)
      * @returns googlerpcStatus An unexpected error response.

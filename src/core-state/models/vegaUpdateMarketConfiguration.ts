@@ -14,6 +14,7 @@ import type { vegaSimpleModelParams } from './vegaSimpleModelParams';
 import type { vegaUpdateInstrumentConfiguration } from './vegaUpdateInstrumentConfiguration';
 
 export type vegaUpdateMarketConfiguration = {
+    enableTransactionReordering?: boolean;
     /**
      * Updated futures market instrument configuration.
      */
