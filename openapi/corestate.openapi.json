@@ -2,20 +2,18 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Vega core state APIs",
-    "version": "v0.77.0-preview.5"
+    "version": "v0.79.0-preview.2"
   },
   "servers": [
     {
-      "url": "https://api.n00.testnet.vega.rocks",
-      "description": "n00 (data node)"
-    },
-    {
-      "url": "https://api.n07.testnet.vega.rocks",
-      "description": "n07 (data node)"
-    },
-    {
-      "url": "https://api.n08.testnet.vega.rocks",
-      "description": "n08 (data node)"
+      "url": "{CoreStateServer}",
+      "description": "Core State",
+      "variables": {
+        "CoreStateServer": {
+          "default": "https://n00.testnet.vega.rocks",
+          "description": "Core State endpoint"
+        }
+      }
     }
   ],
   "paths": {
@@ -551,7 +549,7 @@
       },
       "MarketTradingMode": {
         "default": "TRADING_MODE_UNSPECIFIED",
-        "description": "- TRADING_MODE_UNSPECIFIED: Default value, this is invalid\n - TRADING_MODE_CONTINUOUS: Normal trading\n - TRADING_MODE_BATCH_AUCTION: Auction trading (FBA)\n - TRADING_MODE_OPENING_AUCTION: Opening auction\n - TRADING_MODE_MONITORING_AUCTION: Auction triggered by monitoring\n - TRADING_MODE_NO_TRADING: No trading is allowed\n - TRADING_MODE_SUSPENDED_VIA_GOVERNANCE: Special auction mode triggered via governance",
+        "description": "- TRADING_MODE_UNSPECIFIED: Default value, this is invalid\n - TRADING_MODE_CONTINUOUS: Normal trading\n - TRADING_MODE_BATCH_AUCTION: Auction trading (FBA)\n - TRADING_MODE_OPENING_AUCTION: Opening auction\n - TRADING_MODE_MONITORING_AUCTION: Auction triggered by monitoring\n - TRADING_MODE_NO_TRADING: No trading is allowed\n - TRADING_MODE_SUSPENDED_VIA_GOVERNANCE: Special auction mode triggered via governance\n - TRADING_MODE_LONG_BLOCK_AUCTION: Auction triggered globally by long block\n - TRADING_MODE_PROTOCOL_AUTOMATED_PURCHASE_AUCTION: Scheduled auction for automated purchase",
         "enum": [
           "TRADING_MODE_UNSPECIFIED",
           "TRADING_MODE_CONTINUOUS",
@@ -559,7 +557,9 @@
           "TRADING_MODE_OPENING_AUCTION",
           "TRADING_MODE_MONITORING_AUCTION",
           "TRADING_MODE_NO_TRADING",
-          "TRADING_MODE_SUSPENDED_VIA_GOVERNANCE"
+          "TRADING_MODE_SUSPENDED_VIA_GOVERNANCE",
+          "TRADING_MODE_LONG_BLOCK_AUCTION",
+          "TRADING_MODE_PROTOCOL_AUTOMATED_PURCHASE_AUCTION"
         ],
         "title": "Trading mode the market is currently running, also referred to as 'market state'",
         "type": "string"
@@ -1018,7 +1018,7 @@
       },
       "vegaAccountType": {
         "default": "ACCOUNT_TYPE_UNSPECIFIED",
-        "description": "- ACCOUNT_TYPE_UNSPECIFIED: Default value\n - ACCOUNT_TYPE_INSURANCE: Insurance pool accounts contain insurance pool funds for a market\n - ACCOUNT_TYPE_SETTLEMENT: Settlement accounts exist only during settlement or mark-to-market\n - ACCOUNT_TYPE_MARGIN: Margin accounts contain funds set aside for the margin needed to support a party's open positions.\nEach party will have a margin account for each market they have traded in.\nRequired initial margin is allocated to each market from user's general account.\nCollateral in the margin account can't be withdrawn or used as margin on another market until\nit is released back to the general account.\nVega protocol uses an internal accounting system to segregate funds held as\nmargin from other funds to ensure they are never lost or 'double spent'\n\nMargin account funds will vary as margin requirements on positions change\n - ACCOUNT_TYPE_GENERAL: General accounts contain the collateral for a party that is not otherwise allocated. A party will\nhave multiple general accounts, one for each asset they want\nto trade with\n\nGeneral accounts are where funds are initially deposited or withdrawn from,\nit is also the account where funds are taken to fulfil fees and initial margin requirements\n - ACCOUNT_TYPE_FEES_INFRASTRUCTURE: Infrastructure accounts contain fees earned by providing infrastructure on Vega\n - ACCOUNT_TYPE_FEES_LIQUIDITY: Liquidity accounts contain fees earned by providing liquidity on Vega markets\n - ACCOUNT_TYPE_FEES_MAKER: This account is created to hold fees earned by placing orders that sit on the book\nand are then matched with an incoming order to create a trade - These fees reward parties\nwho provide the best priced liquidity that actually allows trading to take place\n - ACCOUNT_TYPE_BOND: This account is created to maintain liquidity providers funds commitments\n - ACCOUNT_TYPE_EXTERNAL: External account represents an external source (deposit/withdrawal)\n - ACCOUNT_TYPE_GLOBAL_INSURANCE: Global insurance account for the asset\n - ACCOUNT_TYPE_GLOBAL_REWARD: Global reward account for the asset\n - ACCOUNT_TYPE_PENDING_TRANSFERS: Per asset account used to store pending transfers (if any)\n - ACCOUNT_TYPE_REWARD_MAKER_PAID_FEES: Per asset reward account for fees paid to makers\n - ACCOUNT_TYPE_REWARD_MAKER_RECEIVED_FEES: Per asset reward account for fees received by makers\n - ACCOUNT_TYPE_REWARD_LP_RECEIVED_FEES: Per asset reward account for fees received by liquidity providers\n - ACCOUNT_TYPE_REWARD_MARKET_PROPOSERS: Per asset reward account for market proposers when the market goes above some trading threshold\n - ACCOUNT_TYPE_HOLDING: Per asset account for holding in-flight unfilled orders' funds\n - ACCOUNT_TYPE_LP_LIQUIDITY_FEES: Network controlled liquidity provider's account, per market, to hold accrued liquidity fees.\n - ACCOUNT_TYPE_LIQUIDITY_FEES_BONUS_DISTRIBUTION: Network controlled liquidity fees bonus distribution account, per market.\n - ACCOUNT_TYPE_NETWORK_TREASURY: Network controlled treasury\n - ACCOUNT_TYPE_VESTING_REWARDS: Account holding user's rewards for the vesting period\n - ACCOUNT_TYPE_VESTED_REWARDS: Account holding user's rewards after the vesting period\n - ACCOUNT_TYPE_REWARD_AVERAGE_POSITION: Per asset market reward account given for average position\n - ACCOUNT_TYPE_REWARD_RELATIVE_RETURN: Per asset market reward account given for relative return\n - ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY: Per asset market reward account given for return volatility\n - ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING: Per asset market reward account given to validators by their ranking\n - ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD: Per asset account for pending fee referral reward payouts\n - ACCOUNT_TYPE_ORDER_MARGIN: Per asset market account for party in isolated margin mode\n - ACCOUNT_TYPE_REWARD_REALISED_RETURN: Per asset market reward account for realised return",
+        "description": "- ACCOUNT_TYPE_UNSPECIFIED: Default value\n - ACCOUNT_TYPE_INSURANCE: Insurance pool accounts contain insurance pool funds for a market\n - ACCOUNT_TYPE_SETTLEMENT: Settlement accounts exist only during settlement or mark-to-market\n - ACCOUNT_TYPE_MARGIN: Margin accounts contain funds set aside for the margin needed to support a party's open positions.\nEach party will have a margin account for each market they have traded in.\nRequired initial margin is allocated to each market from user's general account.\nCollateral in the margin account can't be withdrawn or used as margin on another market until\nit is released back to the general account.\nVega protocol uses an internal accounting system to segregate funds held as\nmargin from other funds to ensure they are never lost or 'double spent'\n\nMargin account funds will vary as margin requirements on positions change\n - ACCOUNT_TYPE_GENERAL: General accounts contain the collateral for a party that is not otherwise allocated. A party will\nhave multiple general accounts, one for each asset they want\nto trade with\n\nGeneral accounts are where funds are initially deposited or withdrawn from,\nit is also the account where funds are taken to fulfil fees and initial margin requirements\n - ACCOUNT_TYPE_FEES_INFRASTRUCTURE: Infrastructure accounts contain fees earned by providing infrastructure on Vega\n - ACCOUNT_TYPE_FEES_LIQUIDITY: Liquidity accounts contain fees earned by providing liquidity on Vega markets\n - ACCOUNT_TYPE_FEES_MAKER: This account is created to hold fees earned by placing orders that sit on the book\nand are then matched with an incoming order to create a trade - These fees reward parties\nwho provide the best priced liquidity that actually allows trading to take place\n - ACCOUNT_TYPE_BOND: This account is created to maintain liquidity providers funds commitments\n - ACCOUNT_TYPE_EXTERNAL: External account represents an external source (deposit/withdrawal)\n - ACCOUNT_TYPE_GLOBAL_INSURANCE: Global insurance account for the asset\n - ACCOUNT_TYPE_GLOBAL_REWARD: Global reward account for the asset\n - ACCOUNT_TYPE_PENDING_TRANSFERS: Per asset account used to store pending transfers (if any)\n - ACCOUNT_TYPE_REWARD_MAKER_PAID_FEES: Per asset reward account for fees paid to makers\n - ACCOUNT_TYPE_REWARD_MAKER_RECEIVED_FEES: Per asset reward account for fees received by makers\n - ACCOUNT_TYPE_REWARD_LP_RECEIVED_FEES: Per asset reward account for fees received by liquidity providers\n - ACCOUNT_TYPE_REWARD_MARKET_PROPOSERS: Per asset reward account for market proposers when the market goes above some trading threshold\n - ACCOUNT_TYPE_HOLDING: Per asset account for holding in-flight unfilled orders' funds\n - ACCOUNT_TYPE_LP_LIQUIDITY_FEES: Network controlled liquidity provider's account, per market, to hold accrued liquidity fees.\n - ACCOUNT_TYPE_LIQUIDITY_FEES_BONUS_DISTRIBUTION: Network controlled liquidity fees bonus distribution account, per market.\n - ACCOUNT_TYPE_NETWORK_TREASURY: Network controlled treasury\n - ACCOUNT_TYPE_VESTING_REWARDS: Account holding user's rewards for the vesting period\n - ACCOUNT_TYPE_VESTED_REWARDS: Account holding user's rewards after the vesting period\n - ACCOUNT_TYPE_REWARD_RELATIVE_RETURN: Per asset market reward account given for relative return\n - ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY: Per asset market reward account given for return volatility\n - ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING: Per asset market reward account given to validators by their ranking\n - ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD: Per asset account for pending fee referral reward payouts\n - ACCOUNT_TYPE_ORDER_MARGIN: Per asset market account for party in isolated margin mode\n - ACCOUNT_TYPE_REWARD_REALISED_RETURN: Per asset market reward account for realised return\n - ACCOUNT_TYPE_BUY_BACK_FEES: Per asset account for paid buy-back fees\n - ACCOUNT_TYPE_REWARD_AVERAGE_NOTIONAL: Per asset market reward account given for average notional\n - ACCOUNT_TYPE_REWARD_ELIGIBLE_ENTITIES: Reward account for the eligible entities metric.",
         "enum": [
           "ACCOUNT_TYPE_UNSPECIFIED",
           "ACCOUNT_TYPE_INSURANCE",
@@ -1043,13 +1043,15 @@
           "ACCOUNT_TYPE_NETWORK_TREASURY",
           "ACCOUNT_TYPE_VESTING_REWARDS",
           "ACCOUNT_TYPE_VESTED_REWARDS",
-          "ACCOUNT_TYPE_REWARD_AVERAGE_POSITION",
           "ACCOUNT_TYPE_REWARD_RELATIVE_RETURN",
           "ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY",
           "ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING",
           "ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD",
           "ACCOUNT_TYPE_ORDER_MARGIN",
-          "ACCOUNT_TYPE_REWARD_REALISED_RETURN"
+          "ACCOUNT_TYPE_REWARD_REALISED_RETURN",
+          "ACCOUNT_TYPE_BUY_BACK_FEES",
+          "ACCOUNT_TYPE_REWARD_AVERAGE_NOTIONAL",
+          "ACCOUNT_TYPE_REWARD_ELIGIBLE_ENTITIES"
         ],
         "title": "Various collateral/account types as used by Vega",
         "type": "string"
@@ -1147,7 +1149,7 @@
       },
       "vegaAuctionTrigger": {
         "default": "AUCTION_TRIGGER_UNSPECIFIED",
-        "description": "- AUCTION_TRIGGER_UNSPECIFIED: Default value for AuctionTrigger, no auction triggered\n - AUCTION_TRIGGER_BATCH: Batch auction\n - AUCTION_TRIGGER_OPENING: Opening auction\n - AUCTION_TRIGGER_PRICE: Price monitoring trigger\n - AUCTION_TRIGGER_LIQUIDITY: Deprecated\n - AUCTION_TRIGGER_LIQUIDITY_TARGET_NOT_MET: Liquidity auction due to not enough committed liquidity\n - AUCTION_TRIGGER_UNABLE_TO_DEPLOY_LP_ORDERS: Deprecated\n - AUCTION_TRIGGER_GOVERNANCE_SUSPENSION: Market is suspended and put into auction via governance",
+        "description": "- AUCTION_TRIGGER_UNSPECIFIED: Default value for AuctionTrigger, no auction triggered\n - AUCTION_TRIGGER_BATCH: Batch auction\n - AUCTION_TRIGGER_OPENING: Opening auction\n - AUCTION_TRIGGER_PRICE: Price monitoring trigger\n - AUCTION_TRIGGER_LIQUIDITY: Deprecated\n - AUCTION_TRIGGER_LIQUIDITY_TARGET_NOT_MET: Liquidity auction due to not enough committed liquidity\n - AUCTION_TRIGGER_UNABLE_TO_DEPLOY_LP_ORDERS: Deprecated\n - AUCTION_TRIGGER_GOVERNANCE_SUSPENSION: Market is suspended and put into auction via governance\n - AUCTION_TRIGGER_LONG_BLOCK: Market is suspended in response to a long block\n - AUCTION_TRIGGER_PROTOCOL_AUTOMATED_PURCHASE: Market is in auction for automated purchase.",
         "enum": [
           "AUCTION_TRIGGER_UNSPECIFIED",
           "AUCTION_TRIGGER_BATCH",
@@ -1156,7 +1158,9 @@
           "AUCTION_TRIGGER_LIQUIDITY",
           "AUCTION_TRIGGER_LIQUIDITY_TARGET_NOT_MET",
           "AUCTION_TRIGGER_UNABLE_TO_DEPLOY_LP_ORDERS",
-          "AUCTION_TRIGGER_GOVERNANCE_SUSPENSION"
+          "AUCTION_TRIGGER_GOVERNANCE_SUSPENSION",
+          "AUCTION_TRIGGER_LONG_BLOCK",
+          "AUCTION_TRIGGER_PROTOCOL_AUTOMATED_PURCHASE"
         ],
         "title": "Auction triggers indicate what condition triggered an auction (if market is in auction mode)",
         "type": "string"
@@ -1206,6 +1210,10 @@
             "$ref": "#/components/schemas/vegaNewMarket",
             "description": "Proposal change for creating new futures market."
           },
+          "newProtocolAutomatedPurchase": {
+            "$ref": "#/components/schemas/vegaNewProtocolAutomatedPurchase",
+            "title": "Proposal for a new automated purchase auction"
+          },
           "newSpotMarket": {
             "$ref": "#/components/schemas/vegaNewSpotMarket",
             "description": "Proposal change for creating new spot market."
@@ -1242,6 +1250,10 @@
             "$ref": "#/components/schemas/vegaUpdateVolumeDiscountProgram",
             "description": "Proposal change for updating the volume discount program."
           },
+          "updateVolumeRebateProgram": {
+            "$ref": "#/components/schemas/vegaUpdateVolumeRebateProgram",
+            "description": "Proposal change for updating the volume rebate program."
+          },
           "validationTimestamp": {
             "description": "Validation timestamp as Unix time in seconds.",
             "format": "int64",
@@ -1262,11 +1274,24 @@
             "type": "string"
           },
           "referralDiscountFactor": {
-            "description": "Proportion of the referee's taker fees to be discounted.",
+            "title": "deprecated",
             "type": "string"
           },
+          "referralDiscountFactors": {
+            "$ref": "#/components/schemas/vegaDiscountFactors",
+            "description": "Referral discount factors for the various fees."
+          },
           "referralRewardFactor": {
-            "description": "Proportion of the referee's taker fees to be rewarded to the referrer.",
+            "title": "deprecated",
+            "type": "string"
+          },
+          "referralRewardFactors": {
+            "$ref": "#/components/schemas/vegaRewardFactors",
+            "description": "Proportion of the referee's fees to be rewarded to the referrer."
+          },
+          "tierNumber": {
+            "description": "The tier number. It's set by the core, and used in the party fee stats API.",
+            "format": "uint64",
             "type": "string"
           }
         },
@@ -1520,6 +1545,20 @@
         "title": "Status describe the status of the data source spec",
         "type": "string"
       },
+      "vegaDataSourceSpecToAutomatedPurchaseBinding": {
+        "description": "Describes which properties of the data source data are to be\nused for automated purchase.",
+        "properties": {
+          "auctionScheduleProperty": {
+            "description": "Name of the property in the source data that should be used to determine the automated purchase schedule.",
+            "type": "string"
+          },
+          "auctionVolumeSnapshotScheduleProperty": {
+            "description": "Name of the property in the source data that should be used to determine the schedule of the automated purchase auction.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "vegaDataSourceSpecToFutureBinding": {
         "properties": {
           "settlementDataProperty": {
@@ -1569,6 +1608,23 @@
         },
         "type": "object"
       },
+      "vegaDiscountFactors": {
+        "properties": {
+          "infrastructureDiscountFactor": {
+            "description": "Proportion of the referee's infrastructure fee to be discounted.",
+            "type": "string"
+          },
+          "liquidityDiscountFactor": {
+            "description": "Proportion of the referee's liquidity fee to be discounted.",
+            "type": "string"
+          },
+          "makerDiscountFactor": {
+            "description": "Proportion of the referee's maker fee to be discounted.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "vegaDispatchMetric": {
         "default": "DISPATCH_METRIC_UNSPECIFIED",
         "enum": [
@@ -1577,13 +1633,14 @@
           "DISPATCH_METRIC_MAKER_FEES_RECEIVED",
           "DISPATCH_METRIC_LP_FEES_RECEIVED",
           "DISPATCH_METRIC_MARKET_VALUE",
-          "DISPATCH_METRIC_AVERAGE_POSITION",
           "DISPATCH_METRIC_RELATIVE_RETURN",
           "DISPATCH_METRIC_RETURN_VOLATILITY",
           "DISPATCH_METRIC_VALIDATOR_RANKING",
-          "DISPATCH_METRIC_REALISED_RETURN"
+          "DISPATCH_METRIC_REALISED_RETURN",
+          "DISPATCH_METRIC_AVERAGE_NOTIONAL",
+          "DISPATCH_METRIC_ELIGIBLE_ENTITIES"
         ],
-        "title": "- DISPATCH_METRIC_MAKER_FEES_PAID: Dispatch metric that uses the total maker fees paid in the market\n - DISPATCH_METRIC_MAKER_FEES_RECEIVED: Dispatch metric that uses the total maker fees received in the market\n - DISPATCH_METRIC_LP_FEES_RECEIVED: Dispatch metric that uses the total LP fees received in the market\n - DISPATCH_METRIC_MARKET_VALUE: Dispatch metric that uses total value of the market if above the required threshold and not paid given proposer bonus yet\n - DISPATCH_METRIC_AVERAGE_POSITION: Dispatch metric that uses the time weighted average position\n - DISPATCH_METRIC_RELATIVE_RETURN: Dispatch metric that uses the relative PNL of the party in the market\n - DISPATCH_METRIC_RETURN_VOLATILITY: Dispatch metric that uses return volatility of the party in the market\n - DISPATCH_METRIC_VALIDATOR_RANKING: Dispatch metric that uses the validator ranking of the validator as metric\n - DISPATCH_METRIC_REALISED_RETURN: Dispatch metric that uses the realised return of the party in a market",
+        "title": "- DISPATCH_METRIC_MAKER_FEES_PAID: Dispatch metric that uses the total maker fees paid in the market\n - DISPATCH_METRIC_MAKER_FEES_RECEIVED: Dispatch metric that uses the total maker fees received in the market\n - DISPATCH_METRIC_LP_FEES_RECEIVED: Dispatch metric that uses the total LP fees received in the market\n - DISPATCH_METRIC_MARKET_VALUE: Dispatch metric that uses total value of the market if above the required threshold and not paid given proposer bonus yet\n - DISPATCH_METRIC_RELATIVE_RETURN: Dispatch metric that uses the relative PNL of the party in the market\n - DISPATCH_METRIC_RETURN_VOLATILITY: Dispatch metric that uses return volatility of the party in the market\n - DISPATCH_METRIC_VALIDATOR_RANKING: Dispatch metric that uses the validator ranking of the validator as metric\n - DISPATCH_METRIC_REALISED_RETURN: Dispatch metric that uses the realised return of the party in a market\n - DISPATCH_METRIC_AVERAGE_NOTIONAL: Dispatch metric that uses the time weighted average notional\n - DISPATCH_METRIC_ELIGIBLE_ENTITIES: Dispatch metric that uses the eligibility criteria of entities",
         "type": "string"
       },
       "vegaDispatchStrategy": {
@@ -1599,6 +1656,13 @@
           "distributionStrategy": {
             "$ref": "#/components/schemas/vegaDistributionStrategy",
             "title": "Controls how the reward is distributed between qualifying parties"
+          },
+          "eligibleKeys": {
+            "description": "A list of party keys to constrain the potential receivers of a reward transfer.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "entityScope": {
             "$ref": "#/components/schemas/vegaEntityScope",
@@ -1633,7 +1697,7 @@
             "type": "string"
           },
           "rankTable": {
-            "description": "Ordered list, using start rank, defining the rank bands and share ratio for each band. Mandatory for the rank distribution strategy.",
+            "description": "Ordered list, using start rank, defining the rank bands and share ratio for each band. Mandatory for the rank and rank lottery distribution strategies.",
             "items": {
               "$ref": "#/components/schemas/vegaRank"
             },
@@ -1641,6 +1705,10 @@
           },
           "stakingRequirement": {
             "title": "Minimum number of governance (e.g. VEGA) tokens staked for a party to be considered eligible. Defaults to 0",
+            "type": "string"
+          },
+          "targetNotionalVolume": {
+            "title": "If set, the target notional factor used to scale the amount to be taken from the source account",
             "type": "string"
           },
           "teamScope": {
@@ -1665,11 +1733,12 @@
       },
       "vegaDistributionStrategy": {
         "default": "DISTRIBUTION_STRATEGY_UNSPECIFIED",
-        "description": " - DISTRIBUTION_STRATEGY_PRO_RATA: Rewards funded using the pro-rata strategy should be distributed pro-rata by each entity's reward metric, scaled by any active multipliers that party has.\n - DISTRIBUTION_STRATEGY_RANK: Rewards funded using the party rank.",
+        "description": " - DISTRIBUTION_STRATEGY_PRO_RATA: Rewards funded using the pro-rata strategy should be distributed pro-rata by each entity's reward metric, scaled by any active multipliers that party has.\n - DISTRIBUTION_STRATEGY_RANK: Rewards funded using the party rank.\n - DISTRIBUTION_STRATEGY_RANK_LOTTERY: Rewards funded using the ranked lottery.",
         "enum": [
           "DISTRIBUTION_STRATEGY_UNSPECIFIED",
           "DISTRIBUTION_STRATEGY_PRO_RATA",
-          "DISTRIBUTION_STRATEGY_RANK"
+          "DISTRIBUTION_STRATEGY_RANK",
+          "DISTRIBUTION_STRATEGY_RANK_LOTTERY"
         ],
         "type": "string"
       },
@@ -1803,6 +1872,10 @@
       },
       "vegaFeeFactors": {
         "properties": {
+          "buyBackFee": {
+            "description": "Fees used to purchase governance tokens via regular auctions (network wide).",
+            "type": "string"
+          },
           "infrastructureFee": {
             "description": "Infrastructure fee charged network wide for staking and governance.",
             "type": "string"
@@ -1813,6 +1886,10 @@
           },
           "makerFee": {
             "description": "Market maker fee charged network wide.",
+            "type": "string"
+          },
+          "treasuryFee": {
+            "description": "Fees sent to network treasury for later use based on governance actions (network wide).",
             "type": "string"
           }
         },
@@ -2229,6 +2306,11 @@
       },
       "vegaMarket": {
         "properties": {
+          "allowedEmptyAmmLevels": {
+            "description": "Number of allowed price levels between an AMM's fair price and its quote prices. An AMM definition that exceeds this will be rejected at submission.",
+            "format": "uint64",
+            "type": "string"
+          },
           "decimalPlaces": {
             "description": "Number of decimal places that a price must be shifted by in order to get a\ncorrect price denominated in the currency of the market, for example:\n`realPrice = price / 10^decimalPlaces`. On spot markets, also called 'size decimal places'.",
             "format": "uint64",
@@ -2325,6 +2407,10 @@
       },
       "vegaMarketData": {
         "properties": {
+          "activeProtocolAutomatedPurchase": {
+            "$ref": "#/components/schemas/vegaProtocolAutomatedPurchaseData",
+            "description": "Optional information on the active protocol automated purchase for the market - only applies to spot markets."
+          },
           "auctionEnd": {
             "description": "Time in seconds until the end of the auction (zero if currently not in auction period).",
             "format": "int64",
@@ -2647,6 +2733,11 @@
       },
       "vegaNewMarketConfiguration": {
         "properties": {
+          "allowedEmptyAmmLevels": {
+            "description": "Number of allowed price levels between an AMM's fair price and its quote prices. An AMM definition that exceeds this will be rejected at submission.",
+            "format": "uint64",
+            "type": "string"
+          },
           "decimalPlaces": {
             "description": "Decimal places used for the new futures market, sets the smallest price increment on the book.",
             "format": "uint64",
@@ -2726,6 +2817,81 @@
           }
         },
         "title": "Configuration for a new futures market on Vega",
+        "type": "object"
+      },
+      "vegaNewProtocolAutomatedPurchase": {
+        "properties": {
+          "changes": {
+            "$ref": "#/components/schemas/vegaNewProtocolAutomatedPurchaseChanges",
+            "title": "Configuration for a change to create a new automated purchase auction"
+          }
+        },
+        "type": "object"
+      },
+      "vegaNewProtocolAutomatedPurchaseChanges": {
+        "properties": {
+          "auctionDuration": {
+            "title": "The duration of the auction",
+            "type": "string"
+          },
+          "auctionSchedule": {
+            "$ref": "#/components/schemas/vegaDataSourceDefinition",
+            "title": "A time based oracle for when auctions will occur"
+          },
+          "auctionVolumeSnapshotSchedule": {
+            "$ref": "#/components/schemas/vegaDataSourceDefinition",
+            "description": "A time based oracle for when an observation will be taken of the balance of the source account. This will emit an event notifying of the balance planned to exchange, along with storing this value. When an auction occurs, the latest reading for this value will be used for the volume to trade, rather than the full balance of the account."
+          },
+          "automatedPurchaseSpecBinding": {
+            "$ref": "#/components/schemas/vegaDataSourceSpecToAutomatedPurchaseBinding",
+            "title": "The spec binding for the auction schedule and volume snapshot schedule"
+          },
+          "expiryTimestamp": {
+            "description": "Timestamp in Unix seconds, when the automated purchase is stopped. If an auction is in action it will be removed when the auction is finished.",
+            "format": "int64",
+            "type": "string"
+          },
+          "from": {
+            "title": "The source token that will be swapped",
+            "type": "string"
+          },
+          "fromAccountType": {
+            "$ref": "#/components/schemas/vegaAccountType",
+            "title": "The account type for the network from which the tokens will be sourced"
+          },
+          "marketId": {
+            "title": "The market that will be used to enact the purchase/sale",
+            "type": "string"
+          },
+          "maximumAuctionSize": {
+            "description": "Maximum number of tokens to be sold (specified in asset decimals). If more than this are available in the account at the last snapshot before auction, this maximum value will be used instead, and the remainder will be rolled over to the next scheduled auction.",
+            "type": "string"
+          },
+          "minimumAuctionSize": {
+            "description": "Minimum number of tokens to be sold (specified in asset decimals). If less than this are available in the account at the last snapshot before auction, no auction will occur and the balance will roll over to the next scheduled auction.",
+            "type": "string"
+          },
+          "oracleOffsetFactor": {
+            "title": "The final acceptable price is the price oracle value weighted by this factor (e.g. 1.05 to allow for 5% slippage on the purchase)",
+            "type": "string"
+          },
+          "oraclePriceStalenessTolerance": {
+            "title": "For how long the oracle price source is considered valid",
+            "type": "string"
+          },
+          "priceOracle": {
+            "$ref": "#/components/schemas/vegaDataSourceDefinition",
+            "title": "The oracle which will define an approximate acceptable price for the transaction"
+          },
+          "priceOracleSpecBinding": {
+            "$ref": "#/components/schemas/vegaSpecBindingForCompositePrice",
+            "title": "The spec binding for the price oracle"
+          },
+          "toAccountType": {
+            "$ref": "#/components/schemas/vegaAccountType",
+            "title": "The account type for the network to which the purchased tokens will be sent"
+          }
+        },
         "type": "object"
       },
       "vegaNewSpotMarket": {
@@ -3208,7 +3374,7 @@
       },
       "vegaProposalError": {
         "default": "PROPOSAL_ERROR_UNSPECIFIED",
-        "description": "- PROPOSAL_ERROR_UNSPECIFIED: Default value\n - PROPOSAL_ERROR_CLOSE_TIME_TOO_SOON: Specified close time is too early based on network parameters\n - PROPOSAL_ERROR_CLOSE_TIME_TOO_LATE: Specified close time is too late based on network parameters\n - PROPOSAL_ERROR_ENACT_TIME_TOO_SOON: Specified enactment time is too early based on network parameters\n - PROPOSAL_ERROR_ENACT_TIME_TOO_LATE: Specified enactment time is too late based on network parameters\n - PROPOSAL_ERROR_INSUFFICIENT_TOKENS: Proposer for this proposal has insufficient tokens\n - PROPOSAL_ERROR_INVALID_INSTRUMENT_SECURITY: Instrument quote name and base name were the same\n - PROPOSAL_ERROR_NO_PRODUCT: Proposal has no product\n - PROPOSAL_ERROR_UNSUPPORTED_PRODUCT: Specified product is not supported\n - PROPOSAL_ERROR_NO_TRADING_MODE: Proposal has no trading mode\n - PROPOSAL_ERROR_UNSUPPORTED_TRADING_MODE: Proposal has an unsupported trading mode\n - PROPOSAL_ERROR_NODE_VALIDATION_FAILED: Proposal failed node validation\n - PROPOSAL_ERROR_MISSING_BUILTIN_ASSET_FIELD: Field is missing in a builtin asset source\n - PROPOSAL_ERROR_MISSING_ERC20_CONTRACT_ADDRESS: Contract address is missing in the ERC20 asset source\n - PROPOSAL_ERROR_INVALID_ASSET: Asset ID is invalid or does not exist on the Vega network\n - PROPOSAL_ERROR_INCOMPATIBLE_TIMESTAMPS: Proposal terms timestamps are not compatible (Validation < Closing < Enactment)\n - PROPOSAL_ERROR_NO_RISK_PARAMETERS: No risk parameters were specified\n - PROPOSAL_ERROR_NETWORK_PARAMETER_INVALID_KEY: Invalid key in update network parameter proposal\n - PROPOSAL_ERROR_NETWORK_PARAMETER_INVALID_VALUE: Invalid value in update network parameter proposal\n - PROPOSAL_ERROR_NETWORK_PARAMETER_VALIDATION_FAILED: Validation failed for network parameter proposal\n - PROPOSAL_ERROR_OPENING_AUCTION_DURATION_TOO_SMALL: Opening auction duration is less than the network minimum opening auction time\n - PROPOSAL_ERROR_OPENING_AUCTION_DURATION_TOO_LARGE: Opening auction duration is more than the network minimum opening auction time\n - PROPOSAL_ERROR_COULD_NOT_INSTANTIATE_MARKET: Market proposal market could not be instantiated in execution\n - PROPOSAL_ERROR_INVALID_FUTURE_PRODUCT: Market proposal market contained invalid product definition\n - PROPOSAL_ERROR_INVALID_RISK_PARAMETER: Market proposal has invalid risk parameter\n - PROPOSAL_ERROR_MAJORITY_THRESHOLD_NOT_REACHED: Proposal was declined because vote didn't reach the majority threshold required\n - PROPOSAL_ERROR_PARTICIPATION_THRESHOLD_NOT_REACHED: Proposal declined because the participation threshold was not reached\n - PROPOSAL_ERROR_INVALID_ASSET_DETAILS: Asset proposal has invalid asset details\n - PROPOSAL_ERROR_UNKNOWN_TYPE: Proposal is an unknown type\n - PROPOSAL_ERROR_UNKNOWN_RISK_PARAMETER_TYPE: Proposal has an unknown risk parameter type\n - PROPOSAL_ERROR_INVALID_FREEFORM: Validation failed for freeform proposal\n - PROPOSAL_ERROR_INSUFFICIENT_EQUITY_LIKE_SHARE: Party doesn't have enough equity-like share to propose an update on the market\ntargeted by the proposal\n - PROPOSAL_ERROR_INVALID_MARKET: Market targeted by the proposal does not exist or is not eligible for modification\n - PROPOSAL_ERROR_TOO_MANY_MARKET_DECIMAL_PLACES: Market proposal decimal place is higher than the market settlement asset decimal places\n - PROPOSAL_ERROR_TOO_MANY_PRICE_MONITORING_TRIGGERS: Market proposal contains too many price monitoring triggers\n - PROPOSAL_ERROR_ERC20_ADDRESS_ALREADY_IN_USE: Market proposal contains too many price monitoring triggers\n - PROPOSAL_ERROR_LP_PRICE_RANGE_NONPOSITIVE: LP price range must be larger than 0\n - PROPOSAL_ERROR_LP_PRICE_RANGE_TOO_LARGE: LP price range must not be larger than 100\n - PROPOSAL_ERROR_LINEAR_SLIPPAGE_FACTOR_OUT_OF_RANGE: Linear slippage factor is out of range, either negative or too large\n - PROPOSAL_ERROR_QUADRATIC_SLIPPAGE_FACTOR_OUT_OF_RANGE: Quadratic slippage factor is out of range, either negative or too large\n - PROPOSAL_ERROR_INVALID_SPOT: Validation failed for spot proposal\n - PROPOSAL_ERROR_SPOT_PRODUCT_DISABLED: Spot trading not enabled\n - PROPOSAL_ERROR_INVALID_SUCCESSOR_MARKET: Market proposal is invalid, either invalid insurance pool fraction, or it specifies a parent market that it can't succeed.\n - PROPOSAL_ERROR_GOVERNANCE_TRANSFER_PROPOSAL_FAILED: Governance transfer proposal is invalid\n - PROPOSAL_ERROR_GOVERNANCE_TRANSFER_PROPOSAL_INVALID: Governance transfer proposal failed\n - PROPOSAL_ERROR_GOVERNANCE_CANCEL_TRANSFER_PROPOSAL_INVALID: Proposal for cancelling transfer is invalid, check proposal ID\n - PROPOSAL_ERROR_INVALID_MARKET_STATE_UPDATE: Proposal for updating market state is invalid\n - PROPOSAL_ERROR_INVALID_SLA_PARAMS: Liquidity provision SLA parameters are invalid\n - PROPOSAL_ERROR_MISSING_SLA_PARAMS: Mandatory liquidity provision SLA parameters are missing\n - PROPOSAL_ERROR_INVALID_PERPETUAL_PRODUCT: Perpetual market proposal contained invalid product definition\n - PROPOSAL_ERROR_INVALID_REFERRAL_PROGRAM: Referral program proposal is invalid\n - PROPOSAL_ERROR_INVALID_VOLUME_DISCOUNT_PROGRAM: Volume discount program proposal is invalid\n - PROPOSAL_ERROR_PROPOSAL_IN_BATCH_REJECTED: One or more proposals in a batch has been rejected\n - PROPOSAL_ERROR_PROPOSAL_IN_BATCH_DECLINED: One or more proposals in a batch has been declined\n - PROPOSAL_ERROR_INVALID_SIZE_DECIMAL_PLACES: Spot market decimal places cannot be greater than the base asset’s decimal places",
+        "description": "- PROPOSAL_ERROR_UNSPECIFIED: Default value\n - PROPOSAL_ERROR_CLOSE_TIME_TOO_SOON: Specified close time is too early based on network parameters\n - PROPOSAL_ERROR_CLOSE_TIME_TOO_LATE: Specified close time is too late based on network parameters\n - PROPOSAL_ERROR_ENACT_TIME_TOO_SOON: Specified enactment time is too early based on network parameters\n - PROPOSAL_ERROR_ENACT_TIME_TOO_LATE: Specified enactment time is too late based on network parameters\n - PROPOSAL_ERROR_INSUFFICIENT_TOKENS: Proposer for this proposal has insufficient tokens\n - PROPOSAL_ERROR_INVALID_INSTRUMENT_SECURITY: Instrument quote name and base name were the same\n - PROPOSAL_ERROR_NO_PRODUCT: Proposal has no product\n - PROPOSAL_ERROR_UNSUPPORTED_PRODUCT: Specified product is not supported\n - PROPOSAL_ERROR_NO_TRADING_MODE: Proposal has no trading mode\n - PROPOSAL_ERROR_UNSUPPORTED_TRADING_MODE: Proposal has an unsupported trading mode\n - PROPOSAL_ERROR_NODE_VALIDATION_FAILED: Proposal failed node validation\n - PROPOSAL_ERROR_MISSING_BUILTIN_ASSET_FIELD: Field is missing in a builtin asset source\n - PROPOSAL_ERROR_MISSING_ERC20_CONTRACT_ADDRESS: Contract address is missing in the ERC20 asset source\n - PROPOSAL_ERROR_INVALID_ASSET: Asset ID is invalid or does not exist on the Vega network\n - PROPOSAL_ERROR_INCOMPATIBLE_TIMESTAMPS: Proposal terms timestamps are not compatible (Validation < Closing < Enactment)\n - PROPOSAL_ERROR_NO_RISK_PARAMETERS: No risk parameters were specified\n - PROPOSAL_ERROR_NETWORK_PARAMETER_INVALID_KEY: Invalid key in update network parameter proposal\n - PROPOSAL_ERROR_NETWORK_PARAMETER_INVALID_VALUE: Invalid value in update network parameter proposal\n - PROPOSAL_ERROR_NETWORK_PARAMETER_VALIDATION_FAILED: Validation failed for network parameter proposal\n - PROPOSAL_ERROR_OPENING_AUCTION_DURATION_TOO_SMALL: Opening auction duration is less than the network minimum opening auction time\n - PROPOSAL_ERROR_OPENING_AUCTION_DURATION_TOO_LARGE: Opening auction duration is more than the network minimum opening auction time\n - PROPOSAL_ERROR_COULD_NOT_INSTANTIATE_MARKET: Market proposal market could not be instantiated in execution\n - PROPOSAL_ERROR_INVALID_FUTURE_PRODUCT: Market proposal market contained invalid product definition\n - PROPOSAL_ERROR_INVALID_RISK_PARAMETER: Market proposal has invalid risk parameter\n - PROPOSAL_ERROR_MAJORITY_THRESHOLD_NOT_REACHED: Proposal was declined because vote didn't reach the majority threshold required\n - PROPOSAL_ERROR_PARTICIPATION_THRESHOLD_NOT_REACHED: Proposal declined because the participation threshold was not reached\n - PROPOSAL_ERROR_INVALID_ASSET_DETAILS: Asset proposal has invalid asset details\n - PROPOSAL_ERROR_UNKNOWN_TYPE: Proposal is an unknown type\n - PROPOSAL_ERROR_UNKNOWN_RISK_PARAMETER_TYPE: Proposal has an unknown risk parameter type\n - PROPOSAL_ERROR_INVALID_FREEFORM: Validation failed for freeform proposal\n - PROPOSAL_ERROR_INSUFFICIENT_EQUITY_LIKE_SHARE: Party doesn't have enough equity-like share to propose an update on the market\ntargeted by the proposal\n - PROPOSAL_ERROR_INVALID_MARKET: Market targeted by the proposal does not exist or is not eligible for modification\n - PROPOSAL_ERROR_TOO_MANY_MARKET_DECIMAL_PLACES: Market proposal decimal place is higher than the market settlement asset decimal places\n - PROPOSAL_ERROR_TOO_MANY_PRICE_MONITORING_TRIGGERS: Market proposal contains too many price monitoring triggers\n - PROPOSAL_ERROR_ERC20_ADDRESS_ALREADY_IN_USE: Market proposal contains too many price monitoring triggers\n - PROPOSAL_ERROR_LP_PRICE_RANGE_NONPOSITIVE: LP price range must be larger than 0\n - PROPOSAL_ERROR_LP_PRICE_RANGE_TOO_LARGE: LP price range must not be larger than 100\n - PROPOSAL_ERROR_LINEAR_SLIPPAGE_FACTOR_OUT_OF_RANGE: Linear slippage factor is out of range, either negative or too large\n - PROPOSAL_ERROR_QUADRATIC_SLIPPAGE_FACTOR_OUT_OF_RANGE: Quadratic slippage factor is out of range, either negative or too large\n - PROPOSAL_ERROR_INVALID_SPOT: Validation failed for spot proposal\n - PROPOSAL_ERROR_SPOT_PRODUCT_DISABLED: Spot trading not enabled\n - PROPOSAL_ERROR_INVALID_SUCCESSOR_MARKET: Market proposal is invalid, either invalid insurance pool fraction, or it specifies a parent market that it can't succeed.\n - PROPOSAL_ERROR_GOVERNANCE_TRANSFER_PROPOSAL_FAILED: Governance transfer proposal is invalid\n - PROPOSAL_ERROR_GOVERNANCE_TRANSFER_PROPOSAL_INVALID: Governance transfer proposal failed\n - PROPOSAL_ERROR_GOVERNANCE_CANCEL_TRANSFER_PROPOSAL_INVALID: Proposal for cancelling transfer is invalid, check proposal ID\n - PROPOSAL_ERROR_INVALID_MARKET_STATE_UPDATE: Proposal for updating market state is invalid\n - PROPOSAL_ERROR_INVALID_SLA_PARAMS: Liquidity provision SLA parameters are invalid\n - PROPOSAL_ERROR_MISSING_SLA_PARAMS: Mandatory liquidity provision SLA parameters are missing\n - PROPOSAL_ERROR_INVALID_PERPETUAL_PRODUCT: Perpetual market proposal contained invalid product definition\n - PROPOSAL_ERROR_INVALID_REFERRAL_PROGRAM: Referral program proposal is invalid\n - PROPOSAL_ERROR_INVALID_VOLUME_DISCOUNT_PROGRAM: Volume discount program proposal is invalid\n - PROPOSAL_ERROR_PROPOSAL_IN_BATCH_REJECTED: One or more proposals in a batch has been rejected\n - PROPOSAL_ERROR_PROPOSAL_IN_BATCH_DECLINED: One or more proposals in a batch has been declined\n - PROPOSAL_ERROR_INVALID_SIZE_DECIMAL_PLACES: Spot market decimal places cannot be greater than the base asset’s decimal places\n - PROPOSAL_ERROR_INVALID_VOLUME_REBATE_PROGRAM: Volume rebate program proposal is invalid\n - PROPOSAL_ERROR_INVALID_PROTOCOL_AUTOMATED_PURCHASE: Automated purchase proposal is invalid",
         "enum": [
           "PROPOSAL_ERROR_UNSPECIFIED",
           "PROPOSAL_ERROR_CLOSE_TIME_TOO_SOON",
@@ -3264,7 +3430,9 @@
           "PROPOSAL_ERROR_INVALID_VOLUME_DISCOUNT_PROGRAM",
           "PROPOSAL_ERROR_PROPOSAL_IN_BATCH_REJECTED",
           "PROPOSAL_ERROR_PROPOSAL_IN_BATCH_DECLINED",
-          "PROPOSAL_ERROR_INVALID_SIZE_DECIMAL_PLACES"
+          "PROPOSAL_ERROR_INVALID_SIZE_DECIMAL_PLACES",
+          "PROPOSAL_ERROR_INVALID_VOLUME_REBATE_PROGRAM",
+          "PROPOSAL_ERROR_INVALID_PROTOCOL_AUTOMATED_PURCHASE"
         ],
         "title": "List of possible errors that can cause a proposal to be in state rejected or failed",
         "type": "string"
@@ -3380,6 +3548,10 @@
             "$ref": "#/components/schemas/vegaNewMarket",
             "description": "Proposal change for creating new futures market on Vega."
           },
+          "newProtocolAutomatedPurchase": {
+            "$ref": "#/components/schemas/vegaNewProtocolAutomatedPurchase",
+            "title": "Proposal for a new automated purchase auction"
+          },
           "newSpotMarket": {
             "$ref": "#/components/schemas/vegaNewSpotMarket",
             "description": "Proposal change for creating new spot market on Vega."
@@ -3416,6 +3588,10 @@
             "$ref": "#/components/schemas/vegaUpdateVolumeDiscountProgram",
             "description": "Proposal change for updating the volume discount program."
           },
+          "updateVolumeRebateProgram": {
+            "$ref": "#/components/schemas/vegaUpdateVolumeRebateProgram",
+            "description": "Proposal change for updating the volume rebate program."
+          },
           "validationTimestamp": {
             "description": "Validation timestamp as Unix time in seconds.",
             "format": "int64",
@@ -3423,6 +3599,19 @@
           }
         },
         "title": "Terms for a governance proposal on Vega",
+        "type": "object"
+      },
+      "vegaProtocolAutomatedPurchaseData": {
+        "properties": {
+          "id": {
+            "title": "Identifier of the active protocol automated purchase",
+            "type": "string"
+          },
+          "orderId": {
+            "title": "Identifier of the active order for protocol automated purchase if any",
+            "type": "string"
+          }
+        },
         "type": "object"
       },
       "vegaRank": {
@@ -3485,6 +3674,23 @@
           "windowLength": {
             "description": "Number of epochs over which to evaluate a referral set's running volume.",
             "format": "uint64",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "vegaRewardFactors": {
+        "properties": {
+          "infrastructureRewardFactor": {
+            "description": "Proportion of the referee's infrastructure fees to be rewarded to the referrer.",
+            "type": "string"
+          },
+          "liquidityRewardFactor": {
+            "description": "Proportion of the referee's liquidity fees to be rewarded to the referrer.",
+            "type": "string"
+          },
+          "makerRewardFactor": {
+            "description": "Proportion of the maker fees to be rewarded.",
             "type": "string"
           }
         },
@@ -3743,6 +3949,11 @@
       },
       "vegaUpdateMarketConfiguration": {
         "properties": {
+          "allowedEmptyAmmLevels": {
+            "description": "Number of allowed price levels between an AMM's fair price and its quote prices. An AMM definition that exceeds this will be rejected at submission.",
+            "format": "uint64",
+            "type": "string"
+          },
           "enableTransactionReordering": {
             "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
             "type": "boolean"
@@ -3994,15 +4205,33 @@
         },
         "type": "object"
       },
+      "vegaUpdateVolumeRebateProgram": {
+        "properties": {
+          "changes": {
+            "$ref": "#/components/schemas/vegaVolumeRebateProgramChanges",
+            "title": "Configuration for a change to update a volume rebate program"
+          }
+        },
+        "type": "object"
+      },
       "vegaVolumeBenefitTier": {
         "properties": {
           "minimumRunningNotionalTakerVolume": {
             "description": "Required running notional taker volume in quantum units for parties\nto access this tier.",
             "type": "string"
           },
-          "volumeDiscountFactor": {
-            "description": "Proportion of the taker fees to be discounted.",
+          "tierNumber": {
+            "description": "The tier number. It's set by the core, and used in the party fee stats API.",
+            "format": "uint64",
             "type": "string"
+          },
+          "volumeDiscountFactor": {
+            "title": "deprecated",
+            "type": "string"
+          },
+          "volumeDiscountFactors": {
+            "$ref": "#/components/schemas/vegaDiscountFactors",
+            "description": "Proportion of the taker fees to be discounted."
           }
         },
         "type": "object"
@@ -4013,6 +4242,46 @@
             "description": "Defined benefit tiers in increasing order. First element will give Tier 1,\nsecond element will give Tier 2, and so on. Determines the level of\nbenefit a party can expect based on performance criteria.",
             "items": {
               "$ref": "#/components/schemas/vegaVolumeBenefitTier"
+            },
+            "type": "array"
+          },
+          "endOfProgramTimestamp": {
+            "description": "Timestamp as Unix time in seconds, after which when the current epoch\nends, the program will end and benefits will be disabled.",
+            "format": "int64",
+            "type": "string"
+          },
+          "windowLength": {
+            "description": "Number of epochs over which to evaluate a referral set's running volume.",
+            "format": "uint64",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "vegaVolumeRebateBenefitTier": {
+        "properties": {
+          "additionalMakerRebate": {
+            "description": "Additional rebate factor, based on the 'trade value for fee purposes', that a party at this tier will receive when they are the maker side of a trade.",
+            "type": "string"
+          },
+          "minimumPartyMakerVolumeFraction": {
+            "description": "Fraction of a party's maker volume required for a party to access this tier.",
+            "type": "string"
+          },
+          "tierNumber": {
+            "description": "The tier number. It's set by the core, and used in the party fee stats API.",
+            "format": "uint64",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "vegaVolumeRebateProgramChanges": {
+        "properties": {
+          "benefitTiers": {
+            "description": "Defined benefit tiers in increasing order. First element will give Tier 1,\nsecond element will give Tier 2, and so on. Determines the level of\nbenefit a party can expect based on performance criteria.",
+            "items": {
+              "$ref": "#/components/schemas/vegaVolumeRebateBenefitTier"
             },
             "type": "array"
           },

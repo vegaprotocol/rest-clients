@@ -20,8 +20,8 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: 'https://api.n00.testnet.vega.rocks',
-    VERSION: '0.77.0-preview.5',
+    BASE: 'https://api.testnet.vega.rocks',
+    VERSION: '0.79.0-preview.2',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',
     TOKEN: undefined,

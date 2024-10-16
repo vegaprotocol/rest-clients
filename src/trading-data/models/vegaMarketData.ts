@@ -12,8 +12,13 @@ import type { vegaLiquidityProviderSLA } from './vegaLiquidityProviderSLA';
 import type { vegaMarketState } from './vegaMarketState';
 import type { vegaPriceMonitoringBounds } from './vegaPriceMonitoringBounds';
 import type { vegaProductData } from './vegaProductData';
+import type { vegaProtocolAutomatedPurchaseData } from './vegaProtocolAutomatedPurchaseData';
 
 export type vegaMarketData = {
+    /**
+     * Optional information on the active protocol automated purchase for the market - only applies to spot markets.
+     */
+    activeProtocolAutomatedPurchase?: vegaProtocolAutomatedPurchaseData;
     /**
      * Time in seconds until the end of the auction (zero if currently not in auction period).
      */

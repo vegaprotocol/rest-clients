@@ -20,6 +20,10 @@ export type vegaDispatchStrategy = {
     capRewardFeeMultiple?: string;
     distributionStrategy?: vegaDistributionStrategy;
     /**
+     * A list of party keys to constrain the potential receivers of a reward transfer.
+     */
+    eligibleKeys?: Array<string>;
+    /**
      * Mandatory enum that defines the entities within scope.
      */
     entityScope?: vegaEntityScope;
@@ -39,10 +43,11 @@ export type vegaDispatchStrategy = {
     nTopPerformers?: string;
     notionalTimeWeightedAveragePositionRequirement?: string;
     /**
-     * Ordered list, using start rank, defining the rank bands and share ratio for each band. Mandatory for the rank distribution strategy.
+     * Ordered list, using start rank, defining the rank bands and share ratio for each band. Mandatory for the rank and rank lottery distribution strategies.
      */
     rankTable?: Array<vegaRank>;
     stakingRequirement?: string;
+    targetNotionalVolume?: string;
     teamScope?: Array<string>;
     /**
      * Number of epochs between transfers, i.e. when 4, funds will be transferred every 4 epochs with the first transfer occurring 4 epochs after the transaction is processed.

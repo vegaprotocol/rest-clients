@@ -2,12 +2,18 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Vega block explorer APIs",
-    "version": "v0.77.0-preview.5"
+    "version": "v0.79.0-preview.2"
   },
   "servers": [
     {
-      "url": "https://be.testnet.vega.xyz/rest",
-      "description": "Block Explorer"
+      "url": "{ExplorerServer}",
+      "description": "Block Explorer",
+      "variables": {
+        "ExplorerServer": {
+          "default": "https://be.testnet.vega.xyz/rest",
+          "description": "Base URL of the Block Explorer"
+        }
+      }
     }
   ],
   "paths": {
@@ -576,6 +582,10 @@
       "v1ApplyReferralCode": {
         "description": "Command that allows the submitter to join a referral set and earn a collective reduction in fees based on the activity of all members of that set.\nA party that joins a referral set is called a referee. A referee can only be a member of one referral set and cannot themselves be or become a referrer.\nTo switch to another referral set, a subsequent command can be sent and the switch will take effect at the end of the epoch.",
         "properties": {
+          "doNotJoinTeam": {
+            "description": "Should the key applying the referral code also join the team.\nthe default is false so the existing behaviour is kept if older versions of the protobufs are used.",
+            "type": "boolean"
+          },
           "id": {
             "description": "Referral code, normally the referral set ID, for the party to join.",
             "type": "string"
@@ -710,6 +720,10 @@
             "$ref": "#/components/schemas/vegaERC20MultiSigEvent",
             "description": "Ethereum ERC20 multisig event."
           },
+          "heartbeat": {
+            "$ref": "#/components/schemas/vegaERC20Heartbeat",
+            "description": "Heartbeat showing evidence that a contract is being listened to."
+          },
           "nonce": {
             "description": "Arbitrary one-time integer used to prevent replay attacks.",
             "format": "uint64",
@@ -743,6 +757,10 @@
       "v1CreateReferralSet": {
         "description": "Command that a party can use to instruct the network to create a new referral set on the network.\nThe submitter of this command will become the referrer of the new set and cannot be the referrer or a referee of another set.\nA referrer can use the referral set ID as a referral code to attract others to the Vega network and have fees reduced for the referral set.",
         "properties": {
+          "doNotCreateReferralSet": {
+            "description": "Should a referral set be created as well or only a team.\nthe default is false so the existing behaviour is kept if older versions of the protobufs are used.",
+            "type": "boolean"
+          },
           "isTeam": {
             "description": "Whether or not the referral set should be considered a team that can participate in team games on the network.",
             "type": "boolean"
@@ -1258,6 +1276,7 @@
       },
       "v1NodeVoteType": {
         "default": "TYPE_UNSPECIFIED",
+        "description": " - TYPE_UNSPECIFIED: Represents an unspecified or missing value from the input\n - TYPE_STAKE_DEPOSITED: Node vote for a new stake deposit\n - TYPE_STAKE_REMOVED: Node vote for a new stake removed event\n - TYPE_FUNDS_DEPOSITED: Node vote for a new collateral deposit\n - TYPE_SIGNER_ADDED: Node vote for a new signer added to the erc20 bridge\n - TYPE_SIGNER_REMOVED: Node vote for a signer removed from the erc20 bridge\n - TYPE_BRIDGE_STOPPED: Node vote for a bridge stopped event\n - TYPE_BRIDGE_RESUMED: Node vote for a bridge resumed event\n - TYPE_ASSET_LISTED: Node vote for a newly listed asset\n - TYPE_LIMITS_UPDATED: Node vote for an asset limits update\n - TYPE_STAKE_TOTAL_SUPPLY: Node vote to share the total supply of the staking token\n - TYPE_SIGNER_THRESHOLD_SET: Node vote to update the threshold of the signer set for the multisig contract\n - TYPE_GOVERNANCE_VALIDATE_ASSET: Node vote to validate a new assert governance proposal\n - TYPE_ETHEREUM_CONTRACT_CALL_RESULT: Node vote for an Ethereum contract call result\n - TYPE_ETHEREUM_HEARTBEAT: Node vote for an Ethereum chain event heartbeat.",
         "enum": [
           "TYPE_UNSPECIFIED",
           "TYPE_STAKE_DEPOSITED",
@@ -1272,9 +1291,9 @@
           "TYPE_STAKE_TOTAL_SUPPLY",
           "TYPE_SIGNER_THRESHOLD_SET",
           "TYPE_GOVERNANCE_VALIDATE_ASSET",
-          "TYPE_ETHEREUM_CONTRACT_CALL_RESULT"
+          "TYPE_ETHEREUM_CONTRACT_CALL_RESULT",
+          "TYPE_ETHEREUM_HEARTBEAT"
         ],
-        "title": "- TYPE_UNSPECIFIED: Represents an unspecified or missing value from the input\n - TYPE_STAKE_DEPOSITED: Node vote for a new stake deposit\n - TYPE_STAKE_REMOVED: Node vote for a new stake removed event\n - TYPE_FUNDS_DEPOSITED: Node vote for a new collateral deposit\n - TYPE_SIGNER_ADDED: Node vote for a new signer added to the erc20 bridge\n - TYPE_SIGNER_REMOVED: Node vote for a signer removed from the erc20 bridge\n - TYPE_BRIDGE_STOPPED: Node vote for a bridge stopped event\n - TYPE_BRIDGE_RESUMED: Node vote for a bridge resumed event\n - TYPE_ASSET_LISTED: Node vote for a newly listed asset\n - TYPE_LIMITS_UPDATED: Node vote for an asset limits update\n - TYPE_STAKE_TOTAL_SUPPLY: Node vote to share the total supply of the staking token\n - TYPE_SIGNER_THRESHOLD_SET: Node vote to update the threshold of the signer set for the multisig contract\n - TYPE_GOVERNANCE_VALIDATE_ASSET: Node vote to validate a new assert governance proposal\n - TYPE_ETHEREUM_CONTRACT_CALL_RESULT: Node vote for an Ethereum contract call result",
         "type": "string"
       },
       "v1OracleDataSubmission": {
@@ -1828,7 +1847,7 @@
       },
       "vegaAccountType": {
         "default": "ACCOUNT_TYPE_UNSPECIFIED",
-        "description": "- ACCOUNT_TYPE_UNSPECIFIED: Default value\n - ACCOUNT_TYPE_INSURANCE: Insurance pool accounts contain insurance pool funds for a market\n - ACCOUNT_TYPE_SETTLEMENT: Settlement accounts exist only during settlement or mark-to-market\n - ACCOUNT_TYPE_MARGIN: Margin accounts contain funds set aside for the margin needed to support a party's open positions.\nEach party will have a margin account for each market they have traded in.\nRequired initial margin is allocated to each market from user's general account.\nCollateral in the margin account can't be withdrawn or used as margin on another market until\nit is released back to the general account.\nVega protocol uses an internal accounting system to segregate funds held as\nmargin from other funds to ensure they are never lost or 'double spent'\n\nMargin account funds will vary as margin requirements on positions change\n - ACCOUNT_TYPE_GENERAL: General accounts contain the collateral for a party that is not otherwise allocated. A party will\nhave multiple general accounts, one for each asset they want\nto trade with\n\nGeneral accounts are where funds are initially deposited or withdrawn from,\nit is also the account where funds are taken to fulfil fees and initial margin requirements\n - ACCOUNT_TYPE_FEES_INFRASTRUCTURE: Infrastructure accounts contain fees earned by providing infrastructure on Vega\n - ACCOUNT_TYPE_FEES_LIQUIDITY: Liquidity accounts contain fees earned by providing liquidity on Vega markets\n - ACCOUNT_TYPE_FEES_MAKER: This account is created to hold fees earned by placing orders that sit on the book\nand are then matched with an incoming order to create a trade - These fees reward parties\nwho provide the best priced liquidity that actually allows trading to take place\n - ACCOUNT_TYPE_BOND: This account is created to maintain liquidity providers funds commitments\n - ACCOUNT_TYPE_EXTERNAL: External account represents an external source (deposit/withdrawal)\n - ACCOUNT_TYPE_GLOBAL_INSURANCE: Global insurance account for the asset\n - ACCOUNT_TYPE_GLOBAL_REWARD: Global reward account for the asset\n - ACCOUNT_TYPE_PENDING_TRANSFERS: Per asset account used to store pending transfers (if any)\n - ACCOUNT_TYPE_REWARD_MAKER_PAID_FEES: Per asset reward account for fees paid to makers\n - ACCOUNT_TYPE_REWARD_MAKER_RECEIVED_FEES: Per asset reward account for fees received by makers\n - ACCOUNT_TYPE_REWARD_LP_RECEIVED_FEES: Per asset reward account for fees received by liquidity providers\n - ACCOUNT_TYPE_REWARD_MARKET_PROPOSERS: Per asset reward account for market proposers when the market goes above some trading threshold\n - ACCOUNT_TYPE_HOLDING: Per asset account for holding in-flight unfilled orders' funds\n - ACCOUNT_TYPE_LP_LIQUIDITY_FEES: Network controlled liquidity provider's account, per market, to hold accrued liquidity fees.\n - ACCOUNT_TYPE_LIQUIDITY_FEES_BONUS_DISTRIBUTION: Network controlled liquidity fees bonus distribution account, per market.\n - ACCOUNT_TYPE_NETWORK_TREASURY: Network controlled treasury\n - ACCOUNT_TYPE_VESTING_REWARDS: Account holding user's rewards for the vesting period\n - ACCOUNT_TYPE_VESTED_REWARDS: Account holding user's rewards after the vesting period\n - ACCOUNT_TYPE_REWARD_AVERAGE_POSITION: Per asset market reward account given for average position\n - ACCOUNT_TYPE_REWARD_RELATIVE_RETURN: Per asset market reward account given for relative return\n - ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY: Per asset market reward account given for return volatility\n - ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING: Per asset market reward account given to validators by their ranking\n - ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD: Per asset account for pending fee referral reward payouts\n - ACCOUNT_TYPE_ORDER_MARGIN: Per asset market account for party in isolated margin mode\n - ACCOUNT_TYPE_REWARD_REALISED_RETURN: Per asset market reward account for realised return",
+        "description": "- ACCOUNT_TYPE_UNSPECIFIED: Default value\n - ACCOUNT_TYPE_INSURANCE: Insurance pool accounts contain insurance pool funds for a market\n - ACCOUNT_TYPE_SETTLEMENT: Settlement accounts exist only during settlement or mark-to-market\n - ACCOUNT_TYPE_MARGIN: Margin accounts contain funds set aside for the margin needed to support a party's open positions.\nEach party will have a margin account for each market they have traded in.\nRequired initial margin is allocated to each market from user's general account.\nCollateral in the margin account can't be withdrawn or used as margin on another market until\nit is released back to the general account.\nVega protocol uses an internal accounting system to segregate funds held as\nmargin from other funds to ensure they are never lost or 'double spent'\n\nMargin account funds will vary as margin requirements on positions change\n - ACCOUNT_TYPE_GENERAL: General accounts contain the collateral for a party that is not otherwise allocated. A party will\nhave multiple general accounts, one for each asset they want\nto trade with\n\nGeneral accounts are where funds are initially deposited or withdrawn from,\nit is also the account where funds are taken to fulfil fees and initial margin requirements\n - ACCOUNT_TYPE_FEES_INFRASTRUCTURE: Infrastructure accounts contain fees earned by providing infrastructure on Vega\n - ACCOUNT_TYPE_FEES_LIQUIDITY: Liquidity accounts contain fees earned by providing liquidity on Vega markets\n - ACCOUNT_TYPE_FEES_MAKER: This account is created to hold fees earned by placing orders that sit on the book\nand are then matched with an incoming order to create a trade - These fees reward parties\nwho provide the best priced liquidity that actually allows trading to take place\n - ACCOUNT_TYPE_BOND: This account is created to maintain liquidity providers funds commitments\n - ACCOUNT_TYPE_EXTERNAL: External account represents an external source (deposit/withdrawal)\n - ACCOUNT_TYPE_GLOBAL_INSURANCE: Global insurance account for the asset\n - ACCOUNT_TYPE_GLOBAL_REWARD: Global reward account for the asset\n - ACCOUNT_TYPE_PENDING_TRANSFERS: Per asset account used to store pending transfers (if any)\n - ACCOUNT_TYPE_REWARD_MAKER_PAID_FEES: Per asset reward account for fees paid to makers\n - ACCOUNT_TYPE_REWARD_MAKER_RECEIVED_FEES: Per asset reward account for fees received by makers\n - ACCOUNT_TYPE_REWARD_LP_RECEIVED_FEES: Per asset reward account for fees received by liquidity providers\n - ACCOUNT_TYPE_REWARD_MARKET_PROPOSERS: Per asset reward account for market proposers when the market goes above some trading threshold\n - ACCOUNT_TYPE_HOLDING: Per asset account for holding in-flight unfilled orders' funds\n - ACCOUNT_TYPE_LP_LIQUIDITY_FEES: Network controlled liquidity provider's account, per market, to hold accrued liquidity fees.\n - ACCOUNT_TYPE_LIQUIDITY_FEES_BONUS_DISTRIBUTION: Network controlled liquidity fees bonus distribution account, per market.\n - ACCOUNT_TYPE_NETWORK_TREASURY: Network controlled treasury\n - ACCOUNT_TYPE_VESTING_REWARDS: Account holding user's rewards for the vesting period\n - ACCOUNT_TYPE_VESTED_REWARDS: Account holding user's rewards after the vesting period\n - ACCOUNT_TYPE_REWARD_RELATIVE_RETURN: Per asset market reward account given for relative return\n - ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY: Per asset market reward account given for return volatility\n - ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING: Per asset market reward account given to validators by their ranking\n - ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD: Per asset account for pending fee referral reward payouts\n - ACCOUNT_TYPE_ORDER_MARGIN: Per asset market account for party in isolated margin mode\n - ACCOUNT_TYPE_REWARD_REALISED_RETURN: Per asset market reward account for realised return\n - ACCOUNT_TYPE_BUY_BACK_FEES: Per asset account for paid buy-back fees\n - ACCOUNT_TYPE_REWARD_AVERAGE_NOTIONAL: Per asset market reward account given for average notional\n - ACCOUNT_TYPE_REWARD_ELIGIBLE_ENTITIES: Reward account for the eligible entities metric.",
         "enum": [
           "ACCOUNT_TYPE_UNSPECIFIED",
           "ACCOUNT_TYPE_INSURANCE",
@@ -1853,13 +1872,15 @@
           "ACCOUNT_TYPE_NETWORK_TREASURY",
           "ACCOUNT_TYPE_VESTING_REWARDS",
           "ACCOUNT_TYPE_VESTED_REWARDS",
-          "ACCOUNT_TYPE_REWARD_AVERAGE_POSITION",
           "ACCOUNT_TYPE_REWARD_RELATIVE_RETURN",
           "ACCOUNT_TYPE_REWARD_RETURN_VOLATILITY",
           "ACCOUNT_TYPE_REWARD_VALIDATOR_RANKING",
           "ACCOUNT_TYPE_PENDING_FEE_REFERRAL_REWARD",
           "ACCOUNT_TYPE_ORDER_MARGIN",
-          "ACCOUNT_TYPE_REWARD_REALISED_RETURN"
+          "ACCOUNT_TYPE_REWARD_REALISED_RETURN",
+          "ACCOUNT_TYPE_BUY_BACK_FEES",
+          "ACCOUNT_TYPE_REWARD_AVERAGE_NOTIONAL",
+          "ACCOUNT_TYPE_REWARD_ELIGIBLE_ENTITIES"
         ],
         "title": "Various collateral/account types as used by Vega",
         "type": "string"
@@ -1932,6 +1953,10 @@
             "$ref": "#/components/schemas/vegaNewMarket",
             "description": "Proposal change for creating new futures market."
           },
+          "newProtocolAutomatedPurchase": {
+            "$ref": "#/components/schemas/vegaNewProtocolAutomatedPurchase",
+            "title": "Proposal for a new automated purchase auction"
+          },
           "newSpotMarket": {
             "$ref": "#/components/schemas/vegaNewSpotMarket",
             "description": "Proposal change for creating new spot market."
@@ -1968,6 +1993,10 @@
             "$ref": "#/components/schemas/vegaUpdateVolumeDiscountProgram",
             "description": "Proposal change for updating the volume discount program."
           },
+          "updateVolumeRebateProgram": {
+            "$ref": "#/components/schemas/vegaUpdateVolumeRebateProgram",
+            "description": "Proposal change for updating the volume rebate program."
+          },
           "validationTimestamp": {
             "description": "Validation timestamp as Unix time in seconds.",
             "format": "int64",
@@ -1988,11 +2017,24 @@
             "type": "string"
           },
           "referralDiscountFactor": {
-            "description": "Proportion of the referee's taker fees to be discounted.",
+            "title": "deprecated",
             "type": "string"
           },
+          "referralDiscountFactors": {
+            "$ref": "#/components/schemas/vegaDiscountFactors",
+            "description": "Referral discount factors for the various fees."
+          },
           "referralRewardFactor": {
-            "description": "Proportion of the referee's taker fees to be rewarded to the referrer.",
+            "title": "deprecated",
+            "type": "string"
+          },
+          "referralRewardFactors": {
+            "$ref": "#/components/schemas/vegaRewardFactors",
+            "description": "Proportion of the referee's fees to be rewarded to the referrer."
+          },
+          "tierNumber": {
+            "description": "The tier number. It's set by the core, and used in the party fee stats API.",
+            "format": "uint64",
             "type": "string"
           }
         },
@@ -2228,6 +2270,20 @@
         },
         "type": "object"
       },
+      "vegaDataSourceSpecToAutomatedPurchaseBinding": {
+        "description": "Describes which properties of the data source data are to be\nused for automated purchase.",
+        "properties": {
+          "auctionScheduleProperty": {
+            "description": "Name of the property in the source data that should be used to determine the automated purchase schedule.",
+            "type": "string"
+          },
+          "auctionVolumeSnapshotScheduleProperty": {
+            "description": "Name of the property in the source data that should be used to determine the schedule of the automated purchase auction.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "vegaDataSourceSpecToFutureBinding": {
         "properties": {
           "settlementDataProperty": {
@@ -2256,6 +2312,23 @@
         },
         "type": "object"
       },
+      "vegaDiscountFactors": {
+        "properties": {
+          "infrastructureDiscountFactor": {
+            "description": "Proportion of the referee's infrastructure fee to be discounted.",
+            "type": "string"
+          },
+          "liquidityDiscountFactor": {
+            "description": "Proportion of the referee's liquidity fee to be discounted.",
+            "type": "string"
+          },
+          "makerDiscountFactor": {
+            "description": "Proportion of the referee's maker fee to be discounted.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "vegaDispatchMetric": {
         "default": "DISPATCH_METRIC_UNSPECIFIED",
         "enum": [
@@ -2264,13 +2337,14 @@
           "DISPATCH_METRIC_MAKER_FEES_RECEIVED",
           "DISPATCH_METRIC_LP_FEES_RECEIVED",
           "DISPATCH_METRIC_MARKET_VALUE",
-          "DISPATCH_METRIC_AVERAGE_POSITION",
           "DISPATCH_METRIC_RELATIVE_RETURN",
           "DISPATCH_METRIC_RETURN_VOLATILITY",
           "DISPATCH_METRIC_VALIDATOR_RANKING",
-          "DISPATCH_METRIC_REALISED_RETURN"
+          "DISPATCH_METRIC_REALISED_RETURN",
+          "DISPATCH_METRIC_AVERAGE_NOTIONAL",
+          "DISPATCH_METRIC_ELIGIBLE_ENTITIES"
         ],
-        "title": "- DISPATCH_METRIC_MAKER_FEES_PAID: Dispatch metric that uses the total maker fees paid in the market\n - DISPATCH_METRIC_MAKER_FEES_RECEIVED: Dispatch metric that uses the total maker fees received in the market\n - DISPATCH_METRIC_LP_FEES_RECEIVED: Dispatch metric that uses the total LP fees received in the market\n - DISPATCH_METRIC_MARKET_VALUE: Dispatch metric that uses total value of the market if above the required threshold and not paid given proposer bonus yet\n - DISPATCH_METRIC_AVERAGE_POSITION: Dispatch metric that uses the time weighted average position\n - DISPATCH_METRIC_RELATIVE_RETURN: Dispatch metric that uses the relative PNL of the party in the market\n - DISPATCH_METRIC_RETURN_VOLATILITY: Dispatch metric that uses return volatility of the party in the market\n - DISPATCH_METRIC_VALIDATOR_RANKING: Dispatch metric that uses the validator ranking of the validator as metric\n - DISPATCH_METRIC_REALISED_RETURN: Dispatch metric that uses the realised return of the party in a market",
+        "title": "- DISPATCH_METRIC_MAKER_FEES_PAID: Dispatch metric that uses the total maker fees paid in the market\n - DISPATCH_METRIC_MAKER_FEES_RECEIVED: Dispatch metric that uses the total maker fees received in the market\n - DISPATCH_METRIC_LP_FEES_RECEIVED: Dispatch metric that uses the total LP fees received in the market\n - DISPATCH_METRIC_MARKET_VALUE: Dispatch metric that uses total value of the market if above the required threshold and not paid given proposer bonus yet\n - DISPATCH_METRIC_RELATIVE_RETURN: Dispatch metric that uses the relative PNL of the party in the market\n - DISPATCH_METRIC_RETURN_VOLATILITY: Dispatch metric that uses return volatility of the party in the market\n - DISPATCH_METRIC_VALIDATOR_RANKING: Dispatch metric that uses the validator ranking of the validator as metric\n - DISPATCH_METRIC_REALISED_RETURN: Dispatch metric that uses the realised return of the party in a market\n - DISPATCH_METRIC_AVERAGE_NOTIONAL: Dispatch metric that uses the time weighted average notional\n - DISPATCH_METRIC_ELIGIBLE_ENTITIES: Dispatch metric that uses the eligibility criteria of entities",
         "type": "string"
       },
       "vegaDispatchStrategy": {
@@ -2286,6 +2360,13 @@
           "distributionStrategy": {
             "$ref": "#/components/schemas/vegaDistributionStrategy",
             "title": "Controls how the reward is distributed between qualifying parties"
+          },
+          "eligibleKeys": {
+            "description": "A list of party keys to constrain the potential receivers of a reward transfer.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "entityScope": {
             "$ref": "#/components/schemas/vegaEntityScope",
@@ -2320,7 +2401,7 @@
             "type": "string"
           },
           "rankTable": {
-            "description": "Ordered list, using start rank, defining the rank bands and share ratio for each band. Mandatory for the rank distribution strategy.",
+            "description": "Ordered list, using start rank, defining the rank bands and share ratio for each band. Mandatory for the rank and rank lottery distribution strategies.",
             "items": {
               "$ref": "#/components/schemas/vegaRank"
             },
@@ -2328,6 +2409,10 @@
           },
           "stakingRequirement": {
             "title": "Minimum number of governance (e.g. VEGA) tokens staked for a party to be considered eligible. Defaults to 0",
+            "type": "string"
+          },
+          "targetNotionalVolume": {
+            "title": "If set, the target notional factor used to scale the amount to be taken from the source account",
             "type": "string"
           },
           "teamScope": {
@@ -2352,11 +2437,12 @@
       },
       "vegaDistributionStrategy": {
         "default": "DISTRIBUTION_STRATEGY_UNSPECIFIED",
-        "description": " - DISTRIBUTION_STRATEGY_PRO_RATA: Rewards funded using the pro-rata strategy should be distributed pro-rata by each entity's reward metric, scaled by any active multipliers that party has.\n - DISTRIBUTION_STRATEGY_RANK: Rewards funded using the party rank.",
+        "description": " - DISTRIBUTION_STRATEGY_PRO_RATA: Rewards funded using the pro-rata strategy should be distributed pro-rata by each entity's reward metric, scaled by any active multipliers that party has.\n - DISTRIBUTION_STRATEGY_RANK: Rewards funded using the party rank.\n - DISTRIBUTION_STRATEGY_RANK_LOTTERY: Rewards funded using the ranked lottery.",
         "enum": [
           "DISTRIBUTION_STRATEGY_UNSPECIFIED",
           "DISTRIBUTION_STRATEGY_PRO_RATA",
-          "DISTRIBUTION_STRATEGY_RANK"
+          "DISTRIBUTION_STRATEGY_RANK",
+          "DISTRIBUTION_STRATEGY_RANK_LOTTERY"
         ],
         "type": "string"
       },
@@ -2495,6 +2581,30 @@
           }
         },
         "title": "Event related to an ERC20 token",
+        "type": "object"
+      },
+      "vegaERC20Heartbeat": {
+        "description": "Heartbeat represents that the ERC20 bridge is being watched even though no events happened.",
+        "properties": {
+          "blockHeight": {
+            "format": "uint64",
+            "title": "Last Ethereum block height that was checked for events",
+            "type": "string"
+          },
+          "blockTime": {
+            "description": "Ethereum block time in Unix seconds.",
+            "format": "uint64",
+            "type": "string"
+          },
+          "contractAddress": {
+            "title": "Contract address that is being listened to",
+            "type": "string"
+          },
+          "sourceChainId": {
+            "description": "Source chain for this chain event.",
+            "type": "string"
+          }
+        },
         "type": "object"
       },
       "vegaERC20MultiSigEvent": {
@@ -3081,6 +3191,11 @@
       },
       "vegaNewMarketConfiguration": {
         "properties": {
+          "allowedEmptyAmmLevels": {
+            "description": "Number of allowed price levels between an AMM's fair price and its quote prices. An AMM definition that exceeds this will be rejected at submission.",
+            "format": "uint64",
+            "type": "string"
+          },
           "decimalPlaces": {
             "description": "Decimal places used for the new futures market, sets the smallest price increment on the book.",
             "format": "uint64",
@@ -3160,6 +3275,81 @@
           }
         },
         "title": "Configuration for a new futures market on Vega",
+        "type": "object"
+      },
+      "vegaNewProtocolAutomatedPurchase": {
+        "properties": {
+          "changes": {
+            "$ref": "#/components/schemas/vegaNewProtocolAutomatedPurchaseChanges",
+            "title": "Configuration for a change to create a new automated purchase auction"
+          }
+        },
+        "type": "object"
+      },
+      "vegaNewProtocolAutomatedPurchaseChanges": {
+        "properties": {
+          "auctionDuration": {
+            "title": "The duration of the auction",
+            "type": "string"
+          },
+          "auctionSchedule": {
+            "$ref": "#/components/schemas/vegaDataSourceDefinition",
+            "title": "A time based oracle for when auctions will occur"
+          },
+          "auctionVolumeSnapshotSchedule": {
+            "$ref": "#/components/schemas/vegaDataSourceDefinition",
+            "description": "A time based oracle for when an observation will be taken of the balance of the source account. This will emit an event notifying of the balance planned to exchange, along with storing this value. When an auction occurs, the latest reading for this value will be used for the volume to trade, rather than the full balance of the account."
+          },
+          "automatedPurchaseSpecBinding": {
+            "$ref": "#/components/schemas/vegaDataSourceSpecToAutomatedPurchaseBinding",
+            "title": "The spec binding for the auction schedule and volume snapshot schedule"
+          },
+          "expiryTimestamp": {
+            "description": "Timestamp in Unix seconds, when the automated purchase is stopped. If an auction is in action it will be removed when the auction is finished.",
+            "format": "int64",
+            "type": "string"
+          },
+          "from": {
+            "title": "The source token that will be swapped",
+            "type": "string"
+          },
+          "fromAccountType": {
+            "$ref": "#/components/schemas/vegaAccountType",
+            "title": "The account type for the network from which the tokens will be sourced"
+          },
+          "marketId": {
+            "title": "The market that will be used to enact the purchase/sale",
+            "type": "string"
+          },
+          "maximumAuctionSize": {
+            "description": "Maximum number of tokens to be sold (specified in asset decimals). If more than this are available in the account at the last snapshot before auction, this maximum value will be used instead, and the remainder will be rolled over to the next scheduled auction.",
+            "type": "string"
+          },
+          "minimumAuctionSize": {
+            "description": "Minimum number of tokens to be sold (specified in asset decimals). If less than this are available in the account at the last snapshot before auction, no auction will occur and the balance will roll over to the next scheduled auction.",
+            "type": "string"
+          },
+          "oracleOffsetFactor": {
+            "title": "The final acceptable price is the price oracle value weighted by this factor (e.g. 1.05 to allow for 5% slippage on the purchase)",
+            "type": "string"
+          },
+          "oraclePriceStalenessTolerance": {
+            "title": "For how long the oracle price source is considered valid",
+            "type": "string"
+          },
+          "priceOracle": {
+            "$ref": "#/components/schemas/vegaDataSourceDefinition",
+            "title": "The oracle which will define an approximate acceptable price for the transaction"
+          },
+          "priceOracleSpecBinding": {
+            "$ref": "#/components/schemas/vegaSpecBindingForCompositePrice",
+            "title": "The spec binding for the price oracle"
+          },
+          "toAccountType": {
+            "$ref": "#/components/schemas/vegaAccountType",
+            "title": "The account type for the network to which the purchased tokens will be sent"
+          }
+        },
         "type": "object"
       },
       "vegaNewSpotMarket": {
@@ -3476,6 +3666,10 @@
             "$ref": "#/components/schemas/vegaNewMarket",
             "description": "Proposal change for creating new futures market on Vega."
           },
+          "newProtocolAutomatedPurchase": {
+            "$ref": "#/components/schemas/vegaNewProtocolAutomatedPurchase",
+            "title": "Proposal for a new automated purchase auction"
+          },
           "newSpotMarket": {
             "$ref": "#/components/schemas/vegaNewSpotMarket",
             "description": "Proposal change for creating new spot market on Vega."
@@ -3511,6 +3705,10 @@
           "updateVolumeDiscountProgram": {
             "$ref": "#/components/schemas/vegaUpdateVolumeDiscountProgram",
             "description": "Proposal change for updating the volume discount program."
+          },
+          "updateVolumeRebateProgram": {
+            "$ref": "#/components/schemas/vegaUpdateVolumeRebateProgram",
+            "description": "Proposal change for updating the volume rebate program."
           },
           "validationTimestamp": {
             "description": "Validation timestamp as Unix time in seconds.",
@@ -3581,6 +3779,23 @@
           "windowLength": {
             "description": "Number of epochs over which to evaluate a referral set's running volume.",
             "format": "uint64",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "vegaRewardFactors": {
+        "properties": {
+          "infrastructureRewardFactor": {
+            "description": "Proportion of the referee's infrastructure fees to be rewarded to the referrer.",
+            "type": "string"
+          },
+          "liquidityRewardFactor": {
+            "description": "Proportion of the referee's liquidity fees to be rewarded to the referrer.",
+            "type": "string"
+          },
+          "makerRewardFactor": {
+            "description": "Proportion of the maker fees to be rewarded.",
             "type": "string"
           }
         },
@@ -3907,6 +4122,11 @@
       },
       "vegaUpdateMarketConfiguration": {
         "properties": {
+          "allowedEmptyAmmLevels": {
+            "description": "Number of allowed price levels between an AMM's fair price and its quote prices. An AMM definition that exceeds this will be rejected at submission.",
+            "format": "uint64",
+            "type": "string"
+          },
           "enableTransactionReordering": {
             "title": "If enabled aggressive orders sent to the market will be delayed by the configured number of blocks",
             "type": "boolean"
@@ -4158,6 +4378,15 @@
         },
         "type": "object"
       },
+      "vegaUpdateVolumeRebateProgram": {
+        "properties": {
+          "changes": {
+            "$ref": "#/components/schemas/vegaVolumeRebateProgramChanges",
+            "title": "Configuration for a change to update a volume rebate program"
+          }
+        },
+        "type": "object"
+      },
       "vegaVectorValue": {
         "properties": {
           "value": {
@@ -4175,9 +4404,18 @@
             "description": "Required running notional taker volume in quantum units for parties\nto access this tier.",
             "type": "string"
           },
-          "volumeDiscountFactor": {
-            "description": "Proportion of the taker fees to be discounted.",
+          "tierNumber": {
+            "description": "The tier number. It's set by the core, and used in the party fee stats API.",
+            "format": "uint64",
             "type": "string"
+          },
+          "volumeDiscountFactor": {
+            "title": "deprecated",
+            "type": "string"
+          },
+          "volumeDiscountFactors": {
+            "$ref": "#/components/schemas/vegaDiscountFactors",
+            "description": "Proportion of the taker fees to be discounted."
           }
         },
         "type": "object"
@@ -4188,6 +4426,46 @@
             "description": "Defined benefit tiers in increasing order. First element will give Tier 1,\nsecond element will give Tier 2, and so on. Determines the level of\nbenefit a party can expect based on performance criteria.",
             "items": {
               "$ref": "#/components/schemas/vegaVolumeBenefitTier"
+            },
+            "type": "array"
+          },
+          "endOfProgramTimestamp": {
+            "description": "Timestamp as Unix time in seconds, after which when the current epoch\nends, the program will end and benefits will be disabled.",
+            "format": "int64",
+            "type": "string"
+          },
+          "windowLength": {
+            "description": "Number of epochs over which to evaluate a referral set's running volume.",
+            "format": "uint64",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "vegaVolumeRebateBenefitTier": {
+        "properties": {
+          "additionalMakerRebate": {
+            "description": "Additional rebate factor, based on the 'trade value for fee purposes', that a party at this tier will receive when they are the maker side of a trade.",
+            "type": "string"
+          },
+          "minimumPartyMakerVolumeFraction": {
+            "description": "Fraction of a party's maker volume required for a party to access this tier.",
+            "type": "string"
+          },
+          "tierNumber": {
+            "description": "The tier number. It's set by the core, and used in the party fee stats API.",
+            "format": "uint64",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "vegaVolumeRebateProgramChanges": {
+        "properties": {
+          "benefitTiers": {
+            "description": "Defined benefit tiers in increasing order. First element will give Tier 1,\nsecond element will give Tier 2, and so on. Determines the level of\nbenefit a party can expect based on performance criteria.",
+            "items": {
+              "$ref": "#/components/schemas/vegaVolumeRebateBenefitTier"
             },
             "type": "array"
           },

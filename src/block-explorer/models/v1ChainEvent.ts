@@ -5,6 +5,7 @@
 
 import type { vegaBuiltinAssetEvent } from './vegaBuiltinAssetEvent';
 import type { vegaERC20Event } from './vegaERC20Event';
+import type { vegaERC20Heartbeat } from './vegaERC20Heartbeat';
 import type { vegaERC20MultiSigEvent } from './vegaERC20MultiSigEvent';
 import type { vegaEthContractCallEvent } from './vegaEthContractCallEvent';
 import type { vegaStakingEvent } from './vegaStakingEvent';
@@ -29,6 +30,10 @@ export type v1ChainEvent = {
      * Ethereum ERC20 multisig event.
      */
     erc20Multisig?: vegaERC20MultiSigEvent;
+    /**
+     * Heartbeat showing evidence that a contract is being listened to.
+     */
+    heartbeat?: vegaERC20Heartbeat;
     /**
      * Arbitrary one-time integer used to prevent replay attacks.
      */

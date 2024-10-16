@@ -103,8 +103,10 @@ export type { vegaDataSourceDefinitionInternal } from './models/vegaDataSourceDe
 export type { vegaDataSourceSpecConfiguration } from './models/vegaDataSourceSpecConfiguration';
 export type { vegaDataSourceSpecConfigurationTime } from './models/vegaDataSourceSpecConfigurationTime';
 export type { vegaDataSourceSpecConfigurationTimeTrigger } from './models/vegaDataSourceSpecConfigurationTimeTrigger';
+export type { vegaDataSourceSpecToAutomatedPurchaseBinding } from './models/vegaDataSourceSpecToAutomatedPurchaseBinding';
 export type { vegaDataSourceSpecToFutureBinding } from './models/vegaDataSourceSpecToFutureBinding';
 export type { vegaDataSourceSpecToPerpetualBinding } from './models/vegaDataSourceSpecToPerpetualBinding';
+export type { vegaDiscountFactors } from './models/vegaDiscountFactors';
 export { vegaDispatchMetric } from './models/vegaDispatchMetric';
 export type { vegaDispatchStrategy } from './models/vegaDispatchStrategy';
 export { vegaDistributionStrategy } from './models/vegaDistributionStrategy';
@@ -115,6 +117,7 @@ export type { vegaERC20AssetLimitsUpdated } from './models/vegaERC20AssetLimitsU
 export type { vegaERC20AssetList } from './models/vegaERC20AssetList';
 export type { vegaERC20Deposit } from './models/vegaERC20Deposit';
 export type { vegaERC20Event } from './models/vegaERC20Event';
+export type { vegaERC20Heartbeat } from './models/vegaERC20Heartbeat';
 export type { vegaERC20MultiSigEvent } from './models/vegaERC20MultiSigEvent';
 export type { vegaERC20SignerAdded } from './models/vegaERC20SignerAdded';
 export type { vegaERC20SignerRemoved } from './models/vegaERC20SignerRemoved';
@@ -147,6 +150,8 @@ export type { vegaNewAsset } from './models/vegaNewAsset';
 export type { vegaNewFreeform } from './models/vegaNewFreeform';
 export type { vegaNewMarket } from './models/vegaNewMarket';
 export type { vegaNewMarketConfiguration } from './models/vegaNewMarketConfiguration';
+export type { vegaNewProtocolAutomatedPurchase } from './models/vegaNewProtocolAutomatedPurchase';
+export type { vegaNewProtocolAutomatedPurchaseChanges } from './models/vegaNewProtocolAutomatedPurchaseChanges';
 export type { vegaNewSpotMarket } from './models/vegaNewSpotMarket';
 export type { vegaNewSpotMarketConfiguration } from './models/vegaNewSpotMarketConfiguration';
 export type { vegaNewTransfer } from './models/vegaNewTransfer';
@@ -164,6 +169,7 @@ export type { vegaProposalTerms } from './models/vegaProposalTerms';
 export type { vegaRank } from './models/vegaRank';
 export type { vegaRecurringTransfer } from './models/vegaRecurringTransfer';
 export type { vegaReferralProgramChanges } from './models/vegaReferralProgramChanges';
+export type { vegaRewardFactors } from './models/vegaRewardFactors';
 export type { vegaRiskFactorOverride } from './models/vegaRiskFactorOverride';
 export type { vegaScalarValue } from './models/vegaScalarValue';
 export { vegaSide } from './models/vegaSide';
@@ -193,9 +199,12 @@ export type { vegaUpdateSpotInstrumentConfiguration } from './models/vegaUpdateS
 export type { vegaUpdateSpotMarket } from './models/vegaUpdateSpotMarket';
 export type { vegaUpdateSpotMarketConfiguration } from './models/vegaUpdateSpotMarketConfiguration';
 export type { vegaUpdateVolumeDiscountProgram } from './models/vegaUpdateVolumeDiscountProgram';
+export type { vegaUpdateVolumeRebateProgram } from './models/vegaUpdateVolumeRebateProgram';
 export type { vegaVectorValue } from './models/vegaVectorValue';
 export type { vegaVolumeBenefitTier } from './models/vegaVolumeBenefitTier';
 export type { vegaVolumeDiscountProgramChanges } from './models/vegaVolumeDiscountProgramChanges';
+export type { vegaVolumeRebateBenefitTier } from './models/vegaVolumeRebateBenefitTier';
+export type { vegaVolumeRebateProgramChanges } from './models/vegaVolumeRebateProgramChanges';
 export { vegaVoteValue } from './models/vegaVoteValue';
 export type { vegaWithdrawExt } from './models/vegaWithdrawExt';
 

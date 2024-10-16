@@ -17,6 +17,10 @@ import type { vegaTradableInstrument } from './vegaTradableInstrument';
 
 export type vegaMarket = {
     /**
+     * Number of allowed price levels between an AMM's fair price and its quote prices. An AMM definition that exceeds this will be rejected at submission.
+     */
+    allowedEmptyAmmLevels?: string;
+    /**
      * Number of decimal places that a price must be shifted by in order to get a
      * correct price denominated in the currency of the market, for example:
      * `realPrice = price / 10^decimalPlaces`. On spot markets, also called 'size decimal places'.

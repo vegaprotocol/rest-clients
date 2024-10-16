@@ -5,6 +5,14 @@
 
 export type vegaPriceLevel = {
     /**
+     * Volume of AMM's at the price level.
+     */
+    ammVolume?: string;
+    /**
+     * Estimated AMM volume at the price level.
+     */
+    ammVolumeEstimated?: string;
+    /**
      * Number of orders at the price level.
      */
     numberOfOrders?: string;

@@ -3,6 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaDiscountFactors } from './vegaDiscountFactors';
+import type { vegaRewardFactors } from './vegaRewardFactors';
+
 /**
  * Referral set statistics for a given epoch for a party.
  */
@@ -11,10 +14,11 @@ export type v2ReferralSetStats = {
      * Epoch at which the set's statistics were updated.
      */
     atEpoch?: string;
-    /**
-     * Discount factor applied to the party.
-     */
     discountFactor?: string;
+    /**
+     * Discount factors applied to the party.
+     */
+    discountFactors?: vegaDiscountFactors;
     /**
      * Current referee notional taker volume.
      */
@@ -29,14 +33,16 @@ export type v2ReferralSetStats = {
      */
     referralSetRunningNotionalTakerVolume?: string;
     referrerTakerVolume?: string;
-    /**
-     * Reward factor applied to the party.
-     */
     rewardFactor?: string;
+    /**
+     * Reward factors applied to the party.
+     */
+    rewardFactors?: vegaRewardFactors;
+    rewardsFactorMultiplier?: string;
     /**
      * Proportion of the referee's taker fees to be rewarded to the referrer.
      */
-    rewardsFactorMultiplier?: string;
+    rewardsFactorsMultiplier?: vegaRewardFactors;
     /**
      * Multiplier applied to the referral reward factor when calculating referral rewards due to the referrer.
      */

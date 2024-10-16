@@ -4,6 +4,7 @@
 /* eslint-disable */
 
 import type { v1RefereeStats } from './v1RefereeStats';
+import type { vegaRewardFactors } from './vegaRewardFactors';
 
 export type v1ReferralSetStatsUpdated = {
     /**
@@ -20,13 +21,15 @@ export type v1ReferralSetStatsUpdated = {
      */
     referralSetRunningNotionalTakerVolume?: string;
     referrerTakerVolume?: string;
+    rewardFactor?: string;
     /**
      * Reward factor applied to the trades.
      */
-    rewardFactor?: string;
+    rewardFactors?: vegaRewardFactors;
     /**
-     * Rewards factor multiplier for the trades.
+     * Reward factors multiplier for the trades.
      */
+    rewardFactorsMultiplier?: vegaRewardFactors;
     rewardsFactorMultiplier?: string;
     /**
      * Rewards multiplier applied to the trades.

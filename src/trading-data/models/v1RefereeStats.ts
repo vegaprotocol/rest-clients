@@ -3,11 +3,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaDiscountFactors } from './vegaDiscountFactors';
+
 export type v1RefereeStats = {
     /**
-     * Discount factor applied to the party.
+     * deprecated.
      */
     discountFactor?: string;
+    /**
+     * Discount factors applied to the party.
+     */
+    discountFactors?: vegaDiscountFactors;
     epochNotionalTakerVolume?: string;
     /**
      * Unique ID of the party.

@@ -70,6 +70,7 @@ export class GovernanceService {
      * - TYPE_UPDATE_MARKET_STATE: Proposal for updating the state of a market
      * - TYPE_UPDATE_REFERRAL_PROGRAM: Proposal to update the referral program
      * - TYPE_UPDATE_VOLUME_DISCOUNT_PROGRAM: Proposal to update the volume discount program
+     * - TYPE_NEW_AUTOMATED_PURCHASE: Proposal for new automated purchase auction
      * @param proposerPartyId Restrict proposals to those proposed by the given party ID.
      * @param proposalReference Restrict proposals to those with the given reference.
      * @param paginationFirst Number of records to be returned that sort greater than row identified by cursor supplied in 'after'.
@@ -83,7 +84,7 @@ export class GovernanceService {
      */
     public static tradingDataServiceListGovernanceData(
         proposalState: 'STATE_UNSPECIFIED' | 'STATE_FAILED' | 'STATE_OPEN' | 'STATE_PASSED' | 'STATE_REJECTED' | 'STATE_DECLINED' | 'STATE_ENACTED' | 'STATE_WAITING_FOR_NODE_VOTE' = 'STATE_UNSPECIFIED',
-        proposalType: 'TYPE_UNSPECIFIED' | 'TYPE_ALL' | 'TYPE_NEW_MARKET' | 'TYPE_UPDATE_MARKET' | 'TYPE_NETWORK_PARAMETERS' | 'TYPE_NEW_ASSET' | 'TYPE_NEW_FREE_FORM' | 'TYPE_UPDATE_ASSET' | 'TYPE_NEW_SPOT_MARKET' | 'TYPE_UPDATE_SPOT_MARKET' | 'TYPE_NEW_TRANSFER' | 'TYPE_CANCEL_TRANSFER' | 'TYPE_UPDATE_MARKET_STATE' | 'TYPE_UPDATE_REFERRAL_PROGRAM' | 'TYPE_UPDATE_VOLUME_DISCOUNT_PROGRAM' = 'TYPE_UNSPECIFIED',
+        proposalType: 'TYPE_UNSPECIFIED' | 'TYPE_ALL' | 'TYPE_NEW_MARKET' | 'TYPE_UPDATE_MARKET' | 'TYPE_NETWORK_PARAMETERS' | 'TYPE_NEW_ASSET' | 'TYPE_NEW_FREE_FORM' | 'TYPE_UPDATE_ASSET' | 'TYPE_NEW_SPOT_MARKET' | 'TYPE_UPDATE_SPOT_MARKET' | 'TYPE_NEW_TRANSFER' | 'TYPE_CANCEL_TRANSFER' | 'TYPE_UPDATE_MARKET_STATE' | 'TYPE_UPDATE_REFERRAL_PROGRAM' | 'TYPE_UPDATE_VOLUME_DISCOUNT_PROGRAM' | 'TYPE_NEW_AUTOMATED_PURCHASE' = 'TYPE_UNSPECIFIED',
         proposerPartyId?: string,
         proposalReference?: string,
         paginationFirst?: number,

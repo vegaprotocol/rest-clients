@@ -77,6 +77,7 @@ export class PositionsService {
      * Get a list of all of a party's positions
      * @param filterPartyIds Restrict positions to those related to the given parties.
      * @param filterMarketIds Restrict positions to those on the given markets.
+     * @param filterIncludeDerivedParties Whether to return all derived parties from AMMs for the given party.
      * @param paginationFirst Number of records to be returned that sort greater than row identified by cursor supplied in 'after'.
      * @param paginationAfter If paging forwards, the cursor string for the last row of the previous page.
      * @param paginationLast Number of records to be returned that sort less than row identified by cursor supplied in 'before'.
@@ -89,6 +90,7 @@ export class PositionsService {
     public static tradingDataServiceListAllPositions(
         filterPartyIds?: Array<string>,
         filterMarketIds?: Array<string>,
+        filterIncludeDerivedParties?: boolean,
         paginationFirst?: number,
         paginationAfter?: string,
         paginationLast?: number,
@@ -101,6 +103,7 @@ export class PositionsService {
             query: {
                 'filter.partyIds': filterPartyIds,
                 'filter.marketIds': filterMarketIds,
+                'filter.includeDerivedParties': filterIncludeDerivedParties,
                 'pagination.first': paginationFirst,
                 'pagination.after': paginationAfter,
                 'pagination.last': paginationLast,

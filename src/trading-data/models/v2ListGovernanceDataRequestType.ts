@@ -18,6 +18,7 @@
  * - TYPE_UPDATE_MARKET_STATE: Proposal for updating the state of a market
  * - TYPE_UPDATE_REFERRAL_PROGRAM: Proposal to update the referral program
  * - TYPE_UPDATE_VOLUME_DISCOUNT_PROGRAM: Proposal to update the volume discount program
+ * - TYPE_NEW_AUTOMATED_PURCHASE: Proposal for new automated purchase auction
  */
 export enum v2ListGovernanceDataRequestType {
     TYPE_UNSPECIFIED = 'TYPE_UNSPECIFIED',
@@ -35,4 +36,5 @@ export enum v2ListGovernanceDataRequestType {
     TYPE_UPDATE_MARKET_STATE = 'TYPE_UPDATE_MARKET_STATE',
     TYPE_UPDATE_REFERRAL_PROGRAM = 'TYPE_UPDATE_REFERRAL_PROGRAM',
     TYPE_UPDATE_VOLUME_DISCOUNT_PROGRAM = 'TYPE_UPDATE_VOLUME_DISCOUNT_PROGRAM',
+    TYPE_NEW_AUTOMATED_PURCHASE = 'TYPE_NEW_AUTOMATED_PURCHASE',
 }

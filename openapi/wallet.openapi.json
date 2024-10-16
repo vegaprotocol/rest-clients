@@ -7,8 +7,14 @@
   },
   "servers": [
     {
-      "url": "http://localhost:1789/api/",
-      "description": "Local wallet"
+      "url": "{WalletServer}",
+      "description": "Local wallet",
+      "variables": {
+        "WalletServer": {
+          "default": "http://localhost:1789/api",
+          "description": "Base URL of the wallet"
+        }
+      }
     }
   ],
   "externalDocs": {

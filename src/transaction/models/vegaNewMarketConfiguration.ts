@@ -16,6 +16,10 @@ import type { vegaSuccessorConfiguration } from './vegaSuccessorConfiguration';
 
 export type vegaNewMarketConfiguration = {
     /**
+     * Number of allowed price levels between an AMM's fair price and its quote prices. An AMM definition that exceeds this will be rejected at submission.
+     */
+    allowedEmptyAmmLevels?: string;
+    /**
      * Decimal places used for the new futures market, sets the smallest price increment on the book.
      */
     decimalPlaces?: string;

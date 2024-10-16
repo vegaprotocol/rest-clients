@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { AMMCurve } from './AMMCurve';
 import type { AMMStatusReason } from './AMMStatusReason';
 import type { v1AMMConcentratedLiquidityParameters } from './v1AMMConcentratedLiquidityParameters';
 import type { v1AMMStatus } from './v1AMMStatus';
@@ -24,6 +25,7 @@ export type v1AMM = {
      * ID of the AMM.
      */
     id?: string;
+    lowerCurve?: AMMCurve;
     /**
      * Market ID that the AMM provides liquidity for.
      */
@@ -44,5 +46,6 @@ export type v1AMM = {
      * Reason for the AMM's current status.
      */
     statusReason?: AMMStatusReason;
+    upperCurve?: AMMCurve;
 };
 

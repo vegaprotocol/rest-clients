@@ -12,6 +12,11 @@ import type { v1CreateReferralSetTeam } from './v1CreateReferralSetTeam';
  */
 export type v1CreateReferralSet = {
     /**
+     * Should a referral set be created as well or only a team.
+     * the default is false so the existing behaviour is kept if older versions of the protobufs are used.
+     */
+    doNotCreateReferralSet?: boolean;
+    /**
      * Whether or not the referral set should be considered a team that can participate in team games on the network.
      */
     isTeam?: boolean;

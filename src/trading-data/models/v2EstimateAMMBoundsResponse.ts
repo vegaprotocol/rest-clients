@@ -3,7 +3,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { EstimateAMMBoundsResponseAMMError } from './EstimateAMMBoundsResponseAMMError';
+
 export type v2EstimateAMMBoundsResponse = {
+    /**
+     * If populated the bounds could be calculated but the AMM is invalid for other reasons.
+     */
+    ammError?: EstimateAMMBoundsResponseAMMError;
     /**
      * Estimated price below the lower bound at which the commitment will be lost.
      */

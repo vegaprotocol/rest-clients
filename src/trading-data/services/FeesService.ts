@@ -19,6 +19,8 @@ export class FeesService {
      * @param assetId Restrict fee statistics to those related to the given asset.
      * @param epochSeq Epoch to get referral fee statistics for. If not set, the last complete epoch is used.
      * @param partyId Restrict fee statistics to those for the given party.
+     * @param epochFrom Restrict fee statistics to epoch range starting with epoch from.
+     * @param epochTo Restrict fee statistics to epoch range ending with epoch to.
      * @returns v2GetFeesStatsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -28,6 +30,8 @@ export class FeesService {
         assetId?: string,
         epochSeq?: string,
         partyId?: string,
+        epochFrom?: string,
+        epochTo?: string,
     ): CancelablePromise<v2GetFeesStatsResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -37,6 +41,8 @@ export class FeesService {
                 'assetId': assetId,
                 'epochSeq': epochSeq,
                 'partyId': partyId,
+                'epochFrom': epochFrom,
+                'epochTo': epochTo,
             },
             errors: {
                 500: `An internal server error`,

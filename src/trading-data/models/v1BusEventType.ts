@@ -96,6 +96,11 @@
  * - BUS_EVENT_TYPE_CANCELLED_ORDERS: Event containing the IDs of orders cancelled by a party on a market.
  * - BUS_EVENT_TYPE_GAME_SCORES: Event containing the near realtime game scores for parties and teams.
  * - BUS_EVENT_TYPE_AMM: Event use to notify for an AMM update.
+ * - BUS_EVENT_TYPE_VOLUME_REBATE_PROGRAM_STARTED: Event indicating a volume rebate program started.
+ * - BUS_EVENT_TYPE_VOLUME_REBATE_PROGRAM_UPDATED: Event indicating a volume rebate program has been updated.
+ * - BUS_EVENT_TYPE_VOLUME_REBATE_PROGRAM_ENDED: Event indicating a volume rebate program ended.
+ * - BUS_EVENT_TYPE_VOLUME_REBATE_STATS_UPDATED: Event indicating the updated statistics for the volume rebate.
+ * - BUS_EVENT_TYPE_AUTOMATED_PURCHASE_ANNOUNCED: Event indicating an automated purchase auction has been scheduled.
  * - BUS_EVENT_TYPE_MARKET: Event indicating a market related event, for example when a market opens
  * - BUS_EVENT_TYPE_TX_ERROR: Event used to report failed transactions back to a user, this is excluded from the ALL type
  */
@@ -192,6 +197,11 @@ export enum v1BusEventType {
     BUS_EVENT_TYPE_CANCELLED_ORDERS = 'BUS_EVENT_TYPE_CANCELLED_ORDERS',
     BUS_EVENT_TYPE_GAME_SCORES = 'BUS_EVENT_TYPE_GAME_SCORES',
     BUS_EVENT_TYPE_AMM = 'BUS_EVENT_TYPE_AMM',
+    BUS_EVENT_TYPE_VOLUME_REBATE_PROGRAM_STARTED = 'BUS_EVENT_TYPE_VOLUME_REBATE_PROGRAM_STARTED',
+    BUS_EVENT_TYPE_VOLUME_REBATE_PROGRAM_UPDATED = 'BUS_EVENT_TYPE_VOLUME_REBATE_PROGRAM_UPDATED',
+    BUS_EVENT_TYPE_VOLUME_REBATE_PROGRAM_ENDED = 'BUS_EVENT_TYPE_VOLUME_REBATE_PROGRAM_ENDED',
+    BUS_EVENT_TYPE_VOLUME_REBATE_STATS_UPDATED = 'BUS_EVENT_TYPE_VOLUME_REBATE_STATS_UPDATED',
+    BUS_EVENT_TYPE_AUTOMATED_PURCHASE_ANNOUNCED = 'BUS_EVENT_TYPE_AUTOMATED_PURCHASE_ANNOUNCED',
     BUS_EVENT_TYPE_MARKET = 'BUS_EVENT_TYPE_MARKET',
     BUS_EVENT_TYPE_TX_ERROR = 'BUS_EVENT_TYPE_TX_ERROR',
 }

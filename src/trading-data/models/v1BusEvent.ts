@@ -5,6 +5,7 @@
 
 import type { v1AMM } from './v1AMM';
 import type { v1AuctionEvent } from './v1AuctionEvent';
+import type { v1AutomatedPurchaseAnnounced } from './v1AutomatedPurchaseAnnounced';
 import type { v1BeginBlock } from './v1BeginBlock';
 import type { v1BusEventType } from './v1BusEventType';
 import type { v1CancelledOrders } from './v1CancelledOrders';
@@ -74,6 +75,10 @@ import type { v1VolumeDiscountProgramEnded } from './v1VolumeDiscountProgramEnde
 import type { v1VolumeDiscountProgramStarted } from './v1VolumeDiscountProgramStarted';
 import type { v1VolumeDiscountProgramUpdated } from './v1VolumeDiscountProgramUpdated';
 import type { v1VolumeDiscountStatsUpdated } from './v1VolumeDiscountStatsUpdated';
+import type { v1VolumeRebateProgramEnded } from './v1VolumeRebateProgramEnded';
+import type { v1VolumeRebateProgramStarted } from './v1VolumeRebateProgramStarted';
+import type { v1VolumeRebateProgramUpdated } from './v1VolumeRebateProgramUpdated';
+import type { v1VolumeRebateStatsUpdated } from './v1VolumeRebateStatsUpdated';
 import type { vegaAccount } from './vegaAccount';
 import type { vegaAsset } from './vegaAsset';
 import type { vegaDeposit } from './vegaDeposit';
@@ -102,6 +107,10 @@ export type v1BusEvent = {
     amm?: v1AMM;
     asset?: vegaAsset;
     auction?: v1AuctionEvent;
+    /**
+     * Event notifying an upcoming automated purchase of a token with the sold amount.
+     */
+    automatedPurchaseAnnounced?: v1AutomatedPurchaseAnnounced;
     beginBlock?: v1BeginBlock;
     block?: string;
     /**
@@ -273,6 +282,22 @@ export type v1BusEvent = {
      * Event notifying of an update to the volume discount statistics.
      */
     volumeDiscountStatsUpdated?: v1VolumeDiscountStatsUpdated;
+    /**
+     * Event notifying that a volume rebate program has ended.
+     */
+    volumeRebateProgramEnded?: v1VolumeRebateProgramEnded;
+    /**
+     * Event notifying that a volume rebate program has started.
+     */
+    volumeRebateProgramStarted?: v1VolumeRebateProgramStarted;
+    /**
+     * Event notifying that a volume rebate program has been updated.
+     */
+    volumeRebateProgramUpdated?: v1VolumeRebateProgramUpdated;
+    /**
+     * Event notifying of an update to the volume rebate statistics.
+     */
+    volumeRebateStatsUpdated?: v1VolumeRebateStatsUpdated;
     vote?: vegaVote;
     withdrawal?: vegaWithdrawal;
 };

@@ -28,6 +28,7 @@ export class RewardsService {
      * @param teamId Filter for rewards paid if the party is a member of the given team.
      * @param gameId Filter for rewards paid if the party participated in the given game.
      * @param includeDerivedParties Whether to return all derived parties from AMMs for the given party.
+     * @param marketId Filter the rewards by market ID.
      * @returns v2ListRewardsResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -45,6 +46,7 @@ export class RewardsService {
         teamId?: string,
         gameId?: string,
         includeDerivedParties?: boolean,
+        marketId?: string,
     ): CancelablePromise<v2ListRewardsResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -62,6 +64,7 @@ export class RewardsService {
                 'teamId': teamId,
                 'gameId': gameId,
                 'includeDerivedParties': includeDerivedParties,
+                'marketId': marketId,
             },
             errors: {
                 500: `An internal server error`,

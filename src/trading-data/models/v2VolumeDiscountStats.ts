@@ -3,6 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaDiscountFactors } from './vegaDiscountFactors';
+
 /**
  * Volume discount statistics for a given epoch for all parties.
  */
@@ -11,10 +13,11 @@ export type v2VolumeDiscountStats = {
      * Epoch at which the statistics apply.
      */
     atEpoch?: string;
+    discountFactor?: string;
     /**
      * Discount factor applied given the party's running volume.
      */
-    discountFactor?: string;
+    discountFactors?: vegaDiscountFactors;
     /**
      * Party ID for which the statistics apply.
      */

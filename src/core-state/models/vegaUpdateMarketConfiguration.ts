@@ -14,6 +14,10 @@ import type { vegaSimpleModelParams } from './vegaSimpleModelParams';
 import type { vegaUpdateInstrumentConfiguration } from './vegaUpdateInstrumentConfiguration';
 
 export type vegaUpdateMarketConfiguration = {
+    /**
+     * Number of allowed price levels between an AMM's fair price and its quote prices. An AMM definition that exceeds this will be rejected at submission.
+     */
+    allowedEmptyAmmLevels?: string;
     enableTransactionReordering?: boolean;
     /**
      * Updated futures market instrument configuration.

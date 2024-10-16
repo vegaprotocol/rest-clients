@@ -30,6 +30,7 @@ import type { v1ProtocolUpgradeProposal } from './v1ProtocolUpgradeProposal';
 import type { v1StopOrdersCancellation } from './v1StopOrdersCancellation';
 import type { v1StopOrdersSubmission } from './v1StopOrdersSubmission';
 import type { v1SubmitAMM } from './v1SubmitAMM';
+import type { v1TransactionResultStatus } from './v1TransactionResultStatus';
 import type { v1UndelegateSubmission } from './v1UndelegateSubmission';
 import type { v1UpdateMarginMode } from './v1UpdateMarginMode';
 import type { v1UpdatePartyProfile } from './v1UpdatePartyProfile';
@@ -65,9 +66,15 @@ export type v1TransactionResult = {
     proposal?: v1ProposalSubmission;
     protocolUpgradeProposal?: v1ProtocolUpgradeProposal;
     /**
-     * Status of the transaction, did it succeed or an error was raised.
+     * Status of the transaction, if it succeeded or an error was raised.
      */
     status?: boolean;
+    /**
+     * Status of the transaction.
+     * Backward compatible with previous events,
+     * as this field will default to UNSPECIFIED.
+     */
+    statusDetail?: v1TransactionResultStatus;
     stopOrdersCancellation?: v1StopOrdersCancellation;
     stopOrdersSubmission?: v1StopOrdersSubmission;
     submitAmm?: v1SubmitAMM;

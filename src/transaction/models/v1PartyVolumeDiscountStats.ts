@@ -3,14 +3,20 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { vegaDiscountFactors } from './vegaDiscountFactors';
+
 /**
  * Volume discount stats for a given party.
  */
 export type v1PartyVolumeDiscountStats = {
     /**
-     * Discount factor applied to fees.
+     * deprecated.
      */
     discountFactor?: string;
+    /**
+     * Discount factors applied to fees.
+     */
+    discountFactors?: vegaDiscountFactors;
     /**
      * Party ID.
      */

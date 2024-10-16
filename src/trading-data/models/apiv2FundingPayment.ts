@@ -13,6 +13,10 @@ export type apiv2FundingPayment = {
      */
     fundingPeriodSeq?: string;
     /**
+     * Amount missed out on due to loss socialization.
+     */
+    lossAmount?: string;
+    /**
      * Market that produced the funding payment.
      */
     marketId?: string;

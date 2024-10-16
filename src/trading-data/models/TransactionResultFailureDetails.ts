@@ -3,7 +3,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { TransactionResultKeyErrors } from './TransactionResultKeyErrors';
+
 export type TransactionResultFailureDetails = {
     error?: string;
+    /**
+     * Map of the detailed errors, if any.
+     */
+    errors?: Array<TransactionResultKeyErrors>;
 };
 

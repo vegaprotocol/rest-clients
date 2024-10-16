@@ -75,6 +75,9 @@ export class LiquidityService {
      * @param paginationLast Number of records to be returned that sort less than row identified by cursor supplied in 'before'.
      * @param paginationBefore If paging forwards, the cursor string for the first row of the previous page.
      * @param paginationNewestFirst Whether to order the results with the newest records first. If not set, the default value is true.
+     * @param includeDerivedParties Whether to return all derived parties from AMMs for the given party. If used, party ID is required.
+     * @param epochFrom Restrict paid liquidity fees to those from a given epoch.
+     * @param epochTo Restrict paid liquidity fees to those up to a given epoch.
      * @returns v2ListPaidLiquidityFeesResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -89,6 +92,9 @@ export class LiquidityService {
         paginationLast?: number,
         paginationBefore?: string,
         paginationNewestFirst?: boolean,
+        includeDerivedParties?: boolean,
+        epochFrom?: string,
+        epochTo?: string,
     ): CancelablePromise<v2ListPaidLiquidityFeesResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -103,6 +109,9 @@ export class LiquidityService {
                 'pagination.last': paginationLast,
                 'pagination.before': paginationBefore,
                 'pagination.newestFirst': paginationNewestFirst,
+                'includeDerivedParties': includeDerivedParties,
+                'epochFrom': epochFrom,
+                'epochTo': epochTo,
             },
             errors: {
                 500: `An internal server error`,

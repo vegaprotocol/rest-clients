@@ -7,6 +7,7 @@ import type { vegaCancelTransfer } from './vegaCancelTransfer';
 import type { vegaNewAsset } from './vegaNewAsset';
 import type { vegaNewFreeform } from './vegaNewFreeform';
 import type { vegaNewMarket } from './vegaNewMarket';
+import type { vegaNewProtocolAutomatedPurchase } from './vegaNewProtocolAutomatedPurchase';
 import type { vegaNewSpotMarket } from './vegaNewSpotMarket';
 import type { vegaNewTransfer } from './vegaNewTransfer';
 import type { vegaUpdateAsset } from './vegaUpdateAsset';
@@ -16,6 +17,7 @@ import type { vegaUpdateNetworkParameter } from './vegaUpdateNetworkParameter';
 import type { vegaUpdateReferralProgram } from './vegaUpdateReferralProgram';
 import type { vegaUpdateSpotMarket } from './vegaUpdateSpotMarket';
 import type { vegaUpdateVolumeDiscountProgram } from './vegaUpdateVolumeDiscountProgram';
+import type { vegaUpdateVolumeRebateProgram } from './vegaUpdateVolumeRebateProgram';
 
 export type vegaBatchProposalTermsChange = {
     /**
@@ -40,6 +42,7 @@ export type vegaBatchProposalTermsChange = {
      * Proposal change for creating new futures market.
      */
     newMarket?: vegaNewMarket;
+    newProtocolAutomatedPurchase?: vegaNewProtocolAutomatedPurchase;
     /**
      * Proposal change for creating new spot market.
      */
@@ -76,6 +79,10 @@ export type vegaBatchProposalTermsChange = {
      * Proposal change for updating the volume discount program.
      */
     updateVolumeDiscountProgram?: vegaUpdateVolumeDiscountProgram;
+    /**
+     * Proposal change for updating the volume rebate program.
+     */
+    updateVolumeRebateProgram?: vegaUpdateVolumeRebateProgram;
     /**
      * Validation timestamp as Unix time in seconds.
      */

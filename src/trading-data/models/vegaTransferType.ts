@@ -50,6 +50,10 @@
  * - TRANSFER_TYPE_AMM_LOW: Transfer from a party's general account to their AMM's general account.
  * - TRANSFER_TYPE_AMM_HIGH: Transfer from an AMM's general account to their owner's general account.
  * - TRANSFER_TYPE_AMM_RELEASE: Transfer releasing an AMM's general account upon closure.
+ * - TRANSFER_TYPE_TREASURY_FEE_PAY: Treasury fee paid from party's general account.
+ * - TRANSFER_TYPE_BUY_BACK_FEE_PAY: Buy-back fee paid into network buy-back account.
+ * - TRANSFER_TYPE_HIGH_MAKER_FEE_REBATE_PAY: High-volume maker fee paid from general account
+ * - TRANSFER_TYPE_HIGH_MAKER_FEE_REBATE_RECEIVE: Maker fee received into general account
  */
 export enum vegaTransferType {
     TRANSFER_TYPE_UNSPECIFIED = 'TRANSFER_TYPE_UNSPECIFIED',
@@ -98,4 +102,8 @@ export enum vegaTransferType {
     TRANSFER_TYPE_AMM_LOW = 'TRANSFER_TYPE_AMM_LOW',
     TRANSFER_TYPE_AMM_HIGH = 'TRANSFER_TYPE_AMM_HIGH',
     TRANSFER_TYPE_AMM_RELEASE = 'TRANSFER_TYPE_AMM_RELEASE',
+    TRANSFER_TYPE_TREASURY_FEE_PAY = 'TRANSFER_TYPE_TREASURY_FEE_PAY',
+    TRANSFER_TYPE_BUY_BACK_FEE_PAY = 'TRANSFER_TYPE_BUY_BACK_FEE_PAY',
+    TRANSFER_TYPE_HIGH_MAKER_FEE_REBATE_PAY = 'TRANSFER_TYPE_HIGH_MAKER_FEE_REBATE_PAY',
+    TRANSFER_TYPE_HIGH_MAKER_FEE_REBATE_RECEIVE = 'TRANSFER_TYPE_HIGH_MAKER_FEE_REBATE_RECEIVE',
 }

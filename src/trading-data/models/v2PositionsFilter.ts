@@ -5,6 +5,10 @@
 
 export type v2PositionsFilter = {
     /**
+     * Whether to return all derived parties from AMMs for the given party.
+     */
+    includeDerivedParties?: boolean;
+    /**
      * Restrict positions to those on the given markets.
      */
     marketIds?: Array<string>;

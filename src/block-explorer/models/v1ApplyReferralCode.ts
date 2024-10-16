@@ -10,6 +10,11 @@
  */
 export type v1ApplyReferralCode = {
     /**
+     * Should the key applying the referral code also join the team.
+     * the default is false so the existing behaviour is kept if older versions of the protobufs are used.
+     */
+    doNotJoinTeam?: boolean;
+    /**
      * Referral code, normally the referral set ID, for the party to join.
      */
     id?: string;

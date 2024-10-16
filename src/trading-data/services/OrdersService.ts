@@ -25,6 +25,7 @@ export class OrdersService {
      * @param marketId Market ID, used to specify the fee factors.
      * @param price Price at which the potential order is expected to trade.
      * @param size Size at which the potential order is expected to trade.
+     * @param party Party ID, used to get discount details.
      * @returns v2EstimateFeeResponse A successful response.
      * @returns googlerpcStatus An unexpected error response.
      * @throws ApiError
@@ -33,6 +34,7 @@ export class OrdersService {
         marketId: string,
         price: string,
         size: string,
+        party?: string,
     ): CancelablePromise<v2EstimateFeeResponse | googlerpcStatus> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -41,6 +43,7 @@ export class OrdersService {
                 'marketId': marketId,
                 'price': price,
                 'size': size,
+                'party': party,
             },
             errors: {
                 500: `An internal server error`,
