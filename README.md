@@ -2,6 +2,17 @@
 
 WIP project that autogenerates types and clients for interacting with the Vega REST APIs
 
+## Bumping the version
+
+```bash
+yarn
+node ./scripts/get-latest-specs.js v0.79.0
+yarn generate:all
+node ./scripts/generate-api-paths.js
+```
+
+then tag with the vega version (in the above example it's 0.79.0)
+
 ## Usage
 
 Install the client you wish to use:
